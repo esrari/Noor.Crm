@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
+    <OnPlatform x:TypeArguments="x:String" x:Key="Vazir">
+        <On Platform="Android" Value="Vazir-FD.ttf#Vazir FD" />
+        <On Platform="UWP" Value="/Assets/Vazir-FD.ttf#Vazir FD" />
+        <On Platform="iOS" Value="Vazir-FD" />
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="x:String" x:Key="VazirBold">
+        <On Platform="Android" Value="Vazir-Bold-FD.ttf#Vazir FD" />
+        <On Platform="UWP" Value="/Assets/Vazir-Bold-FD.ttf#Vazir FD" />
+        <On Platform="iOS" Value="Vazir-Bold-FD" />
+    </OnPlatform>
+    
+    <OnPlatform x:TypeArguments="x:String" x:Key="MaterialFontFamily">
+        <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+        <On Platform="UWP" Value="Assets/materialdesignicons-webfont.ttf#Material Design Icons" />
+        <On Platform="iOS" Value="Material Design Icons" />
+    </OnPlatform>
+</ResourceDictionary>

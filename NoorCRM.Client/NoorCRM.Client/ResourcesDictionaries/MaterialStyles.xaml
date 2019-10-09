@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mtrl="clr-namespace:XF.Material.Forms.Resources;assembly=XF.Material.Forms"
+    xmlns:mtrltypo="clr-namespace:XF.Material.Forms.Resources.Typography;assembly=XF.Material.Forms">
+   
+    <mtrltypo:MaterialFontConfiguration x:Key="Material.Font"
+            Body1="{StaticResource Vazir}"
+            Body2="{StaticResource Vazir}"
+            Button="{StaticResource Vazir}"
+            Caption="{StaticResource Vazir}"
+            H1="{StaticResource Vazir}"
+            H2="{StaticResource Vazir}"
+            H3="{StaticResource Vazir}"
+            H4="{StaticResource Vazir}"
+            H5="{StaticResource Vazir}"
+            H6="{StaticResource VazirBold}"
+            Overline="{StaticResource Vazir}"
+            Subtitle1="{StaticResource Vazir}"
+            Subtitle2="{StaticResource VazirBold}" />
+
+    <mtrl:MaterialColorConfiguration x:Key="Material.Color"
+            Background="#EAEAEA"
+            Error="#B00020"
+            OnBackground="#000000"
+            OnError="#FFFFFF"
+            OnPrimary="#FFFFFF"
+            OnSecondary="#FFFFFF"
+            OnSurface="#000000"
+            Primary="#011A27"
+            PrimaryVariant="#000000"
+            Secondary="#063852"
+            SecondaryVariant="#001229"
+            Surface="#FFFFFF" />
+
+    <mtrl:MaterialConfiguration x:Key="Material.Configuration"
+            ColorConfiguration="{StaticResource Material.Color}"
+            FontConfiguration="{StaticResource Material.Font}" />
+</ResourceDictionary>

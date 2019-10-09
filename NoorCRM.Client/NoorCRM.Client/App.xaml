@@ -3,9 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:NoorCRM.Client.ViewModels"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourcesDictionaries/Colors.xaml"/>
+                <ResourceDictionary Source="ResourcesDictionaries/Fonts.xaml"/>
+                <ResourceDictionary Source="ResourcesDictionaries/MaterialStyles.xaml"/>
+                <ResourceDictionary Source="ResourcesDictionaries/MaterialIcons.xaml"/>
+                <ResourceDictionary Source="ResourcesDictionaries/ElementStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
+            <!--Inverse the boolean value-->
+            <local:InverseBooleanConverter x:Key="InverseBoolean"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
