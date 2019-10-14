@@ -2,7 +2,8 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material">
 
     <Style TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{StaticResource BodyBackgroundColor}" />
@@ -31,42 +32,42 @@
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="MicroLabel">
-        <Setter Property="FontFamily" Value="{StaticResource Vazir}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
         <Setter Property="FontSize" Value="Micro"/>
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="SmallLabel">
-        <Setter Property="FontFamily" Value="{StaticResource Vazir}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
         <Setter Property="FontSize" Value="Small"/>
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="NormalLabel">
-        <Setter Property="FontFamily" Value="{StaticResource Vazir}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
         <Setter Property="FontSize" Value="Body"/>
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="LargeLabel">
-        <Setter Property="FontFamily" Value="{StaticResource Vazir}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
         <Setter Property="FontSize" Value="Large"/>
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="TitleLabel">
-        <Setter Property="FontFamily" Value="{StaticResource Vazir}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
         <Setter Property="FontSize" Value="Title"/>
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="MenuButtonLabel">
-        <Setter Property="FontFamily" Value="{StaticResource Vazir}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
         <Setter Property="FontSize" Value="Body"/>
         <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
         <Setter Property="HorizontalTextAlignment" Value="Start"/>
@@ -78,6 +79,17 @@
         <Setter Property="HeightRequest" Value="0.5"/>
         <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
         <Setter Property="BackgroundColor" Value="{StaticResource BorderGrayColor}"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type material:MaterialTextField}" x:Key="MaterialTextBox">
+        <Setter Property="InputType" Value="Default"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="AlwaysShowUnderline" Value="True"/>
+        <Setter Property="UnderlineColor" Value="{StaticResource Primary}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FloatingPlaceholderColor" Value="{StaticResource PrimaryDark}"/>
+        <Setter Property="TintColor" Value="{StaticResource PrimaryDark}"/>
     </Style>
 
 </ResourceDictionary>

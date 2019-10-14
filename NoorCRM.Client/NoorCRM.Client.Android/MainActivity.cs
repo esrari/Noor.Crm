@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.Net;
 
 namespace NoorCRM.Client.Droid
 {
@@ -20,7 +21,16 @@ namespace NoorCRM.Client.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            XF.Material.Droid.Material.Init(this, savedInstanceState);
+
+            // I strongly recommend wrapping this in the compiler directive, because you should have a proper
+            // certificate in a production environment.
+#if DEBUG
+            ServicePointManager.ServerCertificateValidationCallback += (o, certificate, chain, errors) => true;
+#endif
+
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

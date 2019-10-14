@@ -23,5 +23,6 @@
 
     <Color x:Key="BackgroundGrayColor">#eeeeee</Color>
     <Color x:Key="BorderGrayColor">#cccccc</Color>
+    <Color x:Key="TextGrayColor">#aaaaaa</Color>
 
 </ResourceDictionary>

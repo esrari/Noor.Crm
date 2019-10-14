@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.CustomersView">
+
+    <StackLayout>
+        <Grid>
+            <material:MaterialTextField x:Name="txtSearch" 
+                                        Style="{StaticResource MaterialTextBox}"
+                                        Placeholder="جستجو"/>
+        </Grid>
+        <StackLayout x:Name="stkCustomers"
+                     Padding="5">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <material:MaterialCard CornerRadius="3" 
+                                           IsClippedToBounds="True"
+                                           Elevation="1" 
+                                           HorizontalOptions="FillAndExpand"
+                                           Padding="0"
+                                           VerticalOptions="Start"
+                                           IsClickable="True"
+                                           ClickCommand="{Binding TapCommand}"
+                                           ClickCommandParameter="{Binding Customer}">
+                        <StackLayout Orientation="Vertical">
+                            <Label Style="{StaticResource NormalLabel}" 
+                                   Text="{Binding Title}"  
+                                   TextColor="{StaticResource BodyTextColor}"
+                                   HorizontalTextAlignment="Start"/>
+                            <Label Style="{StaticResource MicroLabel}" 
+                                   Text="{Binding Address}"  
+                                   TextColor="{StaticResource TextGrayColor}"
+                                   HorizontalTextAlignment="Start"/>
+                        </StackLayout>
+                    </material:MaterialCard>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </StackLayout>
+</ContentView>

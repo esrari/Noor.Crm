@@ -12,28 +12,28 @@ namespace NoorCRM.Client.Data
         private User _onlineUser;
 
         public event UserFetchedEventHandler OnlineUserFetched;
-        public event CourseFetchedEventHandler CourseFetched;
-        public event CategoryFetchedEventHandler CategoryFetched;
-        public event UserCourseFetchedEventHandler UserCourseFetched;
+        //public event CourseFetchedEventHandler CourseFetched;
+        //public event CategoryFetchedEventHandler CategoryFetched;
+        //public event UserCourseFetchedEventHandler UserCourseFetched;
         public string ExtractedUserPhoneNo { get; set; }
-        public IList<Course> OnlineUserCourses
-        {
-            get
-            {
-                // Create a list of user courses
-                var courseList = new List<Course>();
-                if (_onlineUser != null && _onlineUser.UserCourses != null)
-                {
-                    foreach (var item in _onlineUser.UserCourses)
-                    {
-                        if (item.Course != null)
-                            courseList.Add(item.Course);
-                    }
-                }
+        //public IList<Course> OnlineUserCourses
+        //{
+        //    get
+        //    {
+        //        // Create a list of user courses
+        //        var courseList = new List<Course>();
+        //        if (_onlineUser != null && _onlineUser.UserCourses != null)
+        //        {
+        //            foreach (var item in _onlineUser.UserCourses)
+        //            {
+        //                if (item.Course != null)
+        //                    courseList.Add(item.Course);
+        //            }
+        //        }
 
-                return courseList;
-            }
-        }
+        //        return courseList;
+        //    }
+        //}
 
         public ServiceManager(RestService service)
         {
@@ -56,68 +56,69 @@ namespace NoorCRM.Client.Data
             return _onlineUser;
         }
 
-        public async Task<Course> GetCompleteCourseAsync(int courseId)
-        {
-            var course = await _restService.GetCourseAsync(courseId);
-            OnCourseFetched(course);
+        //public async Task<Course> GetCompleteCourseAsync(int courseId)
+        //{
+        //    var course = await _restService.GetCourseAsync(courseId);
+        //    OnCourseFetched(course);
 
-            return course;
-        }
+        //    return course;
+        //}
 
-        public async Task<UserCourse> GetCourseEquivalentUserCourseAsync(int courseId)
-        {
-            if (_onlineUser == null)
-                return null;
+        //public async Task<UserCourse> GetCourseEquivalentUserCourseAsync(int courseId)
+        //{
+        //    if (_onlineUser == null)
+        //        return null;
 
-            var userCourse = await _restService.GetUserCourseByCourseAsync(_onlineUser.Id, courseId);
-            OnUserCourseFetched(userCourse);
+        //    var userCourse = await _restService.GetUserCourseByCourseAsync(_onlineUser.Id, courseId);
+        //    OnUserCourseFetched(userCourse);
 
-            return userCourse;
-        }
+        //    return userCourse;
+        //}
 
-        public async Task<ICollection<Course>> GetFreeCoursesAsync()
-        {
-            return await _restService.GetFreeCoursesAsync();
-        }
+        //public async Task<ICollection<Course>> GetFreeCoursesAsync()
+        //{
+        //    return await _restService.GetFreeCoursesAsync();
+        //}
 
-        public async Task<ICollection<Course>> GetNewCoursesAsync()
-        {
-            return await _restService.GetNewCoursesAsync();
-        }
+        //public async Task<ICollection<Course>> GetNewCoursesAsync()
+        //{
+        //    return await _restService.GetNewCoursesAsync();
+        //}
 
-        public async Task<ICollection<Category>> GetRootCategoreisAsync()
-        {
-            return await _restService.GetRootCategoreisAsync();
-        }
+        //public async Task<ICollection<Category>> GetRootCategoreisAsync()
+        //{
+        //    return await _restService.GetRootCategoreisAsync();
+        //}
 
-        public async Task<Category> GetCategoryAsync(int catId)
-        {
-            var cat = await _restService.GetCategoryAsync(catId);
-            OnCategoryFetched(cat);
+        //public async Task<Category> GetCategoryAsync(int catId)
+        //{
+        //    var cat = await _restService.GetCategoryAsync(catId);
+        //    OnCategoryFetched(cat);
 
-            return cat;
-        }
+        //    return cat;
+        //}
 
         public void OnOnlineUserFetched()
         {
-            if (_onlineUser != null) OnlineUserFetched?.Invoke(_onlineUser);
+            if (_onlineUser != null)
+                OnlineUserFetched?.Invoke(_onlineUser);
         }
-        public void OnCourseFetched(Course course)
-        {
-            CourseFetched?.Invoke(course);
-        }
-        public void OnCategoryFetched(Category category)
-        {
-            CategoryFetched?.Invoke(category);
-        }
-        public void OnUserCourseFetched(UserCourse userCourse)
-        {
-            UserCourseFetched?.Invoke(userCourse);
-        }
+        //public void OnCourseFetched(Course course)
+        //{
+        //    CourseFetched?.Invoke(course);
+        //}
+        //public void OnCategoryFetched(Category category)
+        //{
+        //    CategoryFetched?.Invoke(category);
+        //}
+        //public void OnUserCourseFetched(UserCourse userCourse)
+        //{
+        //    UserCourseFetched?.Invoke(userCourse);
+        //}
     }
 
     public delegate void UserFetchedEventHandler(User user);
-    public delegate void CourseFetchedEventHandler(Course course);
-    public delegate void CategoryFetchedEventHandler(Category category);
-    public delegate void UserCourseFetchedEventHandler(UserCourse userCourse);
+    //public delegate void CourseFetchedEventHandler(Course course);
+    //public delegate void CategoryFetchedEventHandler(Category category);
+    //public delegate void UserCourseFetchedEventHandler(UserCourse userCourse);
 }

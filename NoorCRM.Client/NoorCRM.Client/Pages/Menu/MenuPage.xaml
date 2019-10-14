@@ -24,20 +24,20 @@
                              Padding="10" 
                              VerticalOptions="End" 
                              HorizontalOptions="Start">
-                    <Label Text="{Binding UserTitle}" Style="{StaticResource NormalLabel}"/>
-                    <Label Text="{Binding UserPhoneNo}" Style="{StaticResource NormalLabel}"/>
+                    <!--<Label Text="{Binding UserTitle}" Style="{StaticResource NormalLabel}"/>
+                    <Label Text="{Binding UserPhoneNo}" Style="{StaticResource NormalLabel}"/>-->
                 </StackLayout>
             </Grid>
             <StackLayout Grid.Row="1" 
                          Orientation="Horizontal" 
                          BackgroundColor="{StaticResource PrimaryDark}">
-                <Label Text="اعتبار کیف پول:" 
+                <!--<Label Text="اعتبار کیف پول:" 
                        Style="{StaticResource NormalLabel}" 
                        TextColor="{StaticResource PrimaryDarkText}" 
-                       Margin="10, 5, 10, 10"/>
-                <Label Text="{Binding UserAccountBalance}" 
+                       Margin="10, 5, 10, 10"/>-->
+                <!--<Label Text="{Binding UserAccountBalance}" 
                        Style="{StaticResource NormalLabel}" 
-                       TextColor="{StaticResource PrimaryDarkText}"/>
+                       TextColor="{StaticResource PrimaryDarkText}"/>-->
             </StackLayout>
             <StackLayout Grid.Row="2" BackgroundColor="{StaticResource BodyBackgroundColor}" Padding ="10">
                 <Label Text="خانه" 
@@ -47,7 +47,7 @@
                     </Label.GestureRecognizers>
                 </Label>
                 <BoxView Style="{StaticResource MenuButtonSplitter}"/>
-                <Label Text="دوره های خریداری شده" 
+                <!--<Label Text="دوره های خریداری شده" 
                         Style="{StaticResource MenuButtonLabel}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoPayedCoursesCommand}"/>
@@ -67,7 +67,7 @@
                         <TapGestureRecognizer Command="{Binding GoTaggedCoursesCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
-                <BoxView Style="{StaticResource MenuButtonSplitter}"/>
+                <BoxView Style="{StaticResource MenuButtonSplitter}"/>-->
                 <Label Text="درباره ما" 
                         Style="{StaticResource MenuButtonLabel}" >
                     <Label.GestureRecognizers>

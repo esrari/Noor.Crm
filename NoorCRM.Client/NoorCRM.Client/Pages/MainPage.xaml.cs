@@ -34,13 +34,11 @@ namespace NoorCRM.Client
             set
             {
                 _onlineUserFetched = value;
-                MainViewModel.UserCourses = App.ApiService.OnlineUserCourses;
-                //For test
-                MainViewModel.FirstAdBannerCourse = App.ApiService.OnlineUserCourses[0];
+                //MainViewModel.UserCourses = App.ApiService.OnlineUserCourses;
+                ////For test
+                //MainViewModel.FirstAdBannerCourse = App.ApiService.OnlineUserCourses[0];
             }
         }
-
-
 
 
         #region Bottom Menu

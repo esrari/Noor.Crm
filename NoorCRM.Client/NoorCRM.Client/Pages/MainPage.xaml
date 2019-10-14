@@ -4,11 +4,11 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.MainPage"
-             FlowDirection="RightToLeft" 
              BackgroundColor="{StaticResource BodyBackgroundColor}"
-             Title="درس ویدیو">
+             Title="نور" FlowDirection="RightToLeft">
 
 
     <ContentPage.ToolbarItems>
@@ -24,14 +24,15 @@
         <!--Contents-->
         <ScrollView Grid.Row="0">
             <Grid>
-                <!--Home Tab--><!--
+                <!--Home Tab-->
                 <local:HomeView x:Name="homeTab" 
-                            ViewModel="{Binding This}"
                             IsVisible="{Binding HomeTabSelected}"/>
-                --><!--Categories Tab--><!--
-                <localPages:CategoryView x:Name="categoryTab" 
-                            ViewModel="{Binding This}"
-                            IsVisible="{Binding SecondTabSelected}"/>-->
+                <!--Customers Tab-->
+                <local:CustomersView x:Name="customersTab" 
+                            IsVisible="{Binding SecondTabSelected}"/>
+                <!--Factors Tab-->
+                <local:FactorsView x:Name="factorsTab" 
+                            IsVisible="{Binding ThirdTabSelected}"/>
             </Grid>
         </ScrollView>
         <!--Bottom Tabs-->
@@ -57,7 +58,7 @@
                                 <TapGestureRecognizer Command="{Binding TapCommand}"/>
                             </StackLayout.GestureRecognizers>
 
-                            <Label Style="{StaticResource MaterialIcons}" 
+                            <Label Style="{StaticResource LargeMaterialIcons}" 
                                    Text="{Binding Icon}" 
                                    TextColor="{Binding TextColor}"
                                    FontSize="Medium"/>

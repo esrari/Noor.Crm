@@ -33,6 +33,15 @@
     <key>CFBundleName</key>
     <string>NoorCRM.Client</string>
     <key>XSAppIconAssets</key>
-    <string>Assets.xcassets/AppIcon.appiconset</string>
+		<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIAppFonts</key>
+		<array>
+			<string>IRANSansMobile.ttf</string>
+			<string>IRANSansMobile_Bold.ttf</string>
+			<string>IRANSansMobile_Light.ttf</string>
+			<string>IRANSansMobile_Medium.ttf</string>
+			<string>IRANSansMobile_UltraLight.ttf</string>
+			<string>materialdesignicons-webfont.ttf</string>
+		</array>
 </dict>
 </plist>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:NoorCRM.Client.ViewModels"
+             xmlns:locSource="clr-namespace:NoorCRM.Client.Sources"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.App">
     <Application.Resources>
@@ -17,7 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!--Inverse the boolean value-->
-            <local:InverseBooleanConverter x:Key="InverseBoolean"/>
+          <locSource:InverseBooleanConverter x:Key="InverseBoolean"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

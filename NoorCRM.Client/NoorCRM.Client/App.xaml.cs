@@ -40,15 +40,15 @@ namespace NoorCRM.Client
             callMain();
         }
 
-        private async void apiService_OnlineUserFetched(User user)
+        private void apiService_OnlineUserFetched(User user)
         {
             // Set AppViewModel with catched data
             MenuPageViewModel.UserTitle = user.FullName;
             MenuPageViewModel.UserPhoneNo = user.PhoneNo;
             _MainPage.OnlineUserFetched = true;
-            MainViewModel.FreeCourses = await ApiService.GetFreeCoursesAsync();
-            MainViewModel.NewCourses = await ApiService.GetNewCoursesAsync();
-            MainViewModel.Categories = await ApiService.GetRootCategoreisAsync();
+            //MainViewModel.FreeCourses = await ApiService.GetFreeCoursesAsync();
+            //MainViewModel.NewCourses = await ApiService.GetNewCoursesAsync();
+            //MainViewModel.Categories = await ApiService.GetRootCategoreisAsync();
         }
 
         private void callMain()
@@ -57,9 +57,12 @@ namespace NoorCRM.Client
             _MainPage = new MainPage(MainViewModel);
             var menuPage = new MenuPage(MenuPageViewModel);
             NavigationPage = new NavigationPage(_MainPage);
-            RootPage = new MasterDetailPage() { FlowDirection = FlowDirection.RightToLeft };
-            RootPage.Master = menuPage;
-            RootPage.Detail = NavigationPage;
+            RootPage = new MasterDetailPage()
+            {
+                FlowDirection = FlowDirection.RightToLeft,
+                Master = menuPage,
+                Detail = NavigationPage
+            };
             MainPage = RootPage;
         }
     }

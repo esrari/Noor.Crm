@@ -44,124 +44,124 @@ namespace NoorCRM.Client.Data
             return null;
         }
 
-        public async Task<Course> GetCourseAsync(int courseId)
-        {
-            var uri = new Uri(string.Format(SoftwareSettings.CoursesUrl, courseId));
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Course>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
+        //public async Task<Course> GetCourseAsync(int courseId)
+        //{
+        //    var uri = new Uri(string.Format(SoftwareSettings.CoursesUrl, courseId));
+        //    try
+        //    {
+        //        var response = await _client.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            return JsonConvert.DeserializeObject<Course>(content);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public async Task<UserCourse> GetUserCourseByCourseAsync(int userId, int courseId)
-        {
-            var uri = new Uri(string.Format(SoftwareSettings.UserCoursesUrl, userId, courseId));
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<UserCourse>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
+        //public async Task<UserCourse> GetUserCourseByCourseAsync(int userId, int courseId)
+        //{
+        //    var uri = new Uri(string.Format(SoftwareSettings.UserCoursesUrl, userId, courseId));
+        //    try
+        //    {
+        //        var response = await _client.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            return JsonConvert.DeserializeObject<UserCourse>(content);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public async Task<ICollection<Course>> GetFreeCoursesAsync()
-        {
-            var uri = new Uri(string.Format(SoftwareSettings.CoursesUrl, "Free"));
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<ICollection<Course>>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
+        //public async Task<ICollection<Course>> GetFreeCoursesAsync()
+        //{
+        //    var uri = new Uri(string.Format(SoftwareSettings.CoursesUrl, "Free"));
+        //    try
+        //    {
+        //        var response = await _client.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            return JsonConvert.DeserializeObject<ICollection<Course>>(content);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public async Task<ICollection<Course>> GetNewCoursesAsync()
-        {
-            var uri = new Uri(string.Format(SoftwareSettings.CoursesUrl, "New"));
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<ICollection<Course>>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
+        //public async Task<ICollection<Course>> GetNewCoursesAsync()
+        //{
+        //    var uri = new Uri(string.Format(SoftwareSettings.CoursesUrl, "New"));
+        //    try
+        //    {
+        //        var response = await _client.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            return JsonConvert.DeserializeObject<ICollection<Course>>(content);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public async Task<ICollection<Category>> GetRootCategoreisAsync()
-        {
-            var uri = new Uri(string.Format(SoftwareSettings.CategoreisUrl, string.Empty));
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<ICollection<Category>>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
+        //public async Task<ICollection<Category>> GetRootCategoreisAsync()
+        //{
+        //    var uri = new Uri(string.Format(SoftwareSettings.CategoreisUrl, string.Empty));
+        //    try
+        //    {
+        //        var response = await _client.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            return JsonConvert.DeserializeObject<ICollection<Category>>(content);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public async Task<Category> GetCategoryAsync(int catId)
-        {
-            var uri = new Uri(string.Format(SoftwareSettings.CategoreisUrl, catId));
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Category>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
+        //public async Task<Category> GetCategoryAsync(int catId)
+        //{
+        //    var uri = new Uri(string.Format(SoftwareSettings.CategoreisUrl, catId));
+        //    try
+        //    {
+        //        var response = await _client.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            return JsonConvert.DeserializeObject<Category>(content);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
     }
 }

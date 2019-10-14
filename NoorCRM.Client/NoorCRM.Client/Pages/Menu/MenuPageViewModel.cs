@@ -63,18 +63,18 @@ namespace NoorCRM.Client.Pages.Menu
 
         #region Commands
         public ICommand GoMainCommand { get; set; }
-        public ICommand GoPayedCoursesCommand { get; set; }
-        public ICommand GoCurrentCoursesCommand { get; set; }
-        public ICommand GoTaggedCoursesCommand { get; set; }
+        //public ICommand GoPayedCoursesCommand { get; set; }
+        //public ICommand GoCurrentCoursesCommand { get; set; }
+        //public ICommand GoTaggedCoursesCommand { get; set; }
         public ICommand GoAboutUsCommand { get; set; }
         public ICommand ExitCommand { get; set; }
 
         public MenuPageViewModel()
         {
             GoMainCommand = new Command(GoMain);
-            GoPayedCoursesCommand = new Command(GoPayedCourses);
-            GoCurrentCoursesCommand = new Command(GoCurrentCourses);
-            GoTaggedCoursesCommand = new Command(GoTaggedCourses);
+            //GoPayedCoursesCommand = new Command(GoPayedCourses);
+            //GoCurrentCoursesCommand = new Command(GoCurrentCourses);
+            //GoTaggedCoursesCommand = new Command(GoTaggedCourses);
             GoAboutUsCommand = new Command(GoAboutUs);
             ExitCommand = new Command(Exit);
         }
@@ -86,23 +86,23 @@ namespace NoorCRM.Client.Pages.Menu
             App.MenuIsPresented = false;
         }
 
-        void GoPayedCourses(object obj)
-        {
-            App.NavigationPage.Navigation.PushAsync(new PayedCourses()); //the content page you wanna load on this click event 
-            App.MenuIsPresented = false;
-        }
+        //void GoPayedCourses(object obj)
+        //{
+        //    App.NavigationPage.Navigation.PushAsync(new PayedCourses()); //the content page you wanna load on this click event 
+        //    App.MenuIsPresented = false;
+        //}
 
-        void GoCurrentCourses(object obj)
-        {
-            App.NavigationPage.Navigation.PushAsync(new CurrentCourses());
-            App.MenuIsPresented = false;
-        }
+        //void GoCurrentCourses(object obj)
+        //{
+        //    App.NavigationPage.Navigation.PushAsync(new CurrentCourses());
+        //    App.MenuIsPresented = false;
+        //}
 
-        private void GoTaggedCourses(object obj)
-        {
-            App.NavigationPage.Navigation.PushAsync(new TaggedCourses()); //the content page you wanna load on this click event 
-            App.MenuIsPresented = false;
-        }
+        //private void GoTaggedCourses(object obj)
+        //{
+        //    App.NavigationPage.Navigation.PushAsync(new TaggedCourses()); //the content page you wanna load on this click event 
+        //    App.MenuIsPresented = false;
+        //}
 
         private void GoAboutUs(object obj)
         {

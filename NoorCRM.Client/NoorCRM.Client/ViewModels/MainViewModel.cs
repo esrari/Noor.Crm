@@ -13,7 +13,7 @@ namespace NoorCRM.Client.ViewModels
 
         #region AdBanner Command
         private Command _firstAdBannerCommand;
-        private Course _firstAdBannerCourse;
+        //private Course _firstAdBannerCourse;
         public Command FirstAdBannerCommand
         {
             get { return _firstAdBannerCommand; }
@@ -25,17 +25,17 @@ namespace NoorCRM.Client.ViewModels
                 OnPropertyChanged();
             }
         }
-        public Course FirstAdBannerCourse
-        {
-            get { return _firstAdBannerCourse; }
-            set
-            {
-                if (ReferenceEquals(_firstAdBannerCourse, value))
-                    return;
-                _firstAdBannerCourse = value;
-                OnPropertyChanged();
-            }
-        }
+        //public Course FirstAdBannerCourse
+        //{
+        //    get { return _firstAdBannerCourse; }
+        //    set
+        //    {
+        //        if (ReferenceEquals(_firstAdBannerCourse, value))
+        //            return;
+        //        _firstAdBannerCourse = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         #endregion
 
         #region Bottom Menu
@@ -117,63 +117,63 @@ namespace NoorCRM.Client.ViewModels
         #endregion
 
         #region User Courses
-        private IEnumerable<Course> _userCourses = new List<Course>();
-        public IEnumerable<Course> UserCourses
-        {
-            get => _userCourses;
-            set
-            {
-                if (ReferenceEquals(_userCourses, value))
-                    return;
-                _userCourses = value;
-                OnPropertyChanged();
-            }
-        }
+        //private IEnumerable<Course> _userCourses = new List<Course>();
+        //public IEnumerable<Course> UserCourses
+        //{
+        //    get => _userCourses;
+        //    set
+        //    {
+        //        if (ReferenceEquals(_userCourses, value))
+        //            return;
+        //        _userCourses = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         #endregion
 
         #region Free Courses
-        private IEnumerable<Course> _freeCourses = new List<Course>();
-        public IEnumerable<Course> FreeCourses
-        {
-            get => _freeCourses;
-            set
-            {
-                if (ReferenceEquals(_freeCourses, value))
-                    return;
-                _freeCourses = value;
-                OnPropertyChanged();
-            }
-        }
+        //private IEnumerable<Course> _freeCourses = new List<Course>();
+        //public IEnumerable<Course> FreeCourses
+        //{
+        //    get => _freeCourses;
+        //    set
+        //    {
+        //        if (ReferenceEquals(_freeCourses, value))
+        //            return;
+        //        _freeCourses = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         #endregion
 
         #region New Courses
-        private IEnumerable<Course> _newCourses = new List<Course>();
-        public IEnumerable<Course> NewCourses
-        {
-            get => _newCourses;
-            set
-            {
-                if (ReferenceEquals(_newCourses, value))
-                    return;
-                _newCourses = value;
-                OnPropertyChanged();
-            }
-        }
+        //private IEnumerable<Course> _newCourses = new List<Course>();
+        //public IEnumerable<Course> NewCourses
+        //{
+        //    get => _newCourses;
+        //    set
+        //    {
+        //        if (ReferenceEquals(_newCourses, value))
+        //            return;
+        //        _newCourses = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         #endregion
 
         #region Categories
-        private IEnumerable<Category> _categories = new List<Category>();
-        public IEnumerable<Category> Categories
-        {
-            get => _categories;
-            set
-            {
-                if (ReferenceEquals(_categories, value))
-                    return;
-                _categories = value;
-                OnPropertyChanged();
-            }
-        }
+        //private IEnumerable<Category> _categories = new List<Category>();
+        //public IEnumerable<Category> Categories
+        //{
+        //    get => _categories;
+        //    set
+        //    {
+        //        if (ReferenceEquals(_categories, value))
+        //            return;
+        //        _categories = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         #endregion
 
         #region INotifyPropertyChanged
