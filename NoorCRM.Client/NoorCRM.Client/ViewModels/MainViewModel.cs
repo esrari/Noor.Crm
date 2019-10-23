@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoorCRM.API.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -112,7 +113,7 @@ namespace NoorCRM.Client.ViewModels
                 _bottomMenuItems = value;
                 OnPropertyChanged();
             }
-        } 
+        }
         #endregion
         #endregion
 
@@ -146,19 +147,19 @@ namespace NoorCRM.Client.ViewModels
         //}
         #endregion
 
-        #region New Courses
-        //private IEnumerable<Course> _newCourses = new List<Course>();
-        //public IEnumerable<Course> NewCourses
-        //{
-        //    get => _newCourses;
-        //    set
-        //    {
-        //        if (ReferenceEquals(_newCourses, value))
-        //            return;
-        //        _newCourses = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        #region Customers
+        private IEnumerable<Customer> _customers = new List<Customer>();
+        public IEnumerable<Customer> Customers
+        {
+            get => _customers;
+            set
+            {
+                if (ReferenceEquals(_customers, value))
+                    return;
+                _customers = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Categories

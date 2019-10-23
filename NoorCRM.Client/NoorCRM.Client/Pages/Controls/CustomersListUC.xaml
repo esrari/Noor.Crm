@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.Controls.CustomersListUC">
+  <ContentView.Content>
+        <ScrollView x:Name="scvScroller" 
+                Orientation="Vertical">
+            <StackLayout Orientation="Vertical"
+                         x:Name="stkContainer"
+                         BindableLayout.ItemsSource="{Binding .}"
+                         Padding="5">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <material:MaterialCard CornerRadius="2" 
+                                           Elevation="2" 
+                                           VerticalOptions="FillAndExpand"
+                                           Padding="3"
+                                           IsClickable="True"
+                                           ClickCommand="{Binding TapCommand}"
+                                           ClickCommandParameter="{Binding Course}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Image Source="{Binding Image}"
+                                       VerticalOptions="Fill"
+                                       HorizontalOptions="Fill"
+                                       Margin="2"/>
+                                </Grid>
+                                <StackLayout Grid.Column="1" Orientation="Vertical">
+                                    <Label Style="{StaticResource NormalLabel}" 
+                                       Text="{Binding Title}"  
+                                       TextColor="{StaticResource BodyTextColor}"/>
+                                    <Label Style="{StaticResource SmallLabel}" 
+                                           Text="{Binding Description}"  
+                                           TextColor="{StaticResource BodyTextColor}"/>
+                                </StackLayout>
+                            </Grid>
+                        </material:MaterialCard>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>
