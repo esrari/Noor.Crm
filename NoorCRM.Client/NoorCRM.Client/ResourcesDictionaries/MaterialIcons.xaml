@@ -4,11 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <x:String x:Key="Car">&#xf10b;</x:String>
-    <x:String x:Key="Play">&#xf40a;</x:String>
-    <x:String x:Key="Home">&#xf2dc;</x:String>
-    <x:String x:Key="FolderOpenOutline">&#xfdab;</x:String>
-    <x:String x:Key="VideoOutline">&#xfbb8;</x:String>
-    <x:String x:Key="DownloadOutline">&#xfb6b;</x:String>
-    <x:String x:Key="PlayBoxOutline">&#xf40b;</x:String>
+    <x:String x:Key="Plus">&#xF415;</x:String>
+
 </ResourceDictionary>

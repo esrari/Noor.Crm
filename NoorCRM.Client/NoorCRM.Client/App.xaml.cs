@@ -40,13 +40,13 @@ namespace NoorCRM.Client
             callMain();
         }
 
-        private void apiService_OnlineUserFetched(User user)
+        private async void apiService_OnlineUserFetched(User user)
         {
             // Set AppViewModel with catched data
             MenuPageViewModel.UserTitle = user.FullName;
             MenuPageViewModel.UserPhoneNo = user.PhoneNo;
             _MainPage.OnlineUserFetched = true;
-            //MainViewModel.FreeCourses = await ApiService.GetFreeCoursesAsync();
+            MainViewModel.Customers = await ApiService.GetUserCustomersAsync();
             //MainViewModel.NewCourses = await ApiService.GetNewCoursesAsync();
             //MainViewModel.Categories = await ApiService.GetRootCategoreisAsync();
         }

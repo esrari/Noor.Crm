@@ -1,4 +1,5 @@
 ﻿using NoorCRM.API.Models;
+using NoorCRM.Client.Sources;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -17,16 +18,17 @@ namespace NoorCRM.Client.Pages.Controls
         public CustomerCardInfo(Customer customer, INavigation navigation)
         {
             Customer = customer;
-            if (!string.IsNullOrWhiteSpace(customer.StoreName))
-                Title = $"{customer.StoreName.Trim()} ({customer.ManagerName.Trim()})";
-            else Title = customer.ManagerName.Trim();
 
-            CityName = customer.City.Name;
+            Title = Helper.CreateCustomerTitle(customer);
+
+            if (customer.City != null)
+                CityName = customer.City.Name;
             Address = customer.Address;
             TapCommand = new Command<Customer>(new Action<Customer>(c =>
             {
                 navigation.PushAsync(new CustomerPage(c));
             }));
         }
+
     }
 }

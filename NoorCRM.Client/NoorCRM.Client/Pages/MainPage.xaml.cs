@@ -58,7 +58,7 @@ namespace NoorCRM.Client
                 new BottomMenuItem()
                 {
                     Title = "امروز",
-                    Icon = MaterialIcons.HomeOutline,
+                    Icon = MaterialIcons.WhiteBalanceSunny,
                     TextColor = bottomMenuSelectedColor,
                     TapCommand = new Command(OnHomeTapped),
                     GridColumnIndex = 0
@@ -66,7 +66,7 @@ namespace NoorCRM.Client
                 new BottomMenuItem()
                 {
                     Title = "مشتریان",
-                    Icon = MaterialIcons.FolderOpenOutline,
+                    Icon = MaterialIcons.AccountGroup,
                     TextColor = bottomMenuNormalColor,
                     TapCommand = new Command(OnSecondTapped),
                     GridColumnIndex = 1
@@ -74,7 +74,7 @@ namespace NoorCRM.Client
                 new BottomMenuItem()
                 {
                     Title = "سفارشات",
-                    Icon = MaterialIcons.Star,
+                    Icon = MaterialIcons.CartOutline,
                     TextColor = bottomMenuNormalColor,
                     TapCommand = new Command(OnThirdTapped),
                     GridColumnIndex = 2

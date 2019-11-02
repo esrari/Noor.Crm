@@ -92,4 +92,17 @@
         <Setter Property="TintColor" Value="{StaticResource PrimaryDark}"/>
     </Style>
 
+    <Style TargetType="{x:Type Button}" x:Key="AddButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="CornerRadius" Value="25"/>
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Text" Value="+"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
 </ResourceDictionary>

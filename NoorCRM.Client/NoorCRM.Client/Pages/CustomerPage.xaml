@@ -3,13 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
              mc:Ignorable="d"
-             x:Class="NoorCRM.Client.Pages.CustomerPage">
+             x:Class="NoorCRM.Client.Pages.CustomerPage"
+             BackgroundColor="{StaticResource BodyBackgroundColor}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <StackLayout>
+                <Grid Padding="3" BackgroundColor="{StaticResource SecondaryLight}">
+                    <Label Text="{Binding Title}" 
+                       Style="{StaticResource NormalLabel}"
+                       TextColor="{StaticResource SecondaryLightText}"
+                       HorizontalOptions="StartAndExpand"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <Label Style="{StaticResource LargeMaterialIcons}"
+                           Text="{StaticResource Plus}"
+                           TextColor="{StaticResource SecondaryLightText}"/>
+                        <Label Style="{StaticResource LargeMaterialIcons}"
+                           Text="{StaticResource Plus}"
+                           TextColor="{StaticResource SecondaryLightText}"/>
+                    </StackLayout>
+                </Grid>
+                <ScrollView>
+                    <local:LogListUC x:Name="logList"/>
+                </ScrollView>
+            </StackLayout>
+            <Button Style="{StaticResource AddButton}"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

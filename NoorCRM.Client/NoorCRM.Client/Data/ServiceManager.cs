@@ -12,7 +12,7 @@ namespace NoorCRM.Client.Data
         private User _onlineUser;
 
         public event UserFetchedEventHandler OnlineUserFetched;
-        //public event CourseFetchedEventHandler CourseFetched;
+        public event CustomerLogsFetchedEventHandler CustomerLogsFetched;
         //public event CategoryFetchedEventHandler CategoryFetched;
         //public event UserCourseFetchedEventHandler UserCourseFetched;
         public string ExtractedUserPhoneNo { get; set; }
@@ -56,7 +56,7 @@ namespace NoorCRM.Client.Data
             return _onlineUser;
         }
 
-        //public async Task<Course> GetCompleteCourseAsync(int courseId)
+        //public async Task<Customer> GetUserCustomersAsync(int courseId)
         //{
         //    var course = await _restService.GetCourseAsync(courseId);
         //    OnCourseFetched(course);
@@ -75,38 +75,30 @@ namespace NoorCRM.Client.Data
         //    return userCourse;
         //}
 
-        //public async Task<ICollection<Course>> GetFreeCoursesAsync()
-        //{
-        //    return await _restService.GetFreeCoursesAsync();
-        //}
+        public async Task<ICollection<Customer>> GetUserCustomersAsync()
+        {
+            if (_onlineUser == null)
+                return null;
 
-        //public async Task<ICollection<Course>> GetNewCoursesAsync()
-        //{
-        //    return await _restService.GetNewCoursesAsync();
-        //}
+            return await _restService.GetUserCustomersAsync(_onlineUser.Id);
+        }
 
-        //public async Task<ICollection<Category>> GetRootCategoreisAsync()
-        //{
-        //    return await _restService.GetRootCategoreisAsync();
-        //}
-
-        //public async Task<Category> GetCategoryAsync(int catId)
-        //{
-        //    var cat = await _restService.GetCategoryAsync(catId);
-        //    OnCategoryFetched(cat);
-
-        //    return cat;
-        //}
+        public async Task<ICollection<CustomerLog>> GetCustomerLogsAync(int customerId)
+        {
+            var logs = await _restService.GetCustomerLogsAync(customerId);
+            OnCustomerLogsFetched(logs);
+            return logs;
+        }
 
         public void OnOnlineUserFetched()
         {
             if (_onlineUser != null)
                 OnlineUserFetched?.Invoke(_onlineUser);
         }
-        //public void OnCourseFetched(Course course)
-        //{
-        //    CourseFetched?.Invoke(course);
-        //}
+        public void OnCustomerLogsFetched(IEnumerable<CustomerLog> logs)
+        {
+            CustomerLogsFetched?.Invoke(logs);
+        }
         //public void OnCategoryFetched(Category category)
         //{
         //    CategoryFetched?.Invoke(category);
@@ -118,7 +110,7 @@ namespace NoorCRM.Client.Data
     }
 
     public delegate void UserFetchedEventHandler(User user);
-    //public delegate void CourseFetchedEventHandler(Course course);
+    public delegate void CustomerLogsFetchedEventHandler(IEnumerable<CustomerLog> logs);
     //public delegate void CategoryFetchedEventHandler(Category category);
     //public delegate void UserCourseFetchedEventHandler(UserCourse userCourse);
 }

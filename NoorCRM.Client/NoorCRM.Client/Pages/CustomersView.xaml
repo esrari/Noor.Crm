@@ -7,13 +7,15 @@
              xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.CustomersView">
-
-    <StackLayout>
-        <Grid>
-            <material:MaterialTextField x:Name="txtSearch" 
+    <Grid>
+        <StackLayout>
+            <Grid>
+                <material:MaterialTextField x:Name="txtSearch" 
                                         Style="{StaticResource MaterialTextBox}"
                                         Placeholder="جستجو"/>
-        </Grid>
-        <local:CustomersListUC Customers="{Binding Customers}"/>
-    </StackLayout>
+            </Grid>
+            <local:CustomersListUC Customers="{Binding Customers}"/>
+        </StackLayout>
+        <Button Style="{StaticResource AddButton}"/>
+    </Grid>
 </ContentView>

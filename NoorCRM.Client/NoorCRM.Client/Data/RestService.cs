@@ -84,45 +84,45 @@ namespace NoorCRM.Client.Data
         //    return null;
         //}
 
-        //public async Task<ICollection<Course>> GetFreeCoursesAsync()
-        //{
-        //    var uri = new Uri(string.Format(SoftwareSettings.CoursesUrl, "Free"));
-        //    try
-        //    {
-        //        var response = await _client.GetAsync(uri);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var content = await response.Content.ReadAsStringAsync();
-        //            return JsonConvert.DeserializeObject<ICollection<Course>>(content);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(@"\tERROR {0}", ex.Message);
-        //    }
+        public async Task<ICollection<Customer>> GetUserCustomersAsync(int userId)
+        {
+            var uri = new Uri(string.Format(SoftwareSettings.CustomersUrl, "Visitor/"+userId));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<ICollection<Customer>>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
 
-        //    return null;
-        //}
+            return null;
+        }
 
-        //public async Task<ICollection<Course>> GetNewCoursesAsync()
-        //{
-        //    var uri = new Uri(string.Format(SoftwareSettings.CoursesUrl, "New"));
-        //    try
-        //    {
-        //        var response = await _client.GetAsync(uri);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var content = await response.Content.ReadAsStringAsync();
-        //            return JsonConvert.DeserializeObject<ICollection<Course>>(content);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(@"\tERROR {0}", ex.Message);
-        //    }
+        public async Task<ICollection<CustomerLog>> GetCustomerLogsAync(int customerId)
+        {
+            var uri = new Uri(string.Format(SoftwareSettings.CustomerLogsUrl, "Customer/"+ customerId));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<ICollection<CustomerLog>>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
 
-        //    return null;
-        //}
+            return null;
+        }
 
         //public async Task<ICollection<Category>> GetRootCategoreisAsync()
         //{

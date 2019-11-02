@@ -6,7 +6,7 @@
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.Controls.CustomersListUC">
-  <ContentView.Content>
+    <ContentView.Content>
         <ScrollView x:Name="scvScroller" 
                 Orientation="Vertical">
             <StackLayout Orientation="Vertical"
@@ -15,34 +15,32 @@
                          Padding="5">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <material:MaterialCard CornerRadius="2" 
-                                           Elevation="2" 
-                                           VerticalOptions="FillAndExpand"
-                                           Padding="3"
-                                           IsClickable="True"
-                                           ClickCommand="{Binding TapCommand}"
-                                           ClickCommandParameter="{Binding Course}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <Image Source="{Binding Image}"
-                                       VerticalOptions="Fill"
-                                       HorizontalOptions="Fill"
-                                       Margin="2"/>
-                                </Grid>
-                                <StackLayout Grid.Column="1" Orientation="Vertical">
-                                    <Label Style="{StaticResource NormalLabel}" 
+                        <Grid Padding="1">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                     Command="{Binding TapCommand}"
+                                     CommandParameter="{Binding Customer}"/>
+                            </Grid.GestureRecognizers>
+                            <BoxView CornerRadius="5"
+                                     HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource PrimaryLight}"/>
+                            <StackLayout Orientation="Vertical"
+                                         Margin="3">
+                                <Label Style="{StaticResource NormalLabel}" 
                                        Text="{Binding Title}"  
-                                       TextColor="{StaticResource BodyTextColor}"/>
+                                       TextColor="{StaticResource BodyTextColor}"
+                                       HorizontalOptions="StartAndExpand"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Style="{StaticResource SmallLabel}"
+                                           Text="{Binding CityName}"  
+                                           TextColor="{StaticResource Primary}"
+                                           Margin="5, 0, 5, 0"/>
                                     <Label Style="{StaticResource SmallLabel}" 
-                                           Text="{Binding Description}"  
+                                           Text="{Binding Address}"  
                                            TextColor="{StaticResource BodyTextColor}"/>
                                 </StackLayout>
-                            </Grid>
-                        </material:MaterialCard>
+                            </StackLayout>
+                        </Grid>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>

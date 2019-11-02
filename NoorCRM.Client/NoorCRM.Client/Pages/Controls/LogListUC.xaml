@@ -4,8 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="NoorCRM.Client.Pages.HomeView">
-    <ContentView.Content>
-        <Label Text="this is text"/>
-    </ContentView.Content>
+             x:Class="NoorCRM.Client.Pages.Controls.LogListUC">
+  <ContentView.Content>
+      <StackLayout x:Name="stkLogs">
+          
+      </StackLayout>
+  </ContentView.Content>
 </ContentView>
