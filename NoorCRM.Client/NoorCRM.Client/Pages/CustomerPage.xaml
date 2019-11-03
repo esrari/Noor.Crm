@@ -24,9 +24,7 @@
                            TextColor="{StaticResource SecondaryLightText}"/>
                     </StackLayout>
                 </Grid>
-                <ScrollView>
-                    <local:LogListUC x:Name="logList"/>
-                </ScrollView>
+                <local:LogListUC x:Name="logList"/>
             </StackLayout>
             <Button Style="{StaticResource AddButton}"/>
         </Grid>

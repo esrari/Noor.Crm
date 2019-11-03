@@ -1,4 +1,5 @@
-﻿using NoorCRM.Client.ViewModels;
+﻿using NoorCRM.API.Models;
+using NoorCRM.Client.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,23 @@ namespace NoorCRM.Client.Pages
         public CustomersView()
         {
             InitializeComponent();
+        }
+
+        private void BtnAddCustomer_Clicked(object sender, EventArgs e)
+        {
+            var addCustomerPage = new CreateCustomerPage();
+            addCustomerPage.CustomerCreated += AddCustomerPage_CustomerCreated;
+            App.NavigationPage.Navigation.PushModalAsync(addCustomerPage);
+        }
+
+        private void AddCustomerPage_CustomerCreated(CreateCustomerViewModel newCustomer)
+        {
+            var customer = new Customer()
+            {
+                ManagerName = newCustomer.CustomerName,
+                StoreName = newCustomer.StoreName,
+                Address = newCustomer.Address
+            };
         }
     }
 }

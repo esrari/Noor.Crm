@@ -5,9 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.Controls.LogListUC">
-  <ContentView.Content>
-      <StackLayout x:Name="stkLogs">
-          
-      </StackLayout>
-  </ContentView.Content>
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout x:Name="stkLogs"
+                         Padding="5"/>
+        </ScrollView>
+    </ContentView.Content>
 </ContentView>

@@ -16,6 +16,8 @@
             </Grid>
             <local:CustomersListUC Customers="{Binding Customers}"/>
         </StackLayout>
-        <Button Style="{StaticResource AddButton}"/>
+        <Button x:Name="btnAddCustomer" 
+                Style="{StaticResource AddButton}"
+                Clicked="BtnAddCustomer_Clicked"/>
     </Grid>
 </ContentView>
