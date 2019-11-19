@@ -3,6 +3,9 @@ using NoorCRM.Client.Data;
 using NoorCRM.Client.Pages.Menu;
 using NoorCRM.Client.ViewModels;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -43,12 +46,18 @@ namespace NoorCRM.Client
         private async void apiService_OnlineUserFetched(User user)
         {
             // Set AppViewModel with catched data
+            MainViewModel.OnlineUser = user;
             MenuPageViewModel.UserTitle = user.FullName;
             MenuPageViewModel.UserPhoneNo = user.PhoneNo;
             _MainPage.OnlineUserFetched = true;
-            MainViewModel.Customers = await ApiService.GetUserCustomersAsync();
+            MainViewModel.Customers = new ObservableCollection<Customer>( await ApiService.GetUserCustomersAsync());
             //MainViewModel.NewCourses = await ApiService.GetNewCoursesAsync();
             //MainViewModel.Categories = await ApiService.GetRootCategoreisAsync();
+
+
+            // Set first city if exist as default city
+            if (user.VisitCities != null && user.VisitCities.Count > 0)
+                MainViewModel.DefaultCity = (user.VisitCities as IList<City>)[0];
         }
 
         private void callMain()

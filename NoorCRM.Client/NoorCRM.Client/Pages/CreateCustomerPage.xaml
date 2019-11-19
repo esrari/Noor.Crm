@@ -6,7 +6,8 @@
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.CreateCustomerPage"
-             FlowDirection="RightToLeft" BackgroundColor="{StaticResource BodyBackgroundColor}">
+             FlowDirection="RightToLeft"
+             BackgroundColor="{StaticResource BodyBackgroundColor}">
     <ContentPage.Content>
         <StackLayout Padding="10">
             <material:MaterialTextField x:Name="txtCustomerName" 
@@ -21,6 +22,10 @@
                                         Style="{StaticResource MaterialTextBox}"
                                         Placeholder="تلفن"
                                         Text="{Binding PhoneNo, Mode=TwoWay}"/>
+            <Picker x:Name="picCities" 
+                    Style="{StaticResource picker}" 
+                    Title="شهر"
+                    SelectedItem="{Binding CityName, Mode=TwoWay}"/>
             <material:MaterialTextField x:Name="txtAddress" 
                                         Style="{StaticResource MaterialTextBox}"
                                         Placeholder="آدرس"

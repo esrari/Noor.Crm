@@ -1,6 +1,7 @@
 ﻿using NoorCRM.API.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -148,8 +149,8 @@ namespace NoorCRM.Client.ViewModels
         #endregion
 
         #region Customers
-        private IEnumerable<Customer> _customers = new List<Customer>();
-        public IEnumerable<Customer> Customers
+        private ObservableCollection<Customer> _customers = new ObservableCollection<Customer>();
+        public ObservableCollection<Customer> Customers
         {
             get => _customers;
             set
@@ -162,19 +163,31 @@ namespace NoorCRM.Client.ViewModels
         }
         #endregion
 
-        #region Categories
-        //private IEnumerable<Category> _categories = new List<Category>();
-        //public IEnumerable<Category> Categories
-        //{
-        //    get => _categories;
-        //    set
-        //    {
-        //        if (ReferenceEquals(_categories, value))
-        //            return;
-        //        _categories = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        #region Online User
+        private User _onlineUser;
+        private City _defaultCity;
+
+        public User OnlineUser
+        {
+            get => _onlineUser;
+            set
+            {
+                if (ReferenceEquals(_onlineUser, value))
+                    return;
+                _onlineUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public City DefaultCity { get => _defaultCity;
+            set
+            {
+                if (ReferenceEquals(_defaultCity, value))
+                    return;
+                _defaultCity = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region INotifyPropertyChanged

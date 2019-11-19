@@ -2,12 +2,14 @@
 using NoorCRM.Client.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace NoorCRM.Client.Pages
 {
@@ -52,14 +54,42 @@ namespace NoorCRM.Client.Pages
             App.NavigationPage.Navigation.PushModalAsync(addCustomerPage);
         }
 
-        private void AddCustomerPage_CustomerCreated(CreateCustomerViewModel newCustomer)
+        private async void AddCustomerPage_CustomerCreated(CreateCustomerViewModel newCustomer)
         {
+            var city = App.MainViewModel.OnlineUser.VisitCities
+                    .Where(vc => vc.Name == newCustomer.CityName)
+                    .FirstOrDefault();
             var customer = new Customer()
             {
                 ManagerName = newCustomer.CustomerName,
                 StoreName = newCustomer.StoreName,
-                Address = newCustomer.Address
+                Address = newCustomer.Address,
+                CityId = city.Id,
+                CreationDate = DateTime.Now,
+                IsActive = true,
+                PhoneNos = new[] { new PhoneNo() { Title = "تلفن", Number = newCustomer.PhoneNo } },
             };
+
+            var insertedCustomer = await App.ApiService.InsertNewCustomerAsync(customer);
+
+            // Send result for snack bar and add inserted customer too customers list
+            if (insertedCustomer == null)
+                await MaterialDialog.Instance.SnackbarAsync(message: "افزودن مشتری جدید با مشکل روبرو شد.",
+                    msDuration: MaterialSnackbar.DurationLong);
+            else
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "افزودن مشتری جدید با موفقیت انجام شد.",
+                    msDuration: MaterialSnackbar.DurationLong);
+
+                // after inserting open customer page for action
+                await App.NavigationPage.Navigation.PushAsync(new CustomerPage(insertedCustomer));
+                // after insertion city don't load again
+                var newList = new ObservableCollection<Customer>(App.MainViewModel.Customers);
+                insertedCustomer.City = city;
+                insertedCustomer.CityId = city.Id;
+                newList.Add(insertedCustomer);
+                App.MainViewModel.Customers = newList;
+            }
         }
     }
 }

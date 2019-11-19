@@ -126,4 +126,11 @@
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
     </Style>
 
+    <Style TargetType="{x:Type Picker}" x:Key="picker">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
+        <Setter Property="TitleColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+    </Style>
 </ResourceDictionary>

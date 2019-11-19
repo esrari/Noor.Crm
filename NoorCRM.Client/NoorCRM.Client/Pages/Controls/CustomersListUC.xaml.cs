@@ -1,5 +1,6 @@
 ﻿using NoorCRM.API.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,9 @@ namespace NoorCRM.Client.Pages.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomersListUC : ContentView
     {
-        public IEnumerable<Customer> Customers
+        public ObservableCollection<Customer> Customers
         {
-            get { return (IEnumerable<Customer>)GetValue(CustomersProperty); }
+            get { return (ObservableCollection<Customer>)GetValue(CustomersProperty); }
             set { SetValue(CustomersProperty, value); }
         }
 
@@ -21,7 +22,7 @@ namespace NoorCRM.Client.Pages.Controls
         public static readonly BindableProperty CustomersProperty =
             BindableProperty.Create(
                 nameof(Customers),
-                typeof(IEnumerable<Customer>),
+                typeof(ObservableCollection<Customer>),
                 typeof(CustomersListUC),
                 null,
                 BindingMode.TwoWay,
@@ -29,7 +30,7 @@ namespace NoorCRM.Client.Pages.Controls
 
         private static async void HandleCustomersChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var customers = newValue as IEnumerable<Customer>;
+            var customers = newValue as ObservableCollection<Customer>;
             if (customers != null)
             {
                 var cardInfos = new List<CustomerCardInfo>();
@@ -42,6 +43,7 @@ namespace NoorCRM.Client.Pages.Controls
                 await cluc.scvScroller.ScrollToAsync(cluc.stkContainer, ScrollToPosition.End, false);
             }
         }
+
         public CustomersListUC()
         {
             InitializeComponent();

@@ -40,6 +40,7 @@ namespace NoorCRM.Client.Data
             _restService = service;
         }
 
+        #region Get
         public async Task<User> GetOnlineUserAsync()
         {
             if (string.IsNullOrWhiteSpace(ExtractedUserPhoneNo))
@@ -56,25 +57,6 @@ namespace NoorCRM.Client.Data
             return _onlineUser;
         }
 
-        //public async Task<Customer> GetUserCustomersAsync(int courseId)
-        //{
-        //    var course = await _restService.GetCourseAsync(courseId);
-        //    OnCourseFetched(course);
-
-        //    return course;
-        //}
-
-        //public async Task<UserCourse> GetCourseEquivalentUserCourseAsync(int courseId)
-        //{
-        //    if (_onlineUser == null)
-        //        return null;
-
-        //    var userCourse = await _restService.GetUserCourseByCourseAsync(_onlineUser.Id, courseId);
-        //    OnUserCourseFetched(userCourse);
-
-        //    return userCourse;
-        //}
-
         public async Task<ICollection<Customer>> GetUserCustomersAsync()
         {
             if (_onlineUser == null)
@@ -89,7 +71,21 @@ namespace NoorCRM.Client.Data
             OnCustomerLogsFetched(logs);
             return logs;
         }
+        #endregion
 
+        #region Insert & Update
+        public async Task<Customer> InsertNewCustomerAsync(Customer customer)
+        {
+            return await _restService.SaveCustomerAsync(customer, true);
+        }
+
+        public async Task<Customer> UpdateCustomerAsync(Customer customer)
+        {
+            return await _restService.SaveCustomerAsync(customer, false);
+        } 
+        #endregion
+
+        #region Event Methods
         public void OnOnlineUserFetched()
         {
             if (_onlineUser != null)
@@ -98,19 +94,10 @@ namespace NoorCRM.Client.Data
         public void OnCustomerLogsFetched(IEnumerable<CustomerLog> logs)
         {
             CustomerLogsFetched?.Invoke(logs);
-        }
-        //public void OnCategoryFetched(Category category)
-        //{
-        //    CategoryFetched?.Invoke(category);
-        //}
-        //public void OnUserCourseFetched(UserCourse userCourse)
-        //{
-        //    UserCourseFetched?.Invoke(userCourse);
-        //}
+        } 
+        #endregion
     }
 
     public delegate void UserFetchedEventHandler(User user);
     public delegate void CustomerLogsFetchedEventHandler(IEnumerable<CustomerLog> logs);
-    //public delegate void CategoryFetchedEventHandler(Category category);
-    //public delegate void UserCourseFetchedEventHandler(UserCourse userCourse);
 }

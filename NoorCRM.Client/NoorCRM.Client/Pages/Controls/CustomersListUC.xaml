@@ -11,7 +11,6 @@
                 Orientation="Vertical">
             <StackLayout Orientation="Vertical"
                          x:Name="stkContainer"
-                         BindableLayout.ItemsSource="{Binding .}"
                          Padding="5">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>

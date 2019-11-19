@@ -21,19 +21,17 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <!--Contents-->
-        <ScrollView Grid.Row="0">
-            <Grid>
-                <!--Home Tab-->
-                <local:HomeView x:Name="homeTab" 
+        <Grid Grid.Row="0">
+            <!--Home Tab-->
+            <local:HomeView x:Name="homeTab" 
                             IsVisible="{Binding HomeTabSelected}"/>
-                <!--Customers Tab-->
-                <local:CustomersView x:Name="customersTab" 
+            <!--Customers Tab-->
+            <local:CustomersView x:Name="customersTab" 
                             IsVisible="{Binding SecondTabSelected}"/>
-                <!--Factors Tab-->
-                <local:FactorsView x:Name="factorsTab" 
+            <!--Factors Tab-->
+            <local:FactorsView x:Name="factorsTab" 
                             IsVisible="{Binding ThirdTabSelected}"/>
-            </Grid>
-        </ScrollView>
+        </Grid>
         <!--Bottom Tabs-->
         <material:MaterialCard Elevation="5" 
                                Grid.Row="1"

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoorCRM.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace NoorCRM.Client.Pages
 {
@@ -19,14 +21,36 @@ namespace NoorCRM.Client.Pages
         {
             InitializeComponent();
 
-            _createCustomerViewModel = new CreateCustomerViewModel();
+            var cities = from city in App.MainViewModel.OnlineUser.VisitCities
+                         select city.Name;
+            picCities.ItemsSource = new List<string>(cities);
+            _createCustomerViewModel = new CreateCustomerViewModel()
+            { CityName = App.MainViewModel.DefaultCity?.Name };
             BindingContext = _createCustomerViewModel;
         }
 
-        private void BtnSave_Clicked(object sender, EventArgs e)
+        private async void BtnSave_Clicked(object sender, EventArgs e)
         {
+            if(string.IsNullOrWhiteSpace(_createCustomerViewModel.CustomerName))
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "لطفا نام فروشنده را وارد نمایید.",
+                                            msDuration: MaterialSnackbar.DurationLong);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(_createCustomerViewModel.PhoneNo))
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "لطفا شماره تلفن فروشگاه را وارد نمایید.",
+                                            msDuration: MaterialSnackbar.DurationLong);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(_createCustomerViewModel.CityName))
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "لطفا شهر را تعیین کنید.",
+                                            msDuration: MaterialSnackbar.DurationLong);
+                return;
+            }
             _createCustomerViewModel.IsAccepted = true;
-            App.NavigationPage.Navigation.PopModalAsync();
+            await App.NavigationPage.Navigation.PopModalAsync();
             OnCustomerCreated(_createCustomerViewModel);
         }
 
@@ -40,6 +64,7 @@ namespace NoorCRM.Client.Pages
         {
             CustomerCreated?.Invoke(newCustomer);
         }
+
     }
 
     public class CreateCustomerViewModel
@@ -48,6 +73,7 @@ namespace NoorCRM.Client.Pages
         public string CustomerName { get; set; }
         public string StoreName { get; set; }
         public string PhoneNo { get; set; }
+        public string CityName { get; set; }
         public string Address { get; set; }
 
         public CreateCustomerViewModel()
