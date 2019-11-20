@@ -6,6 +6,6 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.AddLogPage">
     <ContentPage.Content>
-        <
+        <Grid></Grid>
     </ContentPage.Content>
 </ContentPage>

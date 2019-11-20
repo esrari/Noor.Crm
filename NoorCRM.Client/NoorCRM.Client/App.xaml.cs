@@ -1,14 +1,11 @@
-﻿using NoorCRM.API.Models;
-using NoorCRM.Client.Data;
+﻿using NoorCRM.API.Helpers;
+using NoorCRM.API.Models;
 using NoorCRM.Client.Pages.Menu;
 using NoorCRM.Client.ViewModels;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace NoorCRM.Client
 {
@@ -34,7 +31,7 @@ namespace NoorCRM.Client
             //Material.PlatformConfiguration.ChangeStatusBarColor(new Color(255, 0, 0));
 
             MenuPageViewModel = new MenuPageViewModel();
-            ApiService = new ServiceManager(new RestService());
+            ApiService = new ServiceManager(new RestService(SoftwareSettings.BaseAddress));
             ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
             ApiService.ExtractedUserPhoneNo = "9125464496";
             //ApiService.ExtractedUserPhoneNo = "9125554444";
