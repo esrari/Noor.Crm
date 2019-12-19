@@ -118,19 +118,19 @@ namespace NoorCRM.Client.ViewModels
         #endregion
         #endregion
 
-        #region User Courses
-        //private IEnumerable<Course> _userCourses = new List<Course>();
-        //public IEnumerable<Course> UserCourses
-        //{
-        //    get => _userCourses;
-        //    set
-        //    {
-        //        if (ReferenceEquals(_userCourses, value))
-        //            return;
-        //        _userCourses = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        #region Products
+        private IEnumerable<Product> _products = new List<Product>();
+        public IEnumerable<Product> Products
+        {
+            get => _products;
+            set
+            {
+                if (ReferenceEquals(_products, value))
+                    return;
+                _products = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Free Courses

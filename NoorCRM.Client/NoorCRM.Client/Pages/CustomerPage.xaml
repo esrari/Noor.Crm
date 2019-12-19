@@ -7,7 +7,6 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.CustomerPage"
              BackgroundColor="{StaticResource BodyBackgroundColor}">
-    <ContentPage.Content>
         <Grid>
             <StackLayout>
                 <Grid Padding="3" BackgroundColor="{StaticResource SecondaryLight}">
@@ -26,7 +25,8 @@
                 </Grid>
                 <local:LogListUC x:Name="logList"/>
             </StackLayout>
-            <Button Style="{StaticResource AddButton}"/>
+            <Button x:Name="btnAddLog" 
+                    Style="{StaticResource AddButton}"
+                    Clicked="BtnAddLog_Clicked"/>
         </Grid>
-    </ContentPage.Content>
 </ContentPage>

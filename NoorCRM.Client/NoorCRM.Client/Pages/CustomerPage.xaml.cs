@@ -14,9 +14,12 @@ namespace NoorCRM.Client.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomerPage : ContentPage
     {
+        private readonly Customer _customer;
+
         public CustomerPage(Customer customer)
         {
             InitializeComponent();
+            _customer = customer;
 
             App.ApiService.CustomerLogsFetched += ApiService_CustomerLogsFetched;
             _ = App.ApiService.GetCustomerLogsAync(customer.Id);
@@ -30,6 +33,11 @@ namespace NoorCRM.Client.Pages
                 return;
 
             logList.CustomerLogs = logs;
+        }
+
+        private void BtnAddLog_Clicked(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PushAsync(new AddLogPage(_customer));
         }
     }
 

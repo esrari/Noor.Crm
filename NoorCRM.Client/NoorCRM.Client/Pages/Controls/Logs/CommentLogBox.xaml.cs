@@ -11,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace NoorCRM.Client.Pages.Controls.Logs
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CommentLogUC : ContentView
+    public partial class CommentLogBox : ContentView
     {
-        public CommentLogUC(CommentLog commentLog)
+        public CommentLogBox(CommentLog commentLog)
         {
             InitializeComponent();
 

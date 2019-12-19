@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.SubmitFactorPage"
+             FlowDirection="RightToLeft"
+             BackgroundColor="{StaticResource BodyBackgroundColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="btnSubmit" Text="تایید" Clicked="Submit_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <StackLayout>
+            <Grid Padding="3" BackgroundColor="{StaticResource SecondaryLight}"
+              HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding CustomerTitle}" 
+                       Style="{StaticResource NormalLabel}"
+                       TextColor="{StaticResource SecondaryLightText}"
+                       HorizontalOptions="Start"/>
+                <Label Text="{Binding CreateDate}" 
+                       Style="{StaticResource SmallLabel}"
+                       TextColor="{StaticResource SecondaryLightText}"
+                       HorizontalOptions="End"/>
+            </Grid>
+            <material:MaterialTextField Style="{StaticResource MaterialTextBox}"
+                                        Placeholder="شرایط پرداخت"
+                                        Text="{Binding Description, Mode=TwoWay}"
+                                        HorizontalOptions="StartAndExpand"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="نام کالا" Grid.Column="0"
+                   Style="{StaticResource SmallLabel}"
+                   TextColor="{StaticResource BodyTextColor}"
+                   HorizontalOptions="Start"/>
+                <Label Text="تعداد" Grid.Column="1"
+                   Style="{StaticResource SmallLabel}"
+                   TextColor="{StaticResource BodyTextColor}"/>
+                <Label Text="قیمت" Grid.Column="2"
+                   Style="{StaticResource SmallLabel}"
+                   TextColor="{StaticResource BodyTextColor}"/>
+                <Label Text="مجموع" Grid.Column="3"
+                   Style="{StaticResource SmallLabel}"
+                   TextColor="{StaticResource BodyTextColor}"/>
+            </Grid>
+            <ListView ItemsSource="{Binding FactorItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="حذف" 
+                                          Command="{Binding DeleteCommand}" 
+                                          CommandParameter="{Binding .}"
+                                          IsDestructive="True"/>
+                            </ViewCell.ContextActions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="60"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding ProductName}"
+                               Grid.Column="0"
+                               Style="{StaticResource SmallLabel}"
+                               TextColor="{StaticResource SecondaryLightText}"
+                               HorizontalOptions="Start"/>
+                                <Entry Grid.Column="1"
+                                   Text="{Binding Quantity, Mode=TwoWay}"
+                                   FontSize="Small"/>
+                                <Entry Grid.Column="2"
+                                   Text="{Binding SelectedPrice, Mode=TwoWay}"
+                                   FontSize="Small"/>
+                                <Label Text="{Binding SumPrice}"
+                               Grid.Column="3"
+                               Style="{StaticResource SmallLabel}"
+                               TextColor="{StaticResource SecondaryLightText}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" 
+                         BackgroundColor="{StaticResource PrimaryLight}"
+                         HorizontalOptions="Center">
+                <Label Text="جمع کل:"
+                   Style="{StaticResource SmallLabel}"
+                   TextColor="{StaticResource PrimaryDarkText}"/>
+                <Label Text="{Binding TotalPrice}"
+                   Style="{StaticResource NormalLabel}"
+                   TextColor="{StaticResource PrimaryLightText}"
+                       FontAttributes="Bold"
+                       Margin="5, 0, 5, 0"/>
+            </StackLayout>
+        </StackLayout>
+        <Button x:Name="btnAddItem" 
+                Style="{StaticResource AddButton}"
+                Clicked="BtnAddItem_Clicked"/>
+    </Grid>
+</ContentPage>

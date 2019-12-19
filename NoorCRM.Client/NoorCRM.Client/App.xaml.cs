@@ -9,6 +9,9 @@ using Xamarin.Forms;
 
 namespace NoorCRM.Client
 {
+
+    // Release with this options 
+    // https://docs.microsoft.com/en-us/xamarin/android/deploy-test/release-prep/?tabs=windows#Specify_the_Application_Icon
     public partial class App : Application
     {
         public static ServiceManager ApiService { get; private set; }
@@ -48,7 +51,7 @@ namespace NoorCRM.Client
             MenuPageViewModel.UserPhoneNo = user.PhoneNo;
             _MainPage.OnlineUserFetched = true;
             MainViewModel.Customers = new ObservableCollection<Customer>( await ApiService.GetUserCustomersAsync());
-            //MainViewModel.NewCourses = await ApiService.GetNewCoursesAsync();
+            MainViewModel.Products = await ApiService.GetAllProductsAsync();
             //MainViewModel.Categories = await ApiService.GetRootCategoreisAsync();
 
 

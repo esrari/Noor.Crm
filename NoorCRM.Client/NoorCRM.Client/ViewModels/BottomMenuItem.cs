@@ -14,7 +14,8 @@ namespace NoorCRM.Client.ViewModels
         public int GridColumnIndex { get; set; }
         public Color TextColor
         {
-            get => _textColor; set
+            get => _textColor;
+            set
             {
                 if (_textColor == value)
                     return;

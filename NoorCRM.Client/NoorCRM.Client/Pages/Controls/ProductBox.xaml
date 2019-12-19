@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.Controls.ProductBox">
+    <StackLayout >
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Title}"/>
+            <Label Text="{Binding ExistedQuantity, StringFormat='[{0}]'}"
+                   TextColor="{d:StaticResource PrimaryDark}"/>
+        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="نقد" Style="{StaticResource SmallLabel}"/>
+            <Frame CornerRadius="5" Grid.Row="0" Grid.Column="1" x:Name="btnPrice1">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnPrice1_Clicked"/>
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding Price1}"/>
+            </Frame>
+            <Frame CornerRadius="5" Grid.Row="0" Grid.Column="2" x:Name="btnPrice2">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnPrice2_Clicked"/>
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding Price2}"/>
+            </Frame>
+            <Frame CornerRadius="5" Grid.Row="0" Grid.Column="3" x:Name="btnPrice3">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnPrice3_Clicked"/>
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding Price3}"/>
+            </Frame>
+            <!--<material:MaterialButton Grid.Row="0" Grid.Column="2" x:Name="btnPrice2" Text="{Binding Price2}" Clicked="BtnPrice2_Clicked"/>
+            <material:MaterialButton Grid.Row="0" Grid.Column="3" x:Name="btnPrice3" Text="{Binding Price3}" Clicked="BtnPrice3_Clicked"/>-->
+            <Label Grid.Row="1" Grid.Column="0" Text="شرایطی" Style="{StaticResource SmallLabel}"/>
+            <Frame CornerRadius="5" Grid.Row="1" Grid.Column="1" x:Name="btnPrice1ch">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnPrice1ch_Clicked"/>
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding Price1ch}"/>
+            </Frame>
+            <Frame CornerRadius="5" Grid.Row="1" Grid.Column="2" x:Name="btnPrice2ch">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnPrice2ch_Clicked"/>
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding Price2ch}"/>
+            </Frame>
+            <Frame CornerRadius="5" Grid.Row="1" Grid.Column="3" x:Name="btnPrice3ch">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnPrice3ch_Clicked"/>
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding Price3ch}"/>
+            </Frame>
+            <!--<material:MaterialButton Grid.Row="1" Grid.Column="1" x:Name="btnPrice1ch" Text="{Binding Price1ch}" Clicked="BtnPrice1ch_Clicked"/>
+            <material:MaterialButton Grid.Row="1" Grid.Column="2" x:Name="btnPrice2ch" Text="{Binding Price2ch}" Clicked="BtnPrice2ch_Clicked"/>
+            <material:MaterialButton Grid.Row="1" Grid.Column="3" x:Name="btnPrice3ch" Text="{Binding Price3ch}" Clicked="BtnPrice3ch_Clicked"/>-->
+        </Grid>
+    </StackLayout>
+</ContentView>

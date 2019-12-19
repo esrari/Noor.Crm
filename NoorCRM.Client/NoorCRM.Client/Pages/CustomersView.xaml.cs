@@ -51,7 +51,7 @@ namespace NoorCRM.Client.Pages
         {
             var addCustomerPage = new CreateCustomerPage();
             addCustomerPage.CustomerCreated += AddCustomerPage_CustomerCreated;
-            App.NavigationPage.Navigation.PushModalAsync(addCustomerPage);
+            App.NavigationPage.Navigation.PushAsync(addCustomerPage);
         }
 
         private async void AddCustomerPage_CustomerCreated(CreateCustomerViewModel newCustomer)

@@ -40,7 +40,7 @@ namespace NoorCRM.Client.Pages.Controls
                 {
                     if(item is CommentLog)
                     {
-                        var clog = new CommentLogUC(item as CommentLog);
+                        var clog = new CommentLogBox(item as CommentLog);
                         lluc.stkLogs.Children.Add(clog);
                     }
 
