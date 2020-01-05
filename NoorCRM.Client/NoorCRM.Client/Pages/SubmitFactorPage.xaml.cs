@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace NoorCRM.Client.Pages
 {
@@ -17,6 +18,8 @@ namespace NoorCRM.Client.Pages
     {
         private readonly Customer _customer;
         private FactorViewModel _viewModel;
+        public event PageClosedEventHandler PageClosed;
+
         public SubmitFactorPage(Customer customer)
         {
             InitializeComponent();
@@ -47,9 +50,34 @@ namespace NoorCRM.Client.Pages
             if (!_viewModel.FactorItems.Any())
                 return;
             var factor = _viewModel.GetSubmitedFactor();
-            await App.ApiService.InsertNewFactorAsync(factor);
-            await App.NavigationPage.Navigation.PopAsync();
-            await App.NavigationPage.Navigation.PopAsync();
+            var successLog = new SuccessfulLog()
+            {
+                CreationDate = DateTime.Now,
+                CreatorUserId = App.MainViewModel.OnlineUser.Id,
+                CustomerId = factor.CustomerId,
+                IsVisitorsLog = true
+            };
+
+            var sucLog = await App.ApiService.InsertNewFactorAsync(factor, successLog).ConfigureAwait(true);
+            if (sucLog != null)
+            {
+                OnPageClosed(successful: true, sucLog);
+                await MaterialDialog.Instance.SnackbarAsync(message: "افزودن فاکتور جدید با موفقیت انجام شد.",
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+            }
+            else
+            {
+                OnPageClosed(successful: false, null);
+                await MaterialDialog.Instance.SnackbarAsync(message: "افزودن فاکتور جدید با مشکل روبرو شد.",
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+            }
+
+            await App.NavigationPage.Navigation.PopAsync().ConfigureAwait(false);
+        }
+
+        private void OnPageClosed(bool successful, SuccessfulLog log)
+        {
+            PageClosed?.Invoke(successful, log);
         }
     }
 }

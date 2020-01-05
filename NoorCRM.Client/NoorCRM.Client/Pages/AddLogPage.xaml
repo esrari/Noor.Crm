@@ -7,10 +7,14 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.AddLogPage">
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <material:MaterialButton x:Name="btnComment" Text="توضیح" />
+        <material:MaterialButton x:Name="btnComment" 
+                                 Text="توضیح" 
+                                 Clicked="btnComment_Clicked"/>
         <material:MaterialButton x:Name="btnSuccessful" 
                                  Text="فاکتور" 
                                  Clicked="BtnSuccessful_Clicked"/>
-        <material:MaterialButton x:Name="btnFailed" Text="عدم خرید" />
+        <material:MaterialButton x:Name="btnFailed" 
+                                 Text="عدم خرید" 
+                                 Clicked="btnFailed_Clicked"/>
     </StackLayout>
 </ContentPage>

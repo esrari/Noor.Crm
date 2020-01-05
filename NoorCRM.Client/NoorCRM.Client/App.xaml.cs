@@ -50,8 +50,8 @@ namespace NoorCRM.Client
             MenuPageViewModel.UserTitle = user.FullName;
             MenuPageViewModel.UserPhoneNo = user.PhoneNo;
             _MainPage.OnlineUserFetched = true;
-            MainViewModel.Customers = new ObservableCollection<Customer>( await ApiService.GetUserCustomersAsync());
-            MainViewModel.Products = await ApiService.GetAllProductsAsync();
+            MainViewModel.Customers = new ObservableCollection<Customer>( await ApiService.GetUserCustomersAsync().ConfigureAwait(true));
+            MainViewModel.Products = new ObservableCollection<Product>(await ApiService.GetAllProductsAsync().ConfigureAwait(false));
             //MainViewModel.Categories = await ApiService.GetRootCategoreisAsync();
 
 

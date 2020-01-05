@@ -51,7 +51,7 @@ namespace NoorCRM.Client.Pages
         {
             var addCustomerPage = new CreateCustomerPage();
             addCustomerPage.CustomerCreated += AddCustomerPage_CustomerCreated;
-            App.NavigationPage.Navigation.PushAsync(addCustomerPage);
+            App.NavigationPage.Navigation.PushModalAsync(addCustomerPage);
         }
 
         private async void AddCustomerPage_CustomerCreated(CreateCustomerViewModel newCustomer)
@@ -70,19 +70,19 @@ namespace NoorCRM.Client.Pages
                 PhoneNos = new[] { new PhoneNo() { Title = "تلفن", Number = newCustomer.PhoneNo } },
             };
 
-            var insertedCustomer = await App.ApiService.InsertNewCustomerAsync(customer);
+            var insertedCustomer = await App.ApiService.InsertNewCustomerAsync(customer).ConfigureAwait(true);
 
             // Send result for snack bar and add inserted customer too customers list
             if (insertedCustomer == null)
                 await MaterialDialog.Instance.SnackbarAsync(message: "افزودن مشتری جدید با مشکل روبرو شد.",
-                    msDuration: MaterialSnackbar.DurationLong);
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
             else
             {
                 await MaterialDialog.Instance.SnackbarAsync(message: "افزودن مشتری جدید با موفقیت انجام شد.",
-                    msDuration: MaterialSnackbar.DurationLong);
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
 
                 // after inserting open customer page for action
-                await App.NavigationPage.Navigation.PushAsync(new CustomerPage(insertedCustomer));
+                await App.NavigationPage.Navigation.PushAsync(new CustomerPage(insertedCustomer)).ConfigureAwait(true);
                 // after insertion city don't load again
                 var newList = new ObservableCollection<Customer>(App.MainViewModel.Customers);
                 insertedCustomer.City = city;

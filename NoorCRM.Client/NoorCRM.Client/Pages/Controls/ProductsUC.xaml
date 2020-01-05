@@ -5,10 +5,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.Controls.ProductsUC">
-    <ContentView.Content>
-        <ScrollView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--<BoxView Grid.Row="0" Grid.ColumnSpan="4" HeightRequest="20" BackgroundColor="LightPink"/>-->
+        <Label Grid.Row="0" Grid.Column="1" Text="سوپر مارکت" Style="{StaticResource SmallLabel}" TextColor="Tomato"/>
+        <Label Grid.Row="0" Grid.Column="2" Text="خشکبار" Style="{StaticResource SmallLabel}" TextColor="Tomato"/>
+        <Label Grid.Row="0" Grid.Column="3" Text="بنکدار" Style="{StaticResource SmallLabel}" TextColor="Tomato"/>
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="4" x:Name="scvScroller">
             <StackLayout x:Name="stkProducts"
                          Padding="5"/>
         </ScrollView>
-    </ContentView.Content>
+    </Grid>
 </ContentView>

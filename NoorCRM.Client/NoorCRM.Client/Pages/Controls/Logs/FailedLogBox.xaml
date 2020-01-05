@@ -4,20 +4,19 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="NoorCRM.Client.Pages.Controls.Logs.CommentLogBox">
+             x:Class="NoorCRM.Client.Pages.Controls.Logs.FailedLogBox">
     <Grid>
         <BoxView CornerRadius="5"
                  BackgroundColor="{StaticResource BackgroundGrayColor}"/>
         <StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                 <Label Style="{StaticResource SmallLabel}" 
-                   Text="درجه اهمیت:" />
-                <Label x:Name="lblImportance" 
-                       Margin="10, 0, 10, 0"
-                       Text="عادی"
-                       Style="{StaticResource NormalLabel}"/>
+                   Text="علت عدم سفارش:" />
+                <Label x:Name="lblReason"
+                   Margin="10, 0, 10, 0"
+                   Style="{StaticResource NormalLabel}"/>
             </StackLayout>
-            <Label x:Name="lblComment"
+            <Label x:Name="lblDescription"
                HorizontalOptions="StartAndExpand"
                Margin="5"/>
             <Grid>

@@ -27,7 +27,8 @@
             <material:MaterialTextField Style="{StaticResource MaterialTextBox}"
                                         Placeholder="شرایط پرداخت"
                                         Text="{Binding Description, Mode=TwoWay}"
-                                        HorizontalOptions="StartAndExpand"/>
+                                        HorizontalOptions="StartAndExpand"
+                                        Margin="0, 10, 0, 0"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

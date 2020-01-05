@@ -1,4 +1,5 @@
-﻿using NoorCRM.API.Models;
+﻿using Utility.DateTimeFormats;
+using NoorCRM.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,21 +18,25 @@ namespace NoorCRM.Client.Pages.Controls.Logs
         {
             InitializeComponent();
 
-            switch(commentLog.ImportanceLevel)
+            if (commentLog != null)
             {
-                case ImportanceLevel.Important:
-                    lblImportance.Text = "مهم";
-                    lblImportance.TextColor = Color.Orange;
-                    break;
-                case ImportanceLevel.Critical:
-                    lblImportance.Text = "خیلی مهم";
-                    lblImportance.TextColor = Color.Red;
-                    break;
-            }
+                switch (commentLog.ImportanceLevel)
+                {
+                    case ImportanceLevel.Important:
+                        lblImportance.Text = "مهم";
+                        lblImportance.TextColor = Color.Orange;
+                        break;
+                    case ImportanceLevel.Critical:
+                        lblImportance.Text = "خیلی مهم";
+                        lblImportance.TextColor = Color.Red;
+                        break;
+                }
 
-            lblComment.Text = commentLog.Comment;
-            lblDate.Text = commentLog.CreationDate.ToString();
-            lblCreatorName.Text = commentLog.CreatorUser?.FullName;
+                lblComment.Text = commentLog.Comment;
+                lblDate.Text = commentLog.CreationDate.GetDateTimeString(
+                    DateOrTime.DateTime, (int)DateTimeFormat.yymmddHHmm, isPersian: true);
+                lblCreatorName.Text = commentLog.CreatorUser?.FullName;
+            }
         }
     }
 }

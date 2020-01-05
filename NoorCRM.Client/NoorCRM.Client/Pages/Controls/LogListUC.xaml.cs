@@ -23,8 +23,8 @@ namespace NoorCRM.Client.Pages.Controls
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly BindableProperty CustomerLogsProperty =
             BindableProperty.Create(
-                nameof(CustomerLogs), 
-                typeof(IEnumerable<CustomerLog>), 
+                nameof(CustomerLogs),
+                typeof(IEnumerable<CustomerLog>),
                 typeof(LogListUC),
                 null,
                  BindingMode.TwoWay,
@@ -33,18 +33,26 @@ namespace NoorCRM.Client.Pages.Controls
         private static void HandleCustomerLogsChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var logs = newValue as IEnumerable<CustomerLog>;
-            if(logs!=null)
+            if (logs != null)
             {
                 var lluc = bindable as LogListUC;
                 foreach (var item in logs)
                 {
-                    if(item is CommentLog)
+                    if (item is CommentLog)
                     {
                         var clog = new CommentLogBox(item as CommentLog);
                         lluc.stkLogs.Children.Add(clog);
                     }
-
-                    // Todo: other types of log here
+                    else if (item is SuccessfulLog)
+                    {
+                        var slog = new SuccessfulLogBox(item as SuccessfulLog);
+                        lluc.stkLogs.Children.Add(slog);
+                    }
+                    else if (item is FailedLog)
+                    {
+                        var flog = new FailedLogBox(item as FailedLog);
+                        lluc.stkLogs.Children.Add(flog);
+                    }
                 }
             }
         }

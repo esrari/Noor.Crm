@@ -21,7 +21,7 @@ namespace NoorCRM.Client
         public MainPage(MainViewModel mainViewModel)
         {
             MainViewModel = mainViewModel;
-            mainViewModel.HomeTabSelected = true;
+            MainViewModel.HomeTabSelected = true;
             InitializeComponent();
             BindingContext = MainViewModel;
 
@@ -57,7 +57,7 @@ namespace NoorCRM.Client
             {
                 new BottomMenuItem()
                 {
-                    Title = "امروز",
+                    Title = "کالا",
                     Icon = MaterialIcons.WhiteBalanceSunny,
                     TextColor = bottomMenuSelectedColor,
                     TapCommand = new Command(OnHomeTapped),

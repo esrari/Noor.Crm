@@ -15,6 +15,7 @@ namespace NoorCRM.Client.Pages
     public partial class CustomerPage : ContentPage
     {
         private readonly Customer _customer;
+        private List<CustomerLog> _logs;
 
         public CustomerPage(Customer customer)
         {
@@ -32,12 +33,24 @@ namespace NoorCRM.Client.Pages
             if (logs == null)
                 return;
 
-            logList.CustomerLogs = logs;
+            _logs = new List<CustomerLog>(logs);
+            logList.CustomerLogs = _logs;
         }
 
         private void BtnAddLog_Clicked(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new AddLogPage(_customer));
+            var addLogPage = new AddLogPage(_customer);
+            addLogPage.PageClosed += AddLogPage_PageClosed;
+            App.NavigationPage.Navigation.PushAsync(addLogPage);
+        }
+
+        private void AddLogPage_PageClosed(bool successful, CustomerLog log)
+        {
+            if(successful)
+            {
+                _logs.Add(log);
+                logList.CustomerLogs = _logs;
+            }
         }
     }
 

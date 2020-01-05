@@ -31,26 +31,26 @@ namespace NoorCRM.Client.Pages
 
         private async void BtnSave_Clicked(object sender, EventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(_createCustomerViewModel.CustomerName))
+            if (string.IsNullOrWhiteSpace(_createCustomerViewModel.CustomerName))
             {
                 await MaterialDialog.Instance.SnackbarAsync(message: "لطفا نام فروشنده را وارد نمایید.",
-                                            msDuration: MaterialSnackbar.DurationLong);
+                                            msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(false);
                 return;
             }
             if (string.IsNullOrWhiteSpace(_createCustomerViewModel.PhoneNo))
             {
                 await MaterialDialog.Instance.SnackbarAsync(message: "لطفا شماره تلفن فروشگاه را وارد نمایید.",
-                                            msDuration: MaterialSnackbar.DurationLong);
+                                            msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(false);
                 return;
             }
             if (string.IsNullOrWhiteSpace(_createCustomerViewModel.CityName))
             {
                 await MaterialDialog.Instance.SnackbarAsync(message: "لطفا شهر را تعیین کنید.",
-                                            msDuration: MaterialSnackbar.DurationLong);
+                                            msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(false);
                 return;
             }
             _createCustomerViewModel.IsAccepted = true;
-            await App.NavigationPage.Navigation.PopModalAsync();
+            await App.NavigationPage.Navigation.PopModalAsync().ConfigureAwait(false);
             OnCustomerCreated(_createCustomerViewModel);
         }
 

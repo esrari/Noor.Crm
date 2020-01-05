@@ -119,8 +119,8 @@ namespace NoorCRM.Client.ViewModels
         #endregion
 
         #region Products
-        private IEnumerable<Product> _products = new List<Product>();
-        public IEnumerable<Product> Products
+        private ObservableCollection<Product> _products = new ObservableCollection<Product>();
+        public ObservableCollection<Product> Products
         {
             get => _products;
             set
