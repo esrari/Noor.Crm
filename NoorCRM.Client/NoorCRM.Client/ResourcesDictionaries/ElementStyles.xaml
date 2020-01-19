@@ -97,9 +97,16 @@
         <Setter Property="PlaceholderFontFamily" Value="{StaticResource IRANSans}"/>
     </Style>
 
+    <Style TargetType="{x:Type Editor}" x:Key="NormalEditor">
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+    </Style>
+
     <Style TargetType="{x:Type Button}" x:Key="AddButton">
-        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
-        <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
+        <Setter Property="TextColor" Value="{StaticResource SecondaryText}"/>
         <Setter Property="HorizontalOptions" Value="End"/>
         <Setter Property="VerticalOptions" Value="End"/>
         <Setter Property="CornerRadius" Value="25"/>
@@ -132,5 +139,11 @@
         <Setter Property="FlowDirection" Value="RightToLeft"/>
         <Setter Property="TitleColor" Value="{StaticResource Primary}"/>
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Small"/>
+    </Style>
+
+    <Style TargetType="{x:Type material:MaterialChip}" x:Key="chip">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
 </ResourceDictionary>

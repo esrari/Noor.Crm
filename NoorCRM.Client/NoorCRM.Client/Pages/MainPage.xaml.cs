@@ -58,7 +58,7 @@ namespace NoorCRM.Client
                 new BottomMenuItem()
                 {
                     Title = "کالا",
-                    Icon = MaterialIcons.WhiteBalanceSunny,
+                    Icon = MaterialIcons.LibraryBooks,
                     TextColor = bottomMenuSelectedColor,
                     TapCommand = new Command(OnHomeTapped),
                     GridColumnIndex = 0

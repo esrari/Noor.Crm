@@ -17,7 +17,9 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!--Inverse the boolean value-->
-          <locSource:InverseBooleanConverter x:Key="InverseBoolean"/>
+            <locSource:InverseBooleanConverter x:Key="InverseBoolean"/>
+            <locSource:DateTimeConverter x:Key="DateTimeConvert"/>
+            <locSource:PriceCommaConverter x:Key="PriceCommaConvert"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

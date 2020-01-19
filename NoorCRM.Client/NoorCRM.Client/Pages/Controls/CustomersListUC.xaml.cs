@@ -39,8 +39,8 @@ namespace NoorCRM.Client.Pages.Controls
 
                 var cluc = (CustomersListUC)bindable;
                 BindableLayout.SetItemsSource(cluc.stkContainer, cardInfos);
-                await Task.Delay(3);
-                await cluc.scvScroller.ScrollToAsync(cluc.stkContainer, ScrollToPosition.End, false);
+                await Task.Delay(3).ConfigureAwait(true);
+                await cluc.scvScroller.ScrollToAsync(cluc.stkContainer, ScrollToPosition.Start, false).ConfigureAwait(false);
             }
         }
 

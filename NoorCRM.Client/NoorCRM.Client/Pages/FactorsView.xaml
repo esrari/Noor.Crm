@@ -3,11 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.FactorsView">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+    <Grid>
+        <StackLayout Spacing="0">
+            <Grid>
+                <material:MaterialTextField x:Name="txtSearch"
+                                            Style="{StaticResource MaterialTextBox}"
+                                            Margin="10, 0, 10, -26"
+                                            Placeholder="جستجو در عنوان فاکتور"/>
+            </Grid>
+            <local:FactorsListUC Factors="{Binding LastFactors}"/>
+        </StackLayout>
+    </Grid>
 </ContentView>

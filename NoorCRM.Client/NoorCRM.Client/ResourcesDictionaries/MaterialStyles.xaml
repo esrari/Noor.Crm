@@ -29,10 +29,10 @@
             OnPrimary="#FFFFFF"
             OnSecondary="#FFFFFF"
             OnSurface="#000000"
-            Primary="#011A27"
+            Primary="#43a047"
             PrimaryVariant="#000000"
-            Secondary="#063852"
-            SecondaryVariant="#001229"
+            Secondary="#0f57c0"
+            SecondaryVariant="#000000"
             Surface="#FFFFFF" />
 
     <mtrl:MaterialConfiguration x:Key="Material.Configuration"

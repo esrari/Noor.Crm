@@ -37,10 +37,10 @@
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <MandroidI18n />
-    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
+    <AndroidSupportedAbis>x86;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -86,16 +86,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MyEntryRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\IRANSansMobile.ttf" />
-    <AndroidAsset Include="Assets\IRANSansMobile_Bold.ttf" />
-    <AndroidAsset Include="Assets\IRANSansMobile_Light.ttf" />
-    <AndroidAsset Include="Assets\IRANSansMobile_Medium.ttf" />
-    <AndroidAsset Include="Assets\IRANSansMobile_UltraLight.ttf" />
     <AndroidAsset Include="Assets\materialdesignicons-webfont.ttf" />
+    <AndroidAsset Include="Assets\IRANSansMobile%28FaNum%29.ttf" />
+    <AndroidAsset Include="Assets\IRANSansMobile%28FaNum%29_Bold.ttf" />
+    <AndroidAsset Include="Assets\IRANSansMobile%28FaNum%29_Light.ttf" />
+    <AndroidAsset Include="Assets\IRANSansMobile%28FaNum%29_Medium.ttf" />
+    <AndroidAsset Include="Assets\IRANSansMobile%28FaNum%29_UltraLight.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

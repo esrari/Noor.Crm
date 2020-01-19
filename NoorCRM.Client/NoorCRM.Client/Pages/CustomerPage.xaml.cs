@@ -2,6 +2,7 @@
 using NoorCRM.Client.Sources;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,8 +49,18 @@ namespace NoorCRM.Client.Pages
         {
             if(successful)
             {
-                _logs.Add(log);
-                logList.CustomerLogs = _logs;
+                if (log != null)
+                {
+                    _logs.Add(log);
+                    logList.CustomerLogs = _logs;
+                }
+
+                if(log!=null && log is SuccessfulLog)
+                {
+                    var f = (log as SuccessfulLog).Factor;
+                    App.MainViewModel.LastFactors.Insert(0, f);
+                    App.MainViewModel.LastFactors = new ObservableCollection<Factor>(App.MainViewModel.LastFactors);
+                }
             }
         }
     }

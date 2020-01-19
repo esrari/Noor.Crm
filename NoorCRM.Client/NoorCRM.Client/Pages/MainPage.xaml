@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:NoorCRM.Client.Pages"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.MainPage"
-             Title="نور">
+             Title="سامانه مدیریت مشتری نورافشان">
 
 
     <ContentPage.ToolbarItems>

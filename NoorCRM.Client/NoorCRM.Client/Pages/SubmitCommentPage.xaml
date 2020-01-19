@@ -14,20 +14,22 @@
             <StackLayout Padding="3" 
                          BackgroundColor="{StaticResource SecondaryLight}"
                          Orientation="Horizontal"
-                         HorizontalOptions="StartAndExpand" >
+                         HorizontalOptions="FillAndExpand" 
+                         VerticalOptions="Fill">
                 <Label Text="درجه اهمیت:" 
                        Style="{StaticResource NormalLabel}"
                        TextColor="{StaticResource SecondaryLightText}"
                        HorizontalOptions="Start"/>
                 <Picker x:Name="picImportance" 
-                    Style="{StaticResource picker}" 
-                    Title="درجه اهمیت"/>
+                        Style="{StaticResource picker}" 
+                        HorizontalOptions="Center"
+                        Title="درجه اهمیت"/>
             </StackLayout>
-            <material:MaterialTextField Style="{StaticResource MaterialTextBox}"
-                                        x:Name="txtComment"
-                                        Placeholder="توضیحات"
-                                        HorizontalOptions="StartAndExpand"
-                                        Margin="0, 10, 0, 0"/>
+            <Editor Style="{StaticResource NormalEditor}"
+                    x:Name="txtComment"
+                    Placeholder="توضیحات"
+                    AutoSize="TextChanges"
+                    Margin="0, 10, 0, 0"/>
         </StackLayout>
     </Grid>
 </ContentPage>

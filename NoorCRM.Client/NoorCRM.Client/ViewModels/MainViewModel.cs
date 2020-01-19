@@ -133,19 +133,19 @@ namespace NoorCRM.Client.ViewModels
         }
         #endregion
 
-        #region Free Courses
-        //private IEnumerable<Course> _freeCourses = new List<Course>();
-        //public IEnumerable<Course> FreeCourses
-        //{
-        //    get => _freeCourses;
-        //    set
-        //    {
-        //        if (ReferenceEquals(_freeCourses, value))
-        //            return;
-        //        _freeCourses = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        #region Last Factors
+        private ObservableCollection<Factor> _lastFactors = new ObservableCollection<Factor>();
+        public ObservableCollection<Factor> LastFactors
+        {
+            get => _lastFactors;
+            set
+            {
+                if (ReferenceEquals(_lastFactors, value))
+                    return;
+                _lastFactors = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Customers

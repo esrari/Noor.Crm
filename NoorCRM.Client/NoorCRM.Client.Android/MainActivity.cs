@@ -1,6 +1,4 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
@@ -40,4 +38,5 @@ namespace NoorCRM.Client.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
 }

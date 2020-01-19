@@ -5,29 +5,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <OnPlatform x:TypeArguments="x:String" x:Key="IRANSansUltraLight">
-        <On Platform="Android" Value="IRANSansMobile_UltraLight.ttf#IRANSansMobile UltraLight" />
-        <On Platform="UWP" Value="/Assets/IRANSansMobile_Bold.ttf#IRANSansMobile UltraLight" />
-        <On Platform="iOS" Value="IRANSansMobile_UltraLight" />
+        <On Platform="Android" Value="IRANSansMobile(FaNum)_UltraLight.ttf#IRANSansMobile(FaNum) UltraLight" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum)(FaNum)_Bold.ttf#IRANSansMobile(FaNum)(FaNum) UltraLight" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)(FaNum)_UltraLight" />
     </OnPlatform>
     <OnPlatform x:TypeArguments="x:String" x:Key="IRANSansLight">
-        <On Platform="Android" Value="IRANSansMobile_Light.ttf#IRANSansMobile Light" />
-        <On Platform="UWP" Value="/Assets/IRANSansMobile_Light.ttf#IRANSansMobile Light" />
-        <On Platform="iOS" Value="IRANSansMobile_Light" />
+        <On Platform="Android" Value="IRANSansMobile(FaNum)_Light.ttf#IRANSansMobile(FaNum) Light" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum)_Light.ttf#IRANSansMobile(FaNum) Light" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)_Light" />
     </OnPlatform>
     <OnPlatform x:TypeArguments="x:String" x:Key="IRANSans">
-        <On Platform="Android" Value="IRANSansMobile.ttf#IRANSansMobile" />
-        <On Platform="UWP" Value="/Assets/IRANSansMobile.ttf#IRANSansMobile" />
-        <On Platform="iOS" Value="IRANSansMobile" />
+        <On Platform="Android" Value="IRANSansMobile(FaNum).ttf#IRANSansMobile(FaNum)" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum).ttf#IRANSansMobile(FaNum)" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)" />
     </OnPlatform>
     <OnPlatform x:TypeArguments="x:String" x:Key="IRANSansBold">
-        <On Platform="Android" Value="IRANSansMobile_Bold.ttf#IRANSansMobile Bold" />
-        <On Platform="UWP" Value="/Assets/IRANSansMobile_Bold.ttf#IRANSansMobile Bold" />
-        <On Platform="iOS" Value="IRANSansMobile_Bold" />
+        <On Platform="Android" Value="IRANSansMobile(FaNum)_Bold.ttf#IRANSansMobile(FaNum) Bold" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum)_Bold.ttf#IRANSansMobile(FaNum) Bold" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)_Bold" />
     </OnPlatform>
     <OnPlatform x:TypeArguments="x:String" x:Key="IRANSansMedium">
-        <On Platform="Android" Value="IRANSansMobile_Medium.ttf#IRANSansMobile Medium" />
-        <On Platform="UWP" Value="/Assets/IRANSansMobile_Medium.ttf#IRANSansMobile Medium" />
-        <On Platform="iOS" Value="IRANSansMobile_Medium" />
+        <On Platform="Android" Value="IRANSansMobile(FaNum)_Medium.ttf#IRANSansMobile(FaNum) Medium" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum)_Medium.ttf#IRANSansMobile(FaNum) Medium" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)_Medium" />
     </OnPlatform>
 
     <OnPlatform x:TypeArguments="x:String" x:Key="MaterialFontFamily">

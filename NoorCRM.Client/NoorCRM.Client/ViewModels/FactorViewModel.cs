@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,6 +17,8 @@ namespace NoorCRM.Client.ViewModels
     public class FactorViewModel : INotifyPropertyChanged
     {
         private string _description;
+        private bool _editMode = false;
+        private readonly Factor _factorForEdit;
 
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
@@ -45,6 +48,17 @@ namespace NoorCRM.Client.ViewModels
         }
         public FactorStatus Status { get; set; }
         public string CustomerTitle => Customer?.GetTitle();
+        public bool EditPossible
+        {
+            get
+            {
+                if (!_editMode)
+                    return true;
+                if (_editMode && Status == FactorStatus.New)
+                    return true;
+                return false;
+            }
+        }
 
         public Customer Customer { get; set; }
 
@@ -57,6 +71,20 @@ namespace NoorCRM.Client.ViewModels
             Status = FactorStatus.New;
             FactorItems = new ObservableCollection<FactorItemViewModel>();
             Customer = customer;
+        }
+
+        public FactorViewModel(Factor factor)
+        {
+            _editMode = true;
+            CreateDate = factor.CreateDate;
+            Status = factor.Status;
+            FactorItems = new ObservableCollection<FactorItemViewModel>();
+            Customer = factor.Customer;
+
+            if (factor.FactorItems != null && factor.FactorItems.Any())
+                foreach (var item in factor.FactorItems)
+                    AddItem(new FactorItemViewModel(item));
+            _factorForEdit = factor;
         }
 
         public void AddItem(FactorItemViewModel item)
@@ -86,23 +114,34 @@ namespace NoorCRM.Client.ViewModels
             var itemList = new List<FactorItem>();
             foreach (var item in FactorItems)
             {
-                itemList.Add(new FactorItem()
-                {
-                    ProductId = item.Product.Id,
-                    Quantity = item.Quantity,
-                    SelectedPrice = item.SelectedPrice
-                });
+                if (item.Quantity > 0)
+                    itemList.Add(new FactorItem()
+                    {
+                        ProductId = item.Product.Id,
+                        Product = item.Product,
+                        Quantity = item.Quantity,
+                        SelectedPrice = item.SelectedPrice
+                    });
             }
 
-            var fac = new Factor()
+            Factor fac;
+            if (_editMode)
             {
-                CreateDate = CreateDate,
-                Status = Status,
-                CreatorUserId = App.MainViewModel.OnlineUser.Id,
-                CustomerId = Customer.Id,
-                Description = Description,
-                FactorItems = itemList
-            };
+                fac = _factorForEdit;
+                fac.Description = Description;
+                fac.FactorItems = itemList;
+            }
+            else
+                fac = new Factor()
+                {
+                    CreateDate = CreateDate,
+                    Status = Status,
+                    CreatorUserId = App.MainViewModel.OnlineUser.Id,
+                    CustomerId = Customer.Id,
+                    Customer = Customer,
+                    Description = Description,
+                    FactorItems = itemList
+                };
 
             return fac;
         }
@@ -116,11 +155,11 @@ namespace NoorCRM.Client.ViewModels
 
     public class FactorItemViewModel : INotifyPropertyChanged
     {
-        private int _quantity;
-        private double _selectedPrice;
+        public double _quantity;
+        public double _selectedPrice;
 
         public int Id { get; set; }
-        public int Quantity
+        public double Quantity
         {
             get => _quantity;
             set
@@ -159,6 +198,7 @@ namespace NoorCRM.Client.ViewModels
             Id = factorItem.Id;
             Quantity = factorItem.Quantity;
             Product = factorItem.Product;
+            SelectedPrice = factorItem.SelectedPrice;
         }
 
         public FactorItemViewModel()

@@ -14,20 +14,21 @@
             <StackLayout Padding="3" 
                          BackgroundColor="{StaticResource SecondaryLight}"
                          Orientation="Horizontal"
-                         HorizontalOptions="StartAndExpand" >
-                <Label Text="دلیل عدم سفارش:" 
+                         HorizontalOptions="FillAndExpand" >
+                <Label Text="علت عدم سفارش:" 
                        Style="{StaticResource NormalLabel}"
                        TextColor="{StaticResource SecondaryLightText}"
                        HorizontalOptions="Start"/>
                 <Picker x:Name="picReason" 
-                    Style="{StaticResource picker}" 
-                    Title="دلیل"/>
+                        Style="{StaticResource picker}" 
+                        HorizontalOptions="Center"
+                        Title="انتخاب علت"/>
             </StackLayout>
-            <material:MaterialTextField Style="{StaticResource MaterialTextBox}"
-                                        x:Name="txtDescription"
-                                        Placeholder="توضیحات"
-                                        HorizontalOptions="StartAndExpand"
-                                        Margin="0, 10, 0, 0"/>
+            <Editor Style="{StaticResource NormalEditor}"
+                    x:Name="txtDescription"
+                    Placeholder="توضیحات"
+                    AutoSize="TextChanges"
+                    Margin="0, 10, 0, 0"/>
         </StackLayout>
     </Grid>
 </ContentPage>

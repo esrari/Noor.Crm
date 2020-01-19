@@ -9,9 +9,10 @@
              x:Class="NoorCRM.Client.Pages.HomeView">
     <StackLayout>
         <material:MaterialTextField x:Name="txtSearch" 
-                                        Style="{StaticResource MaterialTextBox}"
-                                        Placeholder="جستجو"
-                                        TextChanged="TxtSearch_TextChanged"/>
+                                    Style="{StaticResource MaterialTextBox}"
+                                    Placeholder="جستجو در کالا"
+                                    Margin="10, 0, 10, 0"
+                                    TextChanged="TxtSearch_TextChanged"/>
         <local:ProductsUC x:Name="productList" ProductList="{Binding Products}"/>
     </StackLayout>
 </ContentView>

@@ -6,16 +6,28 @@
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.Controls.ProductBox">
-    <StackLayout >
+    <ContentView.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Padding" Value="5, 10, 5, 10" />
+        </Style>
+    </ContentView.Resources>
+    <Grid>
+        <BoxView CornerRadius="5"
+                 HorizontalOptions="FillAndExpand"
+                 BackgroundColor="{StaticResource PrimaryLight}"/>
+
+    <StackLayout Padding="3">
         <StackLayout Orientation="Horizontal">
-            <Label Text="{Binding Title}"/>
-            <Label Text="{Binding ExistedQuantity, StringFormat='[{0}]'}"
-                   TextColor="{d:StaticResource PrimaryDark}"/>
+                <Label Text="{Binding Title}" Style="{StaticResource NormalLabel}"/>
+                <Label Text="{Binding ExistedQuantity, StringFormat='[{0}]'}"
+                       Style="{StaticResource SmallLabel}"
+                       TextColor="{StaticResource Secondary}"/>
         </StackLayout>
-        <Grid>
+        <Grid ColumnSpacing="1" RowSpacing="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -24,48 +36,46 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Text="نقد" Style="{StaticResource SmallLabel}"/>
-            <Frame CornerRadius="5" Grid.Row="0" Grid.Column="1" x:Name="btnPrice1">
+            <Frame Grid.Row="0" Grid.Column="1" x:Name="btnPrice1">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice1_Clicked"/>
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding Price1}"/>
+                    <Label Text="{Binding Price1, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
-            <Frame CornerRadius="5" Grid.Row="0" Grid.Column="2" x:Name="btnPrice2">
+            <Frame Grid.Row="0" Grid.Column="2" x:Name="btnPrice2">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice2_Clicked"/>
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding Price2}"/>
+                    <Label Text="{Binding Price2, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
-            <Frame CornerRadius="5" Grid.Row="0" Grid.Column="3" x:Name="btnPrice3">
+            <Frame Grid.Row="0" Grid.Column="3" x:Name="btnPrice3">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice3_Clicked"/>
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding Price3}"/>
+                    <Label Text="{Binding Price3, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
             <!--<material:MaterialButton Grid.Row="0" Grid.Column="2" x:Name="btnPrice2" Text="{Binding Price2}" Clicked="BtnPrice2_Clicked"/>
             <material:MaterialButton Grid.Row="0" Grid.Column="3" x:Name="btnPrice3" Text="{Binding Price3}" Clicked="BtnPrice3_Clicked"/>-->
             <Label Grid.Row="1" Grid.Column="0" Text="شرایطی" Style="{StaticResource SmallLabel}"/>
-            <Frame CornerRadius="5" Grid.Row="1" Grid.Column="1" x:Name="btnPrice1ch">
+            <Frame Grid.Row="1" Grid.Column="1" x:Name="btnPrice1ch">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice1ch_Clicked"/>
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding Price1ch}"/>
+                    <Label Text="{Binding Price1ch, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
-            <Frame CornerRadius="5" Grid.Row="1" Grid.Column="2" x:Name="btnPrice2ch">
+            <Frame Grid.Row="1" Grid.Column="2" x:Name="btnPrice2ch">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice2ch_Clicked"/>
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding Price2ch}"/>
+                    <Label Text="{Binding Price2ch, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
-            <Frame CornerRadius="5" Grid.Row="1" Grid.Column="3" x:Name="btnPrice3ch">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnPrice3ch_Clicked"/>
-                </Frame.GestureRecognizers>
-                <Label Text="{Binding Price3ch}"/>
-            </Frame>
-            <!--<material:MaterialButton Grid.Row="1" Grid.Column="1" x:Name="btnPrice1ch" Text="{Binding Price1ch}" Clicked="BtnPrice1ch_Clicked"/>
-            <material:MaterialButton Grid.Row="1" Grid.Column="2" x:Name="btnPrice2ch" Text="{Binding Price2ch}" Clicked="BtnPrice2ch_Clicked"/>
-            <material:MaterialButton Grid.Row="1" Grid.Column="3" x:Name="btnPrice3ch" Text="{Binding Price3ch}" Clicked="BtnPrice3ch_Clicked"/>-->
-        </Grid>
+                <Frame Grid.Row="1" Grid.Column="3" x:Name="btnPrice3ch">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BtnPrice3ch_Clicked"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="{Binding Price3ch, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
+                </Frame>
+            </Grid>
     </StackLayout>
+    </Grid>
 </ContentView>

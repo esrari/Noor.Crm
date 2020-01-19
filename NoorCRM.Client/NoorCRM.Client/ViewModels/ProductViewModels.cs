@@ -24,7 +24,7 @@ namespace NoorCRM.Client.ViewModels
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public int ExistedQuantity { get; set; }
+        public double ExistedQuantity { get; set; }
         public ProductUnit Unit { get; set; }
 
         public double Price1 { get; set; }

@@ -1,5 +1,6 @@
 ﻿using NoorCRM.API.Helpers;
 using NoorCRM.API.Models;
+using NoorCRM.Client.Pages;
 using NoorCRM.Client.Pages.Menu;
 using NoorCRM.Client.ViewModels;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace NoorCRM.Client
         public static MainPage _MainPage { get; set; }
         public static MainViewModel MainViewModel { get; set; }
         public MenuPageViewModel MenuPageViewModel { get; set; }
+        public static AddFactorItemPage AddItemPage { get; set; }
 
         public static bool MenuIsPresented
         {
@@ -36,8 +38,8 @@ namespace NoorCRM.Client
             MenuPageViewModel = new MenuPageViewModel();
             ApiService = new ServiceManager(new RestService(SoftwareSettings.BaseAddress));
             ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
-            ApiService.ExtractedUserPhoneNo = "9125464496";
-            //ApiService.ExtractedUserPhoneNo = "9125554444";
+            ApiService.ExtractedUserPhoneNo = "9120268593";
+            //ApiService.ExtractedUserPhoneNo = "9125464496";
             Task.Run(() => ApiService.GetOnlineUserAsync());
 
             callMain();
@@ -52,8 +54,8 @@ namespace NoorCRM.Client
             _MainPage.OnlineUserFetched = true;
             MainViewModel.Customers = new ObservableCollection<Customer>( await ApiService.GetUserCustomersAsync().ConfigureAwait(true));
             MainViewModel.Products = new ObservableCollection<Product>(await ApiService.GetAllProductsAsync().ConfigureAwait(false));
-            //MainViewModel.Categories = await ApiService.GetRootCategoreisAsync();
-
+            MainViewModel.LastFactors = new ObservableCollection<Factor>(await ApiService.GetLastVisitorFactorsAsync(user.Id, 20).ConfigureAwait(false));
+            AddItemPage = new AddFactorItemPage();
 
             // Set first city if exist as default city
             if (user.VisitCities != null && user.VisitCities.Count > 0)

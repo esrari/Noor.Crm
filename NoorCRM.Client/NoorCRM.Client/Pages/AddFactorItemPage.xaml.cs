@@ -23,6 +23,8 @@ namespace NoorCRM.Client.Pages
             productList.Products = App.MainViewModel.Products;
         }
 
+
+
         private void ProductList_ProductSelected(SelectedProduct selectedProduct)
         {
             OnProductSelected(selectedProduct);
@@ -30,11 +32,7 @@ namespace NoorCRM.Client.Pages
 
         private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(e.NewTextValue))
-                productList.Products = App.MainViewModel.Products;
-            else
-                productList.Products = App.MainViewModel.Products
-                    .Where(p => p.Title.Contains(e.NewTextValue.Trim()));
+            productList.Filter(e.NewTextValue);
         }
 
         public event ProductSelectedEventHandler ProductSelected;

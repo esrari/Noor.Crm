@@ -11,8 +11,9 @@
         <StackLayout>
             <Grid>
                 <material:MaterialTextField x:Name="txtSearch" 
-                                        Style="{StaticResource MaterialTextBox}"
-                                        Placeholder="جستجو"/>
+                                            Style="{StaticResource MaterialTextBox}"
+                                            Margin="10, 0, 10, 0"
+                                            Placeholder="جستجو در مشتریان"/>
             </Grid>
             <local:CustomersListUC Customers="{Binding Customers}"/>
         </StackLayout>

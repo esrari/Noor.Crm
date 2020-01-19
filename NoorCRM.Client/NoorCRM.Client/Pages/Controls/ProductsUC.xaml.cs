@@ -17,7 +17,8 @@ namespace NoorCRM.Client.Pages.Controls
     {
         public IEnumerable<Product> Products
         {
-            set {
+            set
+            {
                 if (value != null)
                 {
                     stkProducts.Children.Clear();
@@ -27,6 +28,7 @@ namespace NoorCRM.Client.Pages.Controls
                         proBox.ProductSelected += ProBox_ProductSelected;
                         stkProducts.Children.Add(proBox);
                     }
+                    scvScroller.ScrollToAsync(stkProducts, ScrollToPosition.Start, false).ConfigureAwait(false);
                 }
             }
         }
@@ -45,9 +47,9 @@ namespace NoorCRM.Client.Pages.Controls
                 typeof(ProductsUC),
                 null,
                 BindingMode.TwoWay,
-                propertyChanged: HandleCustomersChanged);
+                propertyChanged: HandleProductListChanged);
 
-        private static async void HandleCustomersChanged(BindableObject bindable, object oldValue, object newValue)
+        private static async void HandleProductListChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var products = newValue as ObservableCollection<Product>;
             if (products != null)
@@ -61,7 +63,7 @@ namespace NoorCRM.Client.Pages.Controls
                 }
 
                 await Task.Delay(3).ConfigureAwait(true);
-                await pruc.scvScroller.ScrollToAsync(pruc.stkProducts, ScrollToPosition.End, false).ConfigureAwait(false);
+                await pruc.scvScroller.ScrollToAsync(pruc.stkProducts, ScrollToPosition.Start, false).ConfigureAwait(false);
             }
         }
 
@@ -73,6 +75,23 @@ namespace NoorCRM.Client.Pages.Controls
         public ProductsUC()
         {
             InitializeComponent();
+        }
+
+        public void Filter(string filter)
+        {
+            if (string.IsNullOrWhiteSpace(filter))
+                foreach (ProductBox item in stkProducts.Children)
+                    item.IsVisible = true;
+            else
+            {
+                var trimFilter = filter.Trim();
+                foreach (ProductBox item in stkProducts.Children)
+                {
+                    if (item.ViewModel.Title.Contains(trimFilter))
+                        item.IsVisible = true;
+                    else item.IsVisible = false;
+                }
+            }
         }
 
         public event ProductSelectedEventHandler ProductSelected;

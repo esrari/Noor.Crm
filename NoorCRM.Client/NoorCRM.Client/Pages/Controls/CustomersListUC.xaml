@@ -8,13 +8,14 @@
              x:Class="NoorCRM.Client.Pages.Controls.CustomersListUC">
     <ContentView.Content>
         <ScrollView x:Name="scvScroller" 
-                Orientation="Vertical">
+                    Orientation="Vertical"
+                    Margin="0, 5, 0, 0">
             <StackLayout Orientation="Vertical"
                          x:Name="stkContainer"
-                         Padding="5">
+                         Padding="5" Spacing="2">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="1">
+                        <Grid>
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer 
                                      Command="{Binding TapCommand}"
@@ -28,15 +29,16 @@
                                 <Label Style="{StaticResource NormalLabel}" 
                                        Text="{Binding Title}"  
                                        TextColor="{StaticResource BodyTextColor}"
+                                       Margin="5"
                                        HorizontalOptions="StartAndExpand"/>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Style="{StaticResource SmallLabel}"
-                                           Text="{Binding CityName}"  
-                                           TextColor="{StaticResource Primary}"
-                                           Margin="5, 0, 5, 0"/>
+                                    <material:MaterialChip Style="{StaticResource chip}" 
+                                                           BackgroundColor="{StaticResource BackgroundGrayColor}" 
+                                                           Text="{Binding CityName}"
+                                                           TextColor="{StaticResource SecondaryDark}"/>
                                     <Label Style="{StaticResource SmallLabel}" 
                                            Text="{Binding Address}"  
-                                           TextColor="{StaticResource BodyTextColor}"/>
+                                           TextColor="{StaticResource BackgroundGrayColor}"/>
                                 </StackLayout>
                             </StackLayout>
                         </Grid>

@@ -38,22 +38,17 @@ namespace NoorCRM.Client.Pages.Controls
                 var lluc = bindable as LogListUC;
                 foreach (var item in logs)
                 {
-                    if (item is CommentLog)
-                    {
-                        var clog = new CommentLogBox(item as CommentLog);
-                        lluc.stkLogs.Children.Add(clog);
-                    }
-                    else if (item is SuccessfulLog)
-                    {
-                        var slog = new SuccessfulLogBox(item as SuccessfulLog);
-                        lluc.stkLogs.Children.Add(slog);
-                    }
-                    else if (item is FailedLog)
-                    {
-                        var flog = new FailedLogBox(item as FailedLog);
-                        lluc.stkLogs.Children.Add(flog);
-                    }
+                    AddLog(lluc, item);
                 }
+            }
+        }
+
+        public static void AddLog(LogListUC lluc, CustomerLog item)
+        {
+            if (lluc != null && item != null)
+                {
+                var log = new LogBox(item);
+                lluc.stkLogs.Children.Add(log);
             }
         }
 

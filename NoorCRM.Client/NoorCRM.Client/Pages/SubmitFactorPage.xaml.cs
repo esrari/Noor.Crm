@@ -26,23 +26,54 @@ namespace NoorCRM.Client.Pages
             _customer = customer;
             _viewModel = new FactorViewModel(customer);
             BindingContext = _viewModel;
+
+            if (!_viewModel.EditPossible)
+                ToolbarItems.Clear();
+
+            App.AddItemPage.ProductSelected += AddItemPage_ProductSelected;
+        }
+
+        public SubmitFactorPage(Factor factor)
+        {
+            InitializeComponent();
+            _customer = factor?.Customer;
+            _viewModel = new FactorViewModel(factor);
+            BindingContext = _viewModel;
         }
 
         private void BtnAddItem_Clicked(object sender, EventArgs e)
         {
-            var addItemPage = new AddFactorItemPage();
-            addItemPage.ProductSelected += AddItemPage_ProductSelected;
-            App.NavigationPage.Navigation.PushAsync(addItemPage);
+            //var addItemPage = new AddFactorItemPage();
+            //addItemPage.ProductSelected += AddItemPage_ProductSelected;
+            //App.NavigationPage.Navigation.PushAsync(addItemPage);
+
+            App.NavigationPage.Navigation.PushAsync(App.AddItemPage);
         }
 
-        private void AddItemPage_ProductSelected(SelectedProduct selectedProduct)
+        private async void AddItemPage_ProductSelected(SelectedProduct selectedProduct)
         {
-            var item = new FactorItemViewModel()
+            bool itsNew = true;
+            foreach (var fi in _viewModel.FactorItems)
+                if (fi.Product.Id == selectedProduct.Product.Id)
+                {
+                    itsNew = false;
+                    break;
+                }
+
+            if (itsNew)
             {
-                Product = selectedProduct.Product,
-                SelectedPrice = selectedProduct.SelectedPrice
-            };
-            _viewModel.AddItem(item);
+                var item = new FactorItemViewModel()
+                {
+                    Product = selectedProduct.Product,
+                    SelectedPrice = selectedProduct.SelectedPrice
+                };
+                _viewModel.AddItem(item);
+            }
+            else
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "کالای انتخاب شده در لیست موجود می باشد.",
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+            }
         }
 
         private async void Submit_Clicked(object sender, EventArgs e)
@@ -50,26 +81,38 @@ namespace NoorCRM.Client.Pages
             if (!_viewModel.FactorItems.Any())
                 return;
             var factor = _viewModel.GetSubmitedFactor();
-            var successLog = new SuccessfulLog()
-            {
-                CreationDate = DateTime.Now,
-                CreatorUserId = App.MainViewModel.OnlineUser.Id,
-                CustomerId = factor.CustomerId,
-                IsVisitorsLog = true
-            };
 
-            var sucLog = await App.ApiService.InsertNewFactorAsync(factor, successLog).ConfigureAwait(true);
-            if (sucLog != null)
+            if (factor.Id != 0)
             {
-                OnPageClosed(successful: true, sucLog);
-                await MaterialDialog.Instance.SnackbarAsync(message: "افزودن فاکتور جدید با موفقیت انجام شد.",
+                await App.ApiService.UpdateFactorAsync(factor).ConfigureAwait(true);
+                OnPageClosed(successful: true, null);
+                await MaterialDialog.Instance.SnackbarAsync(message: "اصلاح فاکتور با موفقیت انجام شد.",
                     msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
             }
             else
             {
-                OnPageClosed(successful: false, null);
-                await MaterialDialog.Instance.SnackbarAsync(message: "افزودن فاکتور جدید با مشکل روبرو شد.",
-                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                var successLog = new SuccessfulLog()
+                {
+                    CreationDate = DateTime.Now,
+                    CreatorUserId = App.MainViewModel.OnlineUser.Id,
+                    CustomerId = factor.CustomerId,
+                    IsVisitorsLog = true
+                };
+
+                var sucLog = await App.ApiService.InsertNewFactorAsync(factor, successLog).ConfigureAwait(true);
+                if (sucLog != null)
+                {
+                    sucLog.Factor = factor;
+                    OnPageClosed(successful: true, sucLog);
+                    await MaterialDialog.Instance.SnackbarAsync(message: "افزودن فاکتور جدید با موفقیت انجام شد.",
+                        msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                }
+                else
+                {
+                    OnPageClosed(successful: false, null);
+                    await MaterialDialog.Instance.SnackbarAsync(message: "افزودن فاکتور جدید با مشکل روبرو شد.",
+                        msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                }
             }
 
             await App.NavigationPage.Navigation.PopAsync().ConfigureAwait(false);
@@ -78,6 +121,12 @@ namespace NoorCRM.Client.Pages
         private void OnPageClosed(bool successful, SuccessfulLog log)
         {
             PageClosed?.Invoke(successful, log);
+        }
+
+        private void txtQuantity_Focused(object sender, FocusEventArgs e)
+        {
+            var ent = sender as Entry;
+            ent.SelectionLength = ent.Text.Length;
         }
     }
 }

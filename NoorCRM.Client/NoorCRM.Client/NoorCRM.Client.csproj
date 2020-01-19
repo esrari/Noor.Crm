@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon>logo crm.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -30,8 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\Controls\Logs\CommentLogBox.xaml.cs">
-      <DependentUpon>CommentLogBox.xaml</DependentUpon>
+    <Compile Update="Pages\Controls\FactorsListUC.xaml.cs">
+      <DependentUpon>FactorsListUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Controls\LogBox.xaml.cs">
+      <DependentUpon>LogBox.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Controls\ProductBox.xaml.cs">
       <DependentUpon>ProductBox.xaml</DependentUpon>
@@ -51,19 +55,19 @@
     <EmbeddedResource Update="Pages\Controls\CustomersListUC.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Controls\Logs\FailedLogBox.xaml">
+    <EmbeddedResource Update="Pages\Controls\FactorBox.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Controls\Logs\SuccessfulLogBox.xaml">
+    <EmbeddedResource Update="Pages\Controls\FactorsListUC.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Controls\LogBox.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Controls\ProductBox.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Controls\LogListUC.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Controls\Logs\CommentLogBox.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Controls\ProductsUC.xaml">
