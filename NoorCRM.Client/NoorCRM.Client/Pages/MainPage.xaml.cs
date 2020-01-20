@@ -22,10 +22,16 @@ namespace NoorCRM.Client
         {
             MainViewModel = mainViewModel;
             MainViewModel.HomeTabSelected = true;
+            mainViewModel.HomeTabShowed += MainViewModel_HomeTabShowed;
             InitializeComponent();
             BindingContext = MainViewModel;
 
             bottomMenuItemsCreation();
+        }
+
+        private void MainViewModel_HomeTabShowed(object sender, PropertyChangedEventArgs e)
+        {
+            OnHomeTapped();
         }
 
         public bool OnlineUserFetched
@@ -109,11 +115,6 @@ namespace NoorCRM.Client
 
             if (MainViewModel.BottomMenuItems.Count > selectedIndex)
                 MainViewModel.BottomMenuItems[selectedIndex].TextColor = bottomMenuSelectedColor;
-        }
-
-        public void SelectHomePage()
-        {
-            OnHomeTapped();
         }
         #endregion
     }

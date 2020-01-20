@@ -59,6 +59,7 @@ namespace NoorCRM.Client.ViewModels
                 {
                     SecondTabSelected = false;
                     ThirdTabSelected = false;
+                    OnHomeTabShowed();
                 }
                 OnPropertyChanged();
             }
@@ -179,7 +180,9 @@ namespace NoorCRM.Client.ViewModels
             }
         }
 
-        public City DefaultCity { get => _defaultCity;
+        public City DefaultCity
+        {
+            get => _defaultCity;
             set
             {
                 if (ReferenceEquals(_defaultCity, value))
@@ -195,8 +198,13 @@ namespace NoorCRM.Client.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        protected virtual void OnHomeTabShowed([CallerMemberName] string propertyName = null)
+        {
+            HomeTabShowed?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler HomeTabShowed;
         #endregion
     }
 }

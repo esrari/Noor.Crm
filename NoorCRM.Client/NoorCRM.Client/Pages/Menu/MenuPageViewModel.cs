@@ -13,7 +13,7 @@ namespace NoorCRM.Client.Pages.Menu
         #region Properties
         private string _userTitle;
         private string _userPhoneNo;
-        private double _userAccountBalance;
+        private double _userAccountBalance = 0;
 
         public string UserTitle
         {
