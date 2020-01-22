@@ -139,6 +139,8 @@ namespace NoorCRM.Client.Pages.Controls.Logs
         public DateTime CreationDate { get; set; }
         public string CtreatorName { get; set; }
         public string LogTypePersianName { get; set; }
+        public string CustomerTitle { get; set; }
+        public string CityName { get; set; }
 
         public bool FactorTapable => Factor != null;
         public Factor Factor
