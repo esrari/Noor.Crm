@@ -37,11 +37,13 @@ namespace NoorCRM.Client.Pages.Controls
             {
                 var facList = bindable as FactorsListUC;
                 facList.stkFactors.Children.Clear();
-                foreach (var item in facts)
+                var revFacts = facts.Reverse();
+                foreach (var item in revFacts)
                 {
                     var f = new FactorBox(item);
                     facList.stkFactors.Children.Add(f);
                 }
+                facList.scroller.ScrollToAsync(facList.scroller, ScrollToPosition.End, false);
             }
         }
 

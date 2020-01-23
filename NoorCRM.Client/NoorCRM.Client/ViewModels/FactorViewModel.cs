@@ -47,6 +47,7 @@ namespace NoorCRM.Client.ViewModels
             }
         }
         public FactorStatus Status { get; set; }
+        public string StatusPersianName => Status.PersianName();
         public string CustomerTitle => Customer?.GetTitle();
         public bool EditPossible
         {

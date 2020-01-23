@@ -104,6 +104,14 @@
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
     </Style>
 
+    <Style TargetType="{x:Type Editor}" x:Key="SmallEditor">
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Small"/>
+    </Style>
+
     <Style TargetType="{x:Type Button}" x:Key="AddButton">
         <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
         <Setter Property="TextColor" Value="{StaticResource SecondaryText}"/>

@@ -1,4 +1,5 @@
 ﻿using NoorCRM.API.Models;
+using NoorCRM.Client.Pages.Controls;
 using NoorCRM.Client.Sources;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace NoorCRM.Client.Pages
             _customer = customer;
 
             App.ApiService.CustomerLogsFetched += ApiService_CustomerLogsFetched;
-            _ = App.ApiService.GetCustomerLogsAync(customer.Id);
+            _ = App.ApiService.GetCustomerLogsAync(customer.Id, 20, 0);
 
             BindingContext = new CustomerViewModel(customer);
         }
@@ -52,7 +53,7 @@ namespace NoorCRM.Client.Pages
                 if (log != null)
                 {
                     _logs.Add(log);
-                    logList.CustomerLogs = _logs;
+                    LogListUC.AddLog(logList, log);
                 }
 
                 if(log!=null && log is SuccessfulLog)

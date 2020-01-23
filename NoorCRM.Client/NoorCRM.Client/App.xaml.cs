@@ -38,8 +38,8 @@ namespace NoorCRM.Client
             MenuPageViewModel = new MenuPageViewModel();
             ApiService = new ServiceManager(new RestService(SoftwareSettings.BaseAddress));
             ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
-            ApiService.ExtractedUserPhoneNo = "9120268593";
-            //ApiService.ExtractedUserPhoneNo = "9125464496";
+            //ApiService.ExtractedUserPhoneNo = "9120268593";
+            ApiService.ExtractedUserPhoneNo = "9125464496";
             Task.Run(() => ApiService.GetOnlineUserAsync());
 
             callMain();

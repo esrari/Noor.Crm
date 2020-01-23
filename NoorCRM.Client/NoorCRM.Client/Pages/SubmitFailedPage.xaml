@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.SubmitFailedPage">
     <ContentPage.ToolbarItems>
@@ -19,7 +20,7 @@
                        Style="{StaticResource NormalLabel}"
                        TextColor="{StaticResource SecondaryLightText}"
                        HorizontalOptions="Start"/>
-                <Picker x:Name="picReason" 
+                <local:MyPicker x:Name="picReason" 
                         Style="{StaticResource picker}" 
                         HorizontalOptions="Center"
                         Title="انتخاب علت"/>

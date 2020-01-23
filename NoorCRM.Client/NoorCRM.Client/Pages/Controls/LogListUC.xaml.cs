@@ -36,19 +36,24 @@ namespace NoorCRM.Client.Pages.Controls
             if (logs != null)
             {
                 var lluc = bindable as LogListUC;
-                foreach (var item in logs)
+                lluc.stkLogs.Children.Clear();
+                var revLogs = logs.Reverse();
+                foreach (var item in revLogs)
                 {
-                    AddLog(lluc, item);
+                    var log = new LogBox(item);
+                    lluc.stkLogs.Children.Add(log);
                 }
+                lluc.sclLogs.ScrollToAsync(lluc.sclLogs, ScrollToPosition.End, false);
             }
         }
 
         public static void AddLog(LogListUC lluc, CustomerLog item)
         {
             if (lluc != null && item != null)
-                {
+            {
                 var log = new LogBox(item);
                 lluc.stkLogs.Children.Add(log);
+                lluc.sclLogs.ScrollToAsync(lluc.sclLogs, ScrollToPosition.End, false);
             }
         }
 

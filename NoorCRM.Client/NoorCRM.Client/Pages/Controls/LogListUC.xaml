@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.Controls.LogListUC">
     <ContentView.Content>
-        <ScrollView>
+        <ScrollView x:Name="sclLogs">
             <StackLayout x:Name="stkLogs"
                          Padding="5"/>
         </ScrollView>

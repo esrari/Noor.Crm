@@ -73,4 +73,17 @@ namespace NoorCRM.Client.Pages
             await App.NavigationPage.Navigation.PopAsync().ConfigureAwait(false);
         }
     }
+
+    public class MyPicker: Picker
+    {
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == Picker.SelectedIndexProperty.PropertyName)
+            {
+                this.InvalidateMeasure();
+            }
+        }
+    }
 }
