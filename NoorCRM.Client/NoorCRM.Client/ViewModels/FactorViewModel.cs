@@ -18,9 +18,21 @@ namespace NoorCRM.Client.ViewModels
     {
         private string _description;
         private bool _editMode = false;
+        private string _iconSource;
         private readonly Factor _factorForEdit;
 
         public int Id { get; set; }
+        public string IconSource
+        {
+            get => _iconSource;
+            set
+            {
+                if (_iconSource == value)
+                    return;
+                _iconSource = value;
+                OnPropertyChanged();
+            }
+        }
         public DateTime CreateDate { get; set; }
         public string Description
         {

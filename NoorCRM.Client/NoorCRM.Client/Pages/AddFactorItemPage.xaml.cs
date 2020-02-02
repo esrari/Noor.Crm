@@ -28,6 +28,7 @@ namespace NoorCRM.Client.Pages
         private void ProductList_ProductSelected(SelectedProduct selectedProduct)
         {
             OnProductSelected(selectedProduct);
+            txtSearch.Text = "";
         }
 
         private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)

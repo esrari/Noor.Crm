@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                 mc:Ignorable="d"
+                 x:Class="NoorCRM.Client.Pages.SplashPage" Appearing="ContentPage_Appearing">
+        <ContentPage.Content>
+            <Grid FlowDirection="RightToLeft">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <BoxView Grid.RowSpan="2" BackgroundColor="{StaticResource Secondary}"/>
+                <Image Source="logo.png" WidthRequest="200" Margin="0, 70, 0, 30"/>
+                <StackLayout Grid.Row="1" 
+                             VerticalOptions="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="1" Orientation="Vertical" 
+                                     HorizontalOptions="Fill">
+                            <Entry x:Name="txtUsername" 
+                                   IsVisible="False"
+                                   FontFamily="{StaticResource IRANSans}"
+                                   FontSize="Body"
+                                   HorizontalOptions="Fill"
+                                   Placeholder="نام کاربری"/>
+                            <Entry x:Name="txtPassword" 
+                                   IsPassword="True"
+                                   IsVisible="False"
+                                   FontFamily="{StaticResource IRANSans}"
+                                   FontSize="Body"
+                                   HorizontalOptions="Fill"
+                                   Placeholder="رمز عبور" />
+                        </StackLayout>
+                    </Grid>
+                    <material:MaterialButton x:Name="btnSubmit" 
+                                             IsVisible="False"
+                                             HorizontalOptions="Center" 
+                                             Text="تایید" 
+                                             BackgroundColor="White"
+                                             TextColor="Black"
+                                             Clicked="MaterialButton_Clicked"/>
+                    <ActivityIndicator x:Name="indicator" 
+                                       IsRunning="true" 
+                                       Color="White"/>
+                    <StackLayout Orientation="Horizontal" 
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center">
+                        <Label x:Name="lblnet" 
+                               Text="شما به اینترنت متصل نیستید"
+                               IsVisible="True"
+                               FontFamily="{StaticResource IRANSans}"
+                               FontSize="Body"/>
+                        <Frame x:Name ="lblRefresh"  
+                               CornerRadius="5" 
+                               BackgroundColor="{StaticResource Primary}" 
+                               Padding="1" 
+                               HasShadow="False">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
+                            <Label Text="{StaticResource Refresh}"
+                                   FontFamily="{StaticResource MaterialFontFamily}"
+                                   FontSize="Medium"
+                                   Margin ="1, 0, 1, 0"
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </ContentPage.Content>
+    </ContentPage>

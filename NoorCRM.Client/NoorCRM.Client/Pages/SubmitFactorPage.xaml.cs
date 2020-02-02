@@ -28,7 +28,9 @@ namespace NoorCRM.Client.Pages
             BindingContext = _viewModel;
 
             if (!_viewModel.EditPossible)
-                ToolbarItems.Clear();
+                _viewModel.IconSource = "empty.png";
+            else
+                _viewModel.IconSource = "submit.png";
 
             App.AddItemPage.ProductSelected += AddItemPage_ProductSelected;
         }
@@ -80,6 +82,10 @@ namespace NoorCRM.Client.Pages
         {
             if (!_viewModel.FactorItems.Any())
                 return;
+
+            if (_viewModel.Status != FactorStatus.New)
+                return;
+
             var factor = _viewModel.GetSubmitedFactor();
 
             if (factor.Id != 0)

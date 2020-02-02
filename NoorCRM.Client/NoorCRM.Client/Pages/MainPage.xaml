@@ -7,12 +7,12 @@
              xmlns:local="clr-namespace:NoorCRM.Client.Pages"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.MainPage"
-             Title="سامانه  مدیریت مشتری نورافشان">
+             Title="سامانه مدیریت مشتری نورافشان">
 
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Secondary" Priority="0" Text="Item 1" Command="{Binding Item1_Command}"/>
-        <ToolbarItem Order="Secondary" Priority="0" Text="Item 2" Command="{Binding Item2_Command}"/>
+        <ToolbarItem x:Name="btnRefresh" IconImageSource="refresh.png" Clicked="btnRefresh_Clicked"/>
+        <ToolbarItem IconImageSource="{Binding Conn}"/>
     </ContentPage.ToolbarItems>
 
     <Grid>

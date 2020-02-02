@@ -5,6 +5,7 @@ using NoorCRM.Client.Pages.Menu;
 using NoorCRM.Client.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -20,7 +21,7 @@ namespace NoorCRM.Client
         public static NavigationPage NavigationPage { get; private set; }
         public static MainPage _MainPage { get; set; }
         public static MainViewModel MainViewModel { get; set; }
-        public MenuPageViewModel MenuPageViewModel { get; set; }
+        public static MenuPageViewModel MenuPageViewModel { get; set; }
         public static AddFactorItemPage AddItemPage { get; set; }
 
         public static bool MenuIsPresented
@@ -37,29 +38,8 @@ namespace NoorCRM.Client
 
             MenuPageViewModel = new MenuPageViewModel();
             ApiService = new ServiceManager(new RestService(SoftwareSettings.BaseAddress));
-            ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
-            //ApiService.ExtractedUserPhoneNo = "9120268593";
-            ApiService.ExtractedUserPhoneNo = "9125464496";
-            Task.Run(() => ApiService.GetOnlineUserAsync());
 
             callMain();
-        }
-
-        private async void apiService_OnlineUserFetched(User user)
-        {
-            // Set AppViewModel with catched data
-            MainViewModel.OnlineUser = user;
-            MenuPageViewModel.UserTitle = user.FullName;
-            MenuPageViewModel.UserPhoneNo = user.PhoneNo;
-            _MainPage.OnlineUserFetched = true;
-            MainViewModel.Customers = new ObservableCollection<Customer>( await ApiService.GetUserCustomersAsync().ConfigureAwait(true));
-            MainViewModel.Products = new ObservableCollection<Product>(await ApiService.GetAllProductsAsync().ConfigureAwait(false));
-            MainViewModel.LastFactors = new ObservableCollection<Factor>(await ApiService.GetLastVisitorFactorsAsync(user.Id, 20).ConfigureAwait(false));
-            AddItemPage = new AddFactorItemPage();
-
-            // Set first city if exist as default city
-            if (user.VisitCities != null && user.VisitCities.Count > 0)
-                MainViewModel.DefaultCity = (user.VisitCities as IList<City>)[0];
         }
 
         private void callMain()
@@ -76,5 +56,6 @@ namespace NoorCRM.Client
             };
             MainPage = RootPage;
         }
+
     }
 }

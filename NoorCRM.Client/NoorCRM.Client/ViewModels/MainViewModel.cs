@@ -1,4 +1,5 @@
 ﻿using NoorCRM.API.Models;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,33 +13,17 @@ namespace NoorCRM.Client.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         public MainViewModel This => this;
+        public bool SplashScreenSuccessfulClosed { get; set; }
 
-        #region AdBanner Command
-        private Command _firstAdBannerCommand;
-        //private Course _firstAdBannerCourse;
-        public Command FirstAdBannerCommand
+        public string Conn
         {
-            get { return _firstAdBannerCommand; }
+            get => _conn;
             set
             {
-                if (ReferenceEquals(_firstAdBannerCommand, value))
-                    return;
-                _firstAdBannerCommand = value;
+                _conn = value;
                 OnPropertyChanged();
             }
         }
-        //public Course FirstAdBannerCourse
-        //{
-        //    get { return _firstAdBannerCourse; }
-        //    set
-        //    {
-        //        if (ReferenceEquals(_firstAdBannerCourse, value))
-        //            return;
-        //        _firstAdBannerCourse = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-        #endregion
 
         #region Bottom Menu
         #region Bottom Tab Visiblity
@@ -167,6 +152,7 @@ namespace NoorCRM.Client.ViewModels
         #region Online User
         private User _onlineUser;
         private City _defaultCity;
+        private string _conn;
 
         public User OnlineUser
         {
@@ -206,5 +192,24 @@ namespace NoorCRM.Client.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangedEventHandler HomeTabShowed;
         #endregion
+
+        public MainViewModel()
+        {
+            CheckWifiOnStart();
+            CheckWifiContinuously();
+        }
+
+        public void CheckWifiOnStart()
+        {
+            Conn = CrossConnectivity.Current.IsConnected ? "wifi_on.png" : "wifi_off.png";
+        }
+
+        public void CheckWifiContinuously()
+        {
+            CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+            {
+                Conn = args.IsConnected ? "wifi_on.png" : "wifi_off.png";
+            };
+        }
     }
 }

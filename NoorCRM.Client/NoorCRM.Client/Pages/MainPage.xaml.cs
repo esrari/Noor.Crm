@@ -1,4 +1,5 @@
-﻿using NoorCRM.Client.Sources;
+﻿using NoorCRM.Client.Pages;
+using NoorCRM.Client.Sources;
 using NoorCRM.Client.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ namespace NoorCRM.Client
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        private bool _onlineUserFetched;
         private MainViewModel MainViewModel { get; set; }
 
         public MainPage(MainViewModel mainViewModel)
@@ -23,29 +23,28 @@ namespace NoorCRM.Client
             MainViewModel = mainViewModel;
             MainViewModel.HomeTabSelected = true;
             mainViewModel.HomeTabShowed += MainViewModel_HomeTabShowed;
+            App.MainViewModel.SplashScreenSuccessfulClosed = true;
             InitializeComponent();
-            BindingContext = MainViewModel;
-
             bottomMenuItemsCreation();
+
+            var splash = new SplashPage();
+            splash.Disappearing += Splash_Disappearing;
+            Navigation.PushModalAsync(splash)
+                            .ConfigureAwait(true);
+
+            BindingContext = MainViewModel;
+        }
+
+        private void Splash_Disappearing(object sender, EventArgs e)
+        {
+            if (!App.MainViewModel.SplashScreenSuccessfulClosed)
+                Environment.Exit(0);
         }
 
         private void MainViewModel_HomeTabShowed(object sender, PropertyChangedEventArgs e)
         {
             OnHomeTapped();
         }
-
-        public bool OnlineUserFetched
-        {
-            get => _onlineUserFetched;
-            set
-            {
-                _onlineUserFetched = value;
-                //MainViewModel.UserCourses = App.ApiService.OnlineUserCourses;
-                ////For test
-                //MainViewModel.FirstAdBannerCourse = App.ApiService.OnlineUserCourses[0];
-            }
-        }
-
 
         #region Bottom Menu
         private Color bottomMenuNormalColor = Color.White;
@@ -117,5 +116,16 @@ namespace NoorCRM.Client
                 MainViewModel.BottomMenuItems[selectedIndex].TextColor = bottomMenuSelectedColor;
         }
         #endregion
+
+        private void btnRefresh_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new SplashPage())
+                .ConfigureAwait(true);
+        }
+
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
+
+        }
     }
 }
