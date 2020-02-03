@@ -28,7 +28,8 @@ namespace NoorCRM.Client.Pages
 
         private async void apiService_OnlineUserFetched(User user)
         {
-            await loadAllOtherData(user).ConfigureAwait(false);
+            if(user != null)
+                await loadAllOtherData(user).ConfigureAwait(false);
         }
 
         private async Task loadAllOtherData(User user)
@@ -107,7 +108,7 @@ namespace NoorCRM.Client.Pages
 
         private async void MaterialButton_Clicked(object sender, EventArgs e)
         {
-            User user = await checkNumber(txtUsername.Text.Trim(), txtPassword.Text.Trim()).ConfigureAwait(true);
+            User user = await checkNumber(txtUsername.Text.Trim(), txtPassword.Text).ConfigureAwait(true);
             if (user != null)
             {
                 if (File.Exists(fileName))
@@ -120,7 +121,7 @@ namespace NoorCRM.Client.Pages
                 txtUsername.IsVisible = true;
                 txtPassword.IsVisible = true;
                 indicator.IsRunning = false;
-                await MaterialDialog.Instance.SnackbarAsync(message: "این شماره در سیستم تعریف نشده است. لطفا مجددا سعی کنید.",
+                await MaterialDialog.Instance.SnackbarAsync(message: "نام کاربری یا رمز عبور صحیح نمی باشد.",
                     msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
             }
         }

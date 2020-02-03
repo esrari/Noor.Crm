@@ -12,6 +12,8 @@ namespace NoorCRM.Client.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private string _conn;
+
         public MainViewModel This => this;
         public bool SplashScreenSuccessfulClosed { get; set; }
 
@@ -152,7 +154,6 @@ namespace NoorCRM.Client.ViewModels
         #region Online User
         private User _onlineUser;
         private City _defaultCity;
-        private string _conn;
 
         public User OnlineUser
         {

@@ -28,6 +28,7 @@
                                    IsVisible="False"
                                    FontFamily="{StaticResource IRANSans}"
                                    FontSize="Body"
+                                   ReturnType="Next"
                                    HorizontalOptions="Fill"
                                    Placeholder="نام کاربری"/>
                             <Entry x:Name="txtPassword" 
@@ -35,6 +36,7 @@
                                    IsVisible="False"
                                    FontFamily="{StaticResource IRANSans}"
                                    FontSize="Body"
+                                   ReturnType="Done"
                                    HorizontalOptions="Fill"
                                    Placeholder="رمز عبور" />
                         </StackLayout>

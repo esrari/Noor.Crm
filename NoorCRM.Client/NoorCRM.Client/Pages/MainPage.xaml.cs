@@ -122,10 +122,5 @@ namespace NoorCRM.Client
             Navigation.PushModalAsync(new SplashPage())
                 .ConfigureAwait(true);
         }
-
-        private void ContentPage_Appearing(object sender, EventArgs e)
-        {
-
-        }
     }
 }
