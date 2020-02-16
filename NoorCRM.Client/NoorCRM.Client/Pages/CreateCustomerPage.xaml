@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.CreateCustomerPage"
+             FlowDirection="RightToLeft"
+             BackgroundColor="{StaticResource BodyBackgroundColor}">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <material:MaterialTextField x:Name="txtCustomerName" 
+                                        Style="{StaticResource MaterialTextBox}"
+                                        Placeholder="نام مشتری"
+                                        Text="{Binding CustomerName, Mode=TwoWay}"/>
+            <material:MaterialTextField x:Name="txtStoreName" 
+                                        Style="{StaticResource MaterialTextBox}"
+                                        Placeholder="نام فروشگاه"
+                                        Text="{Binding StoreName, Mode=TwoWay}"/>
+            <material:MaterialTextField x:Name="txtPhoneNo" 
+                                        Style="{StaticResource MaterialTextBox}"
+                                        Placeholder="تلفن"
+                                        Text="{Binding PhoneNo, Mode=TwoWay}"/>
+            <Picker x:Name="picCities" 
+                    Style="{StaticResource picker}" 
+                    Title="شهر"
+                    SelectedItem="{Binding CityName, Mode=TwoWay}"/>
+            <material:MaterialTextField x:Name="txtAddress" 
+                                        Style="{StaticResource MaterialTextBox}"
+                                        Placeholder="آدرس"
+                                        Text="{Binding Address, Mode=TwoWay}"/>
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="End">
+                <material:MaterialButton x:Name="btnCancel" 
+                                         Style="{StaticResource CancelButton}"
+                                         Text="انصراف"
+                                         Clicked="BtnCancel_Clicked"/>
+                <material:MaterialButton x:Name="btnSave" 
+                                         Style="{StaticResource SaveButton}"
+                                         Text="ذخیره"
+                                         Clicked="BtnSave_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

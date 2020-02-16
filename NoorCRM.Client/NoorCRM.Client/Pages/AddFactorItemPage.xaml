@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.AddFactorItemPage">
+    <Grid>
+        <StackLayout>
+            <material:MaterialTextField x:Name="txtSearch" 
+                                        Style="{StaticResource MaterialTextBox}"
+                                        Placeholder="جستجو"
+                                        TextChanged="TxtSearch_TextChanged"/>
+            <local:ProductsUC x:Name="productList"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

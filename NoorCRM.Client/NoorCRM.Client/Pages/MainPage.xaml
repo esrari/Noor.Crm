@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.MainPage" Appearing="ContentPage_Appearing"
+             Title="سامانه  مدیریت مشتری نورافشان">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="{Binding Conn}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <!--Contents-->
+        <Grid Grid.Row="0">
+            <!--Home Tab-->
+            <local:HomeView x:Name="homeTab" 
+                            IsVisible="{Binding HomeTabSelected}"/>
+            <!--Today Tab-->
+            <local:TodayView x:Name="todayTab" 
+                            IsVisible="{Binding TodayTabSelected}"/>
+            <!--Customers Tab-->
+            <local:CustomersView x:Name="customersTab" 
+                            IsVisible="{Binding CustomersTabSelected}"/>
+            <!--Factors Tab-->
+            <local:FactorsView x:Name="factorsTab" 
+                            IsVisible="{Binding FactorsTabSelected}"/>
+        </Grid>
+        <!--Bottom Tabs-->
+        <material:MaterialCard Elevation="5" 
+                               Grid.Row="1"
+                               Padding="10"
+                               Margin="0,0,0,-10"
+                               HorizontalOptions="FillAndExpand" 
+                               VerticalOptions="End"
+                               BackgroundColor="{StaticResource BodyBackgroundColor}">
+            <Grid x:Name="stlBottomMenu"
+              HorizontalOptions="Fill"
+              BindableLayout.ItemsSource="{Binding BottomMenuItems}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical" Grid.Column="{Binding GridColumnIndex}">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}"/>
+                            </StackLayout.GestureRecognizers>
+
+                            <Label Style="{StaticResource LargeMaterialIcons}" 
+                                   Text="{Binding Icon}" 
+                                   TextColor="{Binding TextColor}"
+                                   FontSize="Medium"/>
+
+                            <Label Style="{StaticResource NormalLabel}" 
+                                   Text="{Binding Title}"  
+                                   TextColor="{Binding TextColor}"
+                                   FontSize="Small"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </Grid>
+        </material:MaterialCard>
+    </Grid>
+
+
+</ContentPage>

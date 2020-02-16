@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material">
+
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource BodyBackgroundColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource BodyBackgroundColor}" />
+        <Setter Property="BarTextColor" Value="{StaticResource Primary}" />
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="MaterialIcons">
+        <Setter Property="FontFamily" Value="{StaticResource MaterialFontFamily}"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="LargeMaterialIcons">
+        <Setter Property="FontFamily" Value="{StaticResource MaterialFontFamily}"/>
+        <Setter Property="FontSize" Value="Large"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="HugeMaterialIcons">
+        <Setter Property="FontFamily" Value="{StaticResource MaterialFontFamily}"/>
+        <Setter Property="FontSize" Value="Title"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="MicroLabel">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Micro"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="SmallLabel">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="NormalLabel">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Body"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="LargeLabel">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Large"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="TitleLabel">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Title"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="MenuButtonLabel">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Body"/>
+        <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        <Setter Property="TextColor" Value="{StaticResource BodyTextColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource BodyBackgroundColor}"/>
+    </Style>
+
+    <Style TargetType="{x:Type BoxView}" x:Key="MenuButtonSplitter">
+        <Setter Property="HeightRequest" Value="0.5"/>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource BorderGrayColor}"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type material:MaterialTextField}" x:Key="MaterialTextBox">
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
+        <Setter Property="InputType" Value="Default"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="AlwaysShowUnderline" Value="True"/>
+        <Setter Property="UnderlineColor" Value="{StaticResource Primary}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FloatingPlaceholderColor" Value="{StaticResource PrimaryDark}"/>
+        <Setter Property="TintColor" Value="{StaticResource PrimaryDark}"/>
+        <Setter Property="TextFontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="TextFontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="PlaceholderFontFamily" Value="{StaticResource IRANSans}"/>
+    </Style>
+
+    <Style TargetType="{x:Type Editor}" x:Key="NormalEditor">
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+    </Style>
+
+    <Style TargetType="{x:Type Editor}" x:Key="SmallEditor">
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Small"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="AddButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
+        <Setter Property="TextColor" Value="{StaticResource SecondaryText}"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="CornerRadius" Value="25"/>
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Text" Value="+"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style TargetType="{x:Type material:MaterialButton}" x:Key="SaveButton">
+        <Setter Property="ButtonType" Value="Flat"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+    </Style>
+
+    <Style TargetType="{x:Type material:MaterialButton}" x:Key="CancelButton">
+        <Setter Property="ButtonType" Value="Outlined"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+    </Style>
+
+    <Style TargetType="{x:Type Picker}" x:Key="picker">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
+        <Setter Property="TitleColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="Small"/>
+    </Style>
+
+    <Style TargetType="{x:Type material:MaterialChip}" x:Key="chip">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style TargetType="{x:Type material:MaterialChip}" x:Key="chipLarg">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+</ResourceDictionary>
