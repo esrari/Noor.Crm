@@ -23,6 +23,7 @@ namespace NoorCRM.Client.Pages
         public SubmitFactorPage(Customer customer)
         {
             InitializeComponent();
+            App.NavigationPage.BarBackgroundColor = Color.White;
             _customer = customer;
             _viewModel = new FactorViewModel(customer);
             BindingContext = _viewModel;

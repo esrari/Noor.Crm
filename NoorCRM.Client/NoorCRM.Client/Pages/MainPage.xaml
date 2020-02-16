@@ -6,12 +6,11 @@
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:local="clr-namespace:NoorCRM.Client.Pages"
              mc:Ignorable="d"
-             x:Class="NoorCRM.Client.MainPage"
-             Title="سامانه مدیریت مشتری نورافشان">
+             x:Class="NoorCRM.Client.MainPage" Appearing="ContentPage_Appearing"
+             Title="سامانه  مدیریت مشتری نورافشان">
 
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="btnRefresh" IconImageSource="refresh.png" Clicked="btnRefresh_Clicked"/>
         <ToolbarItem IconImageSource="{Binding Conn}"/>
     </ContentPage.ToolbarItems>
 
@@ -25,12 +24,15 @@
             <!--Home Tab-->
             <local:HomeView x:Name="homeTab" 
                             IsVisible="{Binding HomeTabSelected}"/>
+            <!--Today Tab-->
+            <local:TodayView x:Name="todayTab" 
+                            IsVisible="{Binding TodayTabSelected}"/>
             <!--Customers Tab-->
             <local:CustomersView x:Name="customersTab" 
-                            IsVisible="{Binding SecondTabSelected}"/>
+                            IsVisible="{Binding CustomersTabSelected}"/>
             <!--Factors Tab-->
             <local:FactorsView x:Name="factorsTab" 
-                            IsVisible="{Binding ThirdTabSelected}"/>
+                            IsVisible="{Binding FactorsTabSelected}"/>
         </Grid>
         <!--Bottom Tabs-->
         <material:MaterialCard Elevation="5" 
@@ -44,6 +46,7 @@
               HorizontalOptions="Fill"
               BindableLayout.ItemsSource="{Binding BottomMenuItems}">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

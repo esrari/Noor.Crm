@@ -70,19 +70,27 @@ namespace NoorCRM.Client
                 },
                 new BottomMenuItem()
                 {
+                    Title = "امروز",
+                    Icon = MaterialIcons.WeatherSunny,
+                    TextColor = bottomMenuNormalColor,
+                    TapCommand = new Command(OnTodayTapped),
+                    GridColumnIndex = 1
+                },
+                new BottomMenuItem()
+                {
                     Title = "مشتریان",
                     Icon = MaterialIcons.AccountGroup,
                     TextColor = bottomMenuNormalColor,
-                    TapCommand = new Command(OnSecondTapped),
-                    GridColumnIndex = 1
+                    TapCommand = new Command(OnCustomersTapped),
+                    GridColumnIndex = 2
                 },
                 new BottomMenuItem()
                 {
                     Title = "سفارشات",
                     Icon = MaterialIcons.CartOutline,
                     TextColor = bottomMenuNormalColor,
-                    TapCommand = new Command(OnThirdTapped),
-                    GridColumnIndex = 2
+                    TapCommand = new Command(OnFactorsTapped),
+                    GridColumnIndex = 3
                 },
             };
         }
@@ -93,16 +101,22 @@ namespace NoorCRM.Client
             MainViewModel.HomeTabSelected = true;
         }
 
-        private void OnSecondTapped()
+        private void OnTodayTapped()
         {
             setBottomMenuSelectedItem(1);
-            MainViewModel.SecondTabSelected = true;
+            MainViewModel.TodayTabSelected = true;
         }
 
-        private void OnThirdTapped()
+        private void OnCustomersTapped()
         {
             setBottomMenuSelectedItem(2);
-            MainViewModel.ThirdTabSelected = true;
+            MainViewModel.CustomersTabSelected = true;
+        }
+
+        private void OnFactorsTapped()
+        {
+            setBottomMenuSelectedItem(3);
+            MainViewModel.FactorsTabSelected = true;
         }
 
         private void setBottomMenuSelectedItem(int selectedIndex)
@@ -121,6 +135,11 @@ namespace NoorCRM.Client
         {
             Navigation.PushModalAsync(new SplashPage())
                 .ConfigureAwait(true);
+        }
+
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
+            App.NavigationPage.BarBackgroundColor = Color.White;
         }
     }
 }

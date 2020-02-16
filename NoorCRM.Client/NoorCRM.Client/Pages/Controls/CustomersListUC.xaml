@@ -18,19 +18,27 @@
                         <Grid>
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer 
-                                     Command="{Binding TapCommand}"
-                                     CommandParameter="{Binding Customer}"/>
+                                    Command="{Binding TapCommand}"
+                                    CommandParameter="{Binding Customer}"/>
                             </Grid.GestureRecognizers>
                             <BoxView CornerRadius="5"
+                                     IsVisible="{Binding HasAnyFactor}"
                                      HorizontalOptions="FillAndExpand"
                                      BackgroundColor="{StaticResource PrimaryLight}"/>
+                            <BoxView CornerRadius="5"
+                                     IsVisible="{Binding HasAnyFactor, Converter={StaticResource InverseBoolean}}"
+                                     HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource Primary}"/>
                             <StackLayout Orientation="Vertical"
                                          Margin="3">
-                                <Label Style="{StaticResource NormalLabel}" 
-                                       Text="{Binding Title}"  
-                                       TextColor="{StaticResource BodyTextColor}"
-                                       Margin="5"
-                                       HorizontalOptions="StartAndExpand"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label IsVisible="{Binding HasReminder}" Text="{StaticResource Reminder}" Style="{StaticResource MaterialIcons}"/>
+                                    <Label Style="{StaticResource NormalLabel}" 
+                                           Text="{Binding Title}"  
+                                           TextColor="{StaticResource BodyTextColor}"
+                                           Margin="5"
+                                           HorizontalOptions="StartAndExpand"/>
+                                </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <material:MaterialChip Style="{StaticResource chip}" 
                                                            BackgroundColor="{StaticResource BackgroundGrayColor}" 

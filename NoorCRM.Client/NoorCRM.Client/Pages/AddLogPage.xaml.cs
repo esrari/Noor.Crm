@@ -19,6 +19,7 @@ namespace NoorCRM.Client.Pages
         public AddLogPage(Customer customer)
         {
             InitializeComponent();
+            App.NavigationPage.BarBackgroundColor = Color.White;
             _customer = customer;
         }
 

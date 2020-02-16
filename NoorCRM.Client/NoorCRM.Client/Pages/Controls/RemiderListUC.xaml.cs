@@ -1,17 +1,19 @@
 ﻿using NoorCRM.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace NoorCRM.Client.Pages.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomersListUC : ContentView
+    public partial class RemiderListUC : ContentView
     {
         public ObservableCollection<Customer> Customers
         {
@@ -24,12 +26,12 @@ namespace NoorCRM.Client.Pages.Controls
             BindableProperty.Create(
                 nameof(Customers),
                 typeof(ObservableCollection<Customer>),
-                typeof(CustomersListUC),
+                typeof(RemiderListUC),
                 null,
                 BindingMode.TwoWay,
                 propertyChanged: HandleCustomersChanged);
 
-        private static CustomersListUC cluc;
+        private static RemiderListUC cluc;
         private static ObservableCollection<CustomerCardInfo> cardInfos;
         private static async void HandleCustomersChanged(BindableObject bindable, object oldValue, object newValue)
         {
@@ -41,7 +43,7 @@ namespace NoorCRM.Client.Pages.Controls
                 foreach (var c in customers)
                     cardInfos.Add(new CustomerCardInfo(c, App.NavigationPage.Navigation));
 
-                cluc = (CustomersListUC)bindable;
+                cluc = (RemiderListUC)bindable;
                 BindableLayout.SetItemsSource(cluc.stkContainer, cardInfos);
                 await Task.Delay(3).ConfigureAwait(true);
                 await cluc.scvScroller.ScrollToAsync(cluc.stkContainer, ScrollToPosition.Start, false).ConfigureAwait(false);
@@ -68,22 +70,11 @@ namespace NoorCRM.Client.Pages.Controls
                         cardInfos.Remove(cust);
                 }
             }
-
-            //BindableLayout.SetItemsSource(cluc.stkContainer, cardInfos);
         }
 
-        public CustomersListUC()
+        public RemiderListUC()
         {
             InitializeComponent();
-        }
-
-        public void RefreshItems()
-        {
-            if (cardInfos != null)
-                foreach (var item in cardInfos)
-                {
-                    item.CustomerChanged();
-                }
         }
     }
 }

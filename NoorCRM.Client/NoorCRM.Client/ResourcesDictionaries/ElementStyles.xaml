@@ -154,4 +154,9 @@
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
         <Setter Property="FontSize" Value="12"/>
     </Style>
+
+    <Style TargetType="{x:Type material:MaterialChip}" x:Key="chipLarg">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
 </ResourceDictionary>

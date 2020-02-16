@@ -29,9 +29,9 @@
             OnPrimary="#FFFFFF"
             OnSecondary="#FFFFFF"
             OnSurface="#000000"
-            Primary="#43a047"
+            Primary="#1e88e5"
             PrimaryVariant="#000000"
-            Secondary="#0f57c0"
+            Secondary="#ff8f00"
             SecondaryVariant="#000000"
             Surface="#FFFFFF" />
 

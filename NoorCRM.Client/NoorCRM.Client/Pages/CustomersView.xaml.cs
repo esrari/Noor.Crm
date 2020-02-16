@@ -3,6 +3,7 @@ using NoorCRM.Client.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,6 +90,14 @@ namespace NoorCRM.Client.Pages
                 insertedCustomer.CityId = city.Id;
                 newList.Add(insertedCustomer);
                 App.MainViewModel.Customers = newList;
+            }
+        }
+
+        private void ContentView_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsVisible")
+            {
+                listCustomer.RefreshItems();
             }
         }
     }

@@ -30,7 +30,7 @@ namespace NoorCRM.Client.Pages.Controls
                 BindingMode.TwoWay,
                 propertyChanged: HandleFactorsChanged);
 
-        private static void HandleFactorsChanged(BindableObject bindable, object oldValue, object newValue)
+        private static async void HandleFactorsChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var facts = newValue as IEnumerable<Factor>;
             if (facts != null)
@@ -43,7 +43,9 @@ namespace NoorCRM.Client.Pages.Controls
                     var f = new FactorBox(item);
                     facList.stkFactors.Children.Add(f);
                 }
-                facList.scroller.ScrollToAsync(facList.scroller, ScrollToPosition.End, false);
+
+                await Task.Delay(3).ConfigureAwait(true);
+                await facList.scroller.ScrollToAsync(facList.scroller, ScrollToPosition.End, false).ConfigureAwait(false);
             }
         }
 

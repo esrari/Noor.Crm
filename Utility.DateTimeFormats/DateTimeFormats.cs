@@ -38,9 +38,16 @@ namespace Utility.DateTimeFormats
 			if (isPersian)
 			{
 				PersianCalendar pc = new PersianCalendar(); // بدست آوردن تاریخ شمسی
-				year = pc.GetYear(dt);
-				month = pc.GetMonth(dt);
-				day = pc.GetDayOfMonth(dt);
+				try
+				{
+					year = pc.GetYear(dt);
+					month = pc.GetMonth(dt);
+					day = pc.GetDayOfMonth(dt);
+				}
+				catch (Exception ex)
+				{
+					return "";
+				}
 			}
 			else
 			{

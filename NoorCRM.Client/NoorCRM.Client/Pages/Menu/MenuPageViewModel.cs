@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -63,7 +64,7 @@ namespace NoorCRM.Client.Pages.Menu
 
         #region Commands
         public ICommand GoMainCommand { get; set; }
-        //public ICommand GoPayedCoursesCommand { get; set; }
+        public ICommand GoReloadCommand { get; set; }
         //public ICommand GoCurrentCoursesCommand { get; set; }
         //public ICommand GoTaggedCoursesCommand { get; set; }
         public ICommand GoAboutUsCommand { get; set; }
@@ -72,7 +73,7 @@ namespace NoorCRM.Client.Pages.Menu
         public MenuPageViewModel()
         {
             GoMainCommand = new Command(GoMain);
-            //GoPayedCoursesCommand = new Command(GoPayedCourses);
+            GoReloadCommand = new Command(GoReload);
             //GoCurrentCoursesCommand = new Command(GoCurrentCourses);
             //GoTaggedCoursesCommand = new Command(GoTaggedCourses);
             GoAboutUsCommand = new Command(GoAboutUs);
@@ -86,11 +87,14 @@ namespace NoorCRM.Client.Pages.Menu
             App.MenuIsPresented = false;
         }
 
-        //void GoPayedCourses(object obj)
-        //{
-        //    App.NavigationPage.Navigation.PushAsync(new PayedCourses()); //the content page you wanna load on this click event 
-        //    App.MenuIsPresented = false;
-        //}
+        void GoReload(object obj)
+        {
+            App.NavigationPage.Navigation.PopToRootAsync();
+            App.MainViewModel.HomeTabSelected = true;
+            App.MenuIsPresented = false;
+            App.NavigationPage.Navigation.PushModalAsync(
+                new SplashPage(App.MainViewModel.OnlineUser));
+        }
 
         //void GoCurrentCourses(object obj)
         //{

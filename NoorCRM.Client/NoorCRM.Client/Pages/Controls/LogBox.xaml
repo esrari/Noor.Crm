@@ -16,7 +16,7 @@
             <Grid>
                 <BoxView CornerRadius="5" 
                          BackgroundColor="{Binding BackgroundColor}"/>
-                <StackLayout VerticalOptions="Center">
+                <StackLayout VerticalOptions="Center" Spacing="0">
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="Start"
                                  IsVisible="{Binding HasExtraDescription}">
@@ -36,13 +36,13 @@
                     </StackLayout>
                     <Frame CornerRadius="5" 
                            HasShadow="False" 
-                           Margin="10, 1, 10, 1"
+                           Margin="10, 0, 10, 0"
                            Padding="0"
                            IsVisible="{Binding HasDescription}"
                            BackgroundColor="White">
                         <Label x:Name="lblComment"
                                HorizontalOptions="StartAndExpand"
-                               Margin="10"
+                               Margin="10, 3, 10, 3"
                                Style="{StaticResource SmallLabel}"
                                Text="{Binding Description}">
                         </Label>

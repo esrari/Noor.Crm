@@ -26,19 +26,34 @@ namespace NoorCRM.Client.Pages
             _ = getUserPhoneNoAsync();
         }
 
+        public SplashPage(User user)
+        {
+            InitializeComponent();
+            if (user != null)
+                loadAllOtherData(user).ConfigureAwait(false);
+            else
+            {
+                App.ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
+                _ = getUserPhoneNoAsync();
+            }
+        }
+
         private async void apiService_OnlineUserFetched(User user)
         {
-            if(user != null)
+            if (user != null)
+            {
+                App.MainViewModel.OnlineUser = user;
+                App.MenuPageViewModel.UserTitle = user.FullName;
+                App.MenuPageViewModel.UserPhoneNo = user.PhoneNo;
                 await loadAllOtherData(user).ConfigureAwait(false);
+            }
         }
 
         private async Task loadAllOtherData(User user)
         {
             // Set AppViewModel with catched data
-            App.MainViewModel.OnlineUser = user;
-            App.MenuPageViewModel.UserTitle = user.FullName;
-            App.MenuPageViewModel.UserPhoneNo = user.PhoneNo;
             App.MainViewModel.Customers = new ObservableCollection<Customer>(await App.ApiService.GetUserCustomersAsync().ConfigureAwait(true));
+            App.MainViewModel.TodayCustomers = new ObservableCollection<Customer>(await App.ApiService.GetUserTodayCustomersAsync().ConfigureAwait(true));
             App.MainViewModel.Products = new ObservableCollection<Product>(await App.ApiService.GetAllProductsAsync().ConfigureAwait(false));
             App.MainViewModel.LastFactors = new ObservableCollection<Factor>(await App.ApiService.GetLastVisitorFactorsAsync(user.Id, 20).ConfigureAwait(false));
             App.AddItemPage = new AddFactorItemPage();
@@ -54,7 +69,7 @@ namespace NoorCRM.Client.Pages
 
         private async Task getUserPhoneNoAsync()
         {
-            if(!CrossConnectivity.Current.IsConnected)
+            if (!CrossConnectivity.Current.IsConnected)
             {
                 lblnet.IsVisible = true;
                 lblRefresh.IsVisible = true;

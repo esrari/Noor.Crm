@@ -6,5 +6,9 @@
 
     <x:String x:Key="Plus">&#xF415;</x:String>
     <x:String x:Key="Refresh">&#xf450;</x:String>
-
+    <x:String x:Key="Delete">&#xf5e8;</x:String>
+    <x:String x:Key="Edit">&#xf8d4;</x:String>
+    <x:String x:Key="Reminder">&#xf88b;</x:String>
+    <x:String x:Key="Up">&#xf063;</x:String>
+    <x:String x:Key="Down">&#xf04b;</x:String>
 </ResourceDictionary>

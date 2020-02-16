@@ -30,8 +30,9 @@ namespace NoorCRM.Client.ViewModels
         #region Bottom Menu
         #region Bottom Tab Visiblity
         private bool _homeTabSelected;
-        private bool _secondTabSelected;
-        private bool _thirdTabSelected;
+        private bool _todayTabSelected;
+        private bool _customersTabSelected;
+        private bool _factorsTabSelected;
 
         public bool HomeTabSelected
         {
@@ -44,45 +45,67 @@ namespace NoorCRM.Client.ViewModels
                 // Manage other tabs
                 if (value)
                 {
-                    SecondTabSelected = false;
-                    ThirdTabSelected = false;
+                    TodayTabSelected = false;
+                    CustomersTabSelected = false;
+                    FactorsTabSelected = false;
                     OnHomeTabShowed();
                 }
                 OnPropertyChanged();
             }
         }
 
-        public bool SecondTabSelected
+        public bool TodayTabSelected
         {
-            get { return _secondTabSelected; }
+            get { return _todayTabSelected; }
             set
             {
-                if (_secondTabSelected == value)
+                if (_todayTabSelected == value)
                     return;
-                _secondTabSelected = value;
+                _todayTabSelected = value;
                 // Manage other tabs
                 if (value)
                 {
                     HomeTabSelected = false;
-                    ThirdTabSelected = false;
+                    FactorsTabSelected = false;
+                    CustomersTabSelected = false;
                 }
                 OnPropertyChanged();
             }
         }
 
-        public bool ThirdTabSelected
+        public bool CustomersTabSelected
         {
-            get { return _thirdTabSelected; }
+            get { return _customersTabSelected; }
             set
             {
-                if (_thirdTabSelected == value)
+                if (_customersTabSelected == value)
                     return;
-                _thirdTabSelected = value;
+                _customersTabSelected = value;
                 // Manage other tabs
                 if (value)
                 {
                     HomeTabSelected = false;
-                    SecondTabSelected = false;
+                    TodayTabSelected = false;
+                    FactorsTabSelected = false;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        public bool FactorsTabSelected
+        {
+            get { return _factorsTabSelected; }
+            set
+            {
+                if (_factorsTabSelected == value)
+                    return;
+                _factorsTabSelected = value;
+                // Manage other tabs
+                if (value)
+                {
+                    HomeTabSelected = false;
+                    TodayTabSelected = false;
+                    CustomersTabSelected = false;
                 }
                 OnPropertyChanged();
             }
@@ -138,6 +161,7 @@ namespace NoorCRM.Client.ViewModels
 
         #region Customers
         private ObservableCollection<Customer> _customers = new ObservableCollection<Customer>();
+        private ObservableCollection<Customer> _todayCustomers = new ObservableCollection<Customer>();
         public ObservableCollection<Customer> Customers
         {
             get => _customers;
@@ -146,6 +170,18 @@ namespace NoorCRM.Client.ViewModels
                 if (ReferenceEquals(_customers, value))
                     return;
                 _customers = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Customer> TodayCustomers
+        {
+            get => _todayCustomers;
+            set
+            {
+                if (ReferenceEquals(_todayCustomers, value))
+                    return;
+                _todayCustomers = value;
                 OnPropertyChanged();
             }
         }

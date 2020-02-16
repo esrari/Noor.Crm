@@ -19,6 +19,11 @@
             <!--Inverse the boolean value-->
             <locSource:InverseBooleanConverter x:Key="InverseBoolean"/>
             <locSource:DateTimeConverter x:Key="DateTimeConvert"/>
+            <locSource:DateTimeConverter2 x:Key="DateTimeConvert2"/>
+            <locSource:DateConverter x:Key="DateConverter"/>
+            <locSource:DateConverterNoWeekday x:Key="DateConverterNoWeekday"/>
+            <locSource:TimeConverter x:Key="TimeConverter"/>
+            <locSource:TodayTimeConverter x:Key="TodayTimeConverter"/>
             <locSource:PriceCommaConverter x:Key="PriceCommaConvert"/>
         </ResourceDictionary>
     </Application.Resources>

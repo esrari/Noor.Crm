@@ -58,15 +58,15 @@ namespace NoorCRM.Client.Pages.Controls
             switch (factor.Status)
             {
                 case FactorStatus.New:
-                    if (Application.Current.Resources.TryGetValue("Blue", out mainColorObj))
-                        MainColor = (Color)mainColorObj;
-                    if (Application.Current.Resources.TryGetValue("LightBlue", out backColorObj))
-                        BackColor = (Color)backColorObj;
-                    break;
-                case FactorStatus.Proceeded:
                     if (Application.Current.Resources.TryGetValue("Primary", out mainColorObj))
                         MainColor = (Color)mainColorObj;
                     if (Application.Current.Resources.TryGetValue("PrimaryLight", out backColorObj))
+                        BackColor = (Color)backColorObj;
+                    break;
+                case FactorStatus.Proceeded:
+                    if (Application.Current.Resources.TryGetValue("Green", out mainColorObj))
+                        MainColor = (Color)mainColorObj;
+                    if (Application.Current.Resources.TryGetValue("LightGreen", out backColorObj))
                         BackColor = (Color)backColorObj;
                     break;
                 case FactorStatus.Rejected:
