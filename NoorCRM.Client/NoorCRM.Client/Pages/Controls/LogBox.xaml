@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 mc:Ignorable="d"
+                 x:Class="NoorCRM.Client.Pages.Controls.Logs.LogBox">
+        <ContentView.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding TapCommand}"  
+                                  CommandParameter="{Binding Factor}"/>
+        </ContentView.GestureRecognizers>
+        <Frame BorderColor="{StaticResource BorderGrayColor}"
+               HasShadow="False"
+               CornerRadius="5"
+               Padding="1">
+            <Grid>
+                <BoxView CornerRadius="5" 
+                         BackgroundColor="{Binding BackgroundColor}"/>
+                <StackLayout VerticalOptions="Center" Spacing="0">
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Start"
+                                 IsVisible="{Binding HasExtraDescription}">
+                        <Label x:Name="lblExtraDescriptionLabel"
+                               HorizontalOptions="StartAndExpand"
+                               Margin="5"
+                               Style="{StaticResource SmallLabel}"
+                               TextColor="{StaticResource TextGrayColor}"
+                               Text="{Binding ExtraDescriptionLabel, StringFormat='{0}:'}">
+                        </Label>
+                        <Label x:Name="lblExtraDescription"
+                               HorizontalOptions="StartAndExpand"
+                               Margin="5"
+                               Style="{StaticResource SmallLabel}"
+                               Text="{Binding ExtraDescription}">
+                        </Label>
+                    </StackLayout>
+                    <Frame CornerRadius="5" 
+                           HasShadow="False" 
+                           Margin="10, 0, 10, 0"
+                           Padding="0"
+                           IsVisible="{Binding HasDescription}"
+                           BackgroundColor="White">
+                        <Label x:Name="lblComment"
+                               HorizontalOptions="StartAndExpand"
+                               Margin="10, 3, 10, 3"
+                               Style="{StaticResource SmallLabel}"
+                               Text="{Binding Description}">
+                        </Label>
+                    </Frame>
+                    <Grid VerticalOptions="Center" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" 
+                               x:Name="lblCreatorName"
+                               Style="{StaticResource MicroLabel}" 
+                               Text="{Binding CtreatorName}"/>
+                        <Label Grid.Column="1" 
+                               x:Name="lblType"
+                               Style="{StaticResource MicroLabel}"
+                               HorizontalTextAlignment="Center"
+                               Text="{Binding LogTypePersianName}"/>
+                        <Label Grid.Column="2" 
+                               FlowDirection="LeftToRight"
+                               x:Name="lblDate"
+                               Style="{StaticResource MicroLabel}"
+                               Text="{Binding CreationDate, Converter={StaticResource DateTimeConvert}}"/>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </ContentView>

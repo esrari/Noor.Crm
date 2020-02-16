@@ -3,9 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:locSource="clr-namespace:NoorCRM.Client.Sources"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourcesDictionaries/Colors.xaml"/>
+                <ResourceDictionary Source="ResourcesDictionaries/Fonts.xaml"/>
+                <ResourceDictionary Source="ResourcesDictionaries/MaterialStyles.xaml"/>
+                <ResourceDictionary Source="ResourcesDictionaries/MaterialIcons.xaml"/>
+                <ResourceDictionary Source="ResourcesDictionaries/ElementStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
+            <!--Inverse the boolean value-->
+            <locSource:InverseBooleanConverter x:Key="InverseBoolean"/>
+            <locSource:DateTimeConverter x:Key="DateTimeConvert"/>
+            <locSource:DateTimeConverter2 x:Key="DateTimeConvert2"/>
+            <locSource:DateConverter x:Key="DateConverter"/>
+            <locSource:DateConverterNoWeekday x:Key="DateConverterNoWeekday"/>
+            <locSource:TimeConverter x:Key="TimeConverter"/>
+            <locSource:TodayTimeConverter x:Key="TodayTimeConverter"/>
+            <locSource:PriceCommaConverter x:Key="PriceCommaConvert"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

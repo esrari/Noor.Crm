@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <OnPlatform x:TypeArguments="x:String" x:Key="IRANSansUltraLight">
+        <On Platform="Android" Value="IRANSansMobile(FaNum)_UltraLight.ttf#IRANSansMobile(FaNum) UltraLight" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum)(FaNum)_Bold.ttf#IRANSansMobile(FaNum)(FaNum) UltraLight" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)(FaNum)_UltraLight" />
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="x:String" x:Key="IRANSansLight">
+        <On Platform="Android" Value="IRANSansMobile(FaNum)_Light.ttf#IRANSansMobile(FaNum) Light" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum)_Light.ttf#IRANSansMobile(FaNum) Light" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)_Light" />
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="x:String" x:Key="IRANSans">
+        <On Platform="Android" Value="IRANSansMobile(FaNum).ttf#IRANSansMobile(FaNum)" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum).ttf#IRANSansMobile(FaNum)" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)" />
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="x:String" x:Key="IRANSansBold">
+        <On Platform="Android" Value="IRANSansMobile(FaNum)_Bold.ttf#IRANSansMobile(FaNum) Bold" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum)_Bold.ttf#IRANSansMobile(FaNum) Bold" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)_Bold" />
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="x:String" x:Key="IRANSansMedium">
+        <On Platform="Android" Value="IRANSansMobile(FaNum)_Medium.ttf#IRANSansMobile(FaNum) Medium" />
+        <On Platform="UWP" Value="/Assets/IRANSansMobile(FaNum)_Medium.ttf#IRANSansMobile(FaNum) Medium" />
+        <On Platform="iOS" Value="IRANSansMobile(FaNum)_Medium" />
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" x:Key="MaterialFontFamily">
+        <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+        <On Platform="UWP" Value="Assets/materialdesignicons-webfont.ttf#Material Design Icons" />
+        <On Platform="iOS" Value="Material Design Icons" />
+    </OnPlatform>
+</ResourceDictionary>

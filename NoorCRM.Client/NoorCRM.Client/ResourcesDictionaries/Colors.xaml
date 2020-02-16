@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="Primary">#1e88e5</Color>
+    <Color x:Key="PrimaryDark">#005cb2</Color>
+    <Color x:Key="PrimaryLight">#bbdefb</Color>
+    <Color x:Key="Secondary">#ff8f00</Color>
+    <Color x:Key="SecondaryDark">#e65100</Color>
+    <Color x:Key="SecondaryLight">#fbc99d</Color>
+
+    <Color x:Key="PrimaryText">#ffffff</Color>
+    <Color x:Key="PrimaryDarkText">#ffffff</Color>
+    <Color x:Key="PrimaryLightText">#000000</Color>
+    <Color x:Key="SecondaryText">#ffffff</Color>
+    <Color x:Key="SecondaryDarkText">#ffffff</Color>
+    <Color x:Key="SecondaryLightText">#000000</Color>
+
+    <Color x:Key="BodyBackgroundColor">#ffffff</Color>
+    <Color x:Key="BodyTextColor">#000000</Color>
+
+    <Color x:Key="BackgroundGrayColor">#f8f8f8</Color>
+    <Color x:Key="DimBackgroundGrayColor">#eeeeee</Color>
+    <Color x:Key="BorderGrayColor">#cccccc</Color>
+    <Color x:Key="TextGrayColor">#aaaaaa</Color>
+    <Color x:Key="Green">Green</Color>
+    <Color x:Key="LightGreen">LightGreen</Color>
+
+    <!--<Color x:Key="Primary">#43a047</Color>
+    <Color x:Key="PrimaryDark">#00701a</Color>
+    <Color x:Key="PrimaryLight">#76d275</Color>
+    <Color x:Key="Secondary">#f57c00</Color>
+    <Color x:Key="SecondaryDark">#bb4d00</Color>
+    <Color x:Key="SecondaryLight">#ffad42</Color>
+
+    <Color x:Key="PrimaryText">#000000</Color>
+    <Color x:Key="PrimaryDarkText">#000000</Color>
+    <Color x:Key="PrimaryLightText">#000000</Color>
+    <Color x:Key="SecondaryText">#000000</Color>
+    <Color x:Key="SecondaryDarkText">#000000</Color>
+    <Color x:Key="SecondaryLightText">#000000</Color>
+
+    <Color x:Key="BodyBackgroundColor">#ffffff</Color>
+    <Color x:Key="BodyTextColor">#000000</Color>
+
+    <Color x:Key="BackgroundGrayColor">#f8f8f8</Color>
+    <Color x:Key="DimBackgroundGrayColor">#eeeeee</Color>
+    <Color x:Key="BorderGrayColor">#cccccc</Color>
+    <Color x:Key="TextGrayColor">#aaaaaa</Color>
+    <Color x:Key="Blue">DeepSkyBlue</Color>
+    <Color x:Key="LightBlue">SkyBlue</Color>-->
+
+</ResourceDictionary>

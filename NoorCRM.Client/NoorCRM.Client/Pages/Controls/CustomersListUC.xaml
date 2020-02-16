@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.Controls.CustomersListUC">
+    <ContentView.Content>
+        <ScrollView x:Name="scvScroller" 
+                    Orientation="Vertical"
+                    Margin="0, 5, 0, 0">
+            <StackLayout Orientation="Vertical"
+                         x:Name="stkContainer"
+                         Padding="5" Spacing="2">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding TapCommand}"
+                                    CommandParameter="{Binding Customer}"/>
+                            </Grid.GestureRecognizers>
+                            <BoxView CornerRadius="5"
+                                     IsVisible="{Binding HasAnyFactor}"
+                                     HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource PrimaryLight}"/>
+                            <BoxView CornerRadius="5"
+                                     IsVisible="{Binding HasAnyFactor, Converter={StaticResource InverseBoolean}}"
+                                     HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource Primary}"/>
+                            <StackLayout Orientation="Vertical"
+                                         Margin="3">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label IsVisible="{Binding HasReminder}" Text="{StaticResource Reminder}" Style="{StaticResource MaterialIcons}"/>
+                                    <Label Style="{StaticResource NormalLabel}" 
+                                           Text="{Binding Title}"  
+                                           TextColor="{StaticResource BodyTextColor}"
+                                           Margin="5"
+                                           HorizontalOptions="StartAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <material:MaterialChip Style="{StaticResource chip}" 
+                                                           BackgroundColor="{StaticResource BackgroundGrayColor}" 
+                                                           Text="{Binding CityName}"
+                                                           TextColor="{StaticResource SecondaryDark}"/>
+                                    <Label Style="{StaticResource SmallLabel}" 
+                                           Text="{Binding Address}"  
+                                           TextColor="{StaticResource BackgroundGrayColor}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mtrl="clr-namespace:XF.Material.Forms.Resources;assembly=XF.Material"
+    xmlns:mtrltypo="clr-namespace:XF.Material.Forms.Resources.Typography;assembly=XF.Material">
+   
+    <mtrltypo:MaterialFontConfiguration x:Key="Material.Font"
+            Body1="{StaticResource IRANSans}"
+            Body2="{StaticResource IRANSans}"
+            Button="{StaticResource IRANSans}"
+            Caption="{StaticResource IRANSans}"
+            H1="{StaticResource IRANSans}"
+            H2="{StaticResource IRANSans}"
+            H3="{StaticResource IRANSans}"
+            H4="{StaticResource IRANSans}"
+            H5="{StaticResource IRANSans}"
+            H6="{StaticResource IRANSansBold}"
+            Overline="{StaticResource IRANSans}"
+            Subtitle1="{StaticResource IRANSans}"
+            Subtitle2="{StaticResource IRANSansBold}" />
+
+    <mtrl:MaterialColorConfiguration x:Key="Material.Color"
+            Background="#EAEAEA"
+            Error="#B00020"
+            OnBackground="#000000"
+            OnError="#FFFFFF"
+            OnPrimary="#FFFFFF"
+            OnSecondary="#FFFFFF"
+            OnSurface="#000000"
+            Primary="#1e88e5"
+            PrimaryVariant="#000000"
+            Secondary="#ff8f00"
+            SecondaryVariant="#000000"
+            Surface="#FFFFFF" />
+
+    <mtrl:MaterialConfiguration x:Key="Material.Configuration"
+            ColorConfiguration="{StaticResource Material.Color}"
+            FontConfiguration="{StaticResource Material.Font}" />
+</ResourceDictionary>

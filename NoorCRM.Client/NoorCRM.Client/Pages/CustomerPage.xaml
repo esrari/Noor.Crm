@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d" Title="{Binding Title}"
+             x:Class="NoorCRM.Client.Pages.CustomerPage"
+             BackgroundColor="{StaticResource BodyBackgroundColor}">
+    <Grid>
+        <StackLayout>
+            <Frame Padding="0">
+                <Grid Padding="8, 3, 8, 3" BackgroundColor="{StaticResource Secondary}">
+                    <material:MaterialChip
+                        IsVisible="{Binding HasReminder}"
+                        Text="{Binding Reminder, Converter={StaticResource DateTimeConvert2}}"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource chip}">
+                        <material:MaterialChip.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Reminder_Tapped"/>
+                        </material:MaterialChip.GestureRecognizers>
+                    </material:MaterialChip>
+                    <StackLayout Orientation="Horizontal" 
+                                 HorizontalOptions="End"
+                                 VerticalOptions="Center">
+                        <Label x:Name="btnReminder" 
+                               IsVisible="{Binding HasReminder, Converter={StaticResource InverseBoolean}}"
+                               Style="{StaticResource LargeMaterialIcons}"
+                               Text="{StaticResource Reminder}"
+                               TextColor="{StaticResource SecondaryLightText}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Reminder_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label x:Name="btnEdit" 
+                               Style="{StaticResource LargeMaterialIcons}"
+                               Text="{StaticResource Edit}"
+                               TextColor="{StaticResource SecondaryLightText}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_btnEdit"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label x:Name="btnDelete" 
+                               Style="{StaticResource LargeMaterialIcons}"
+                               Text="{StaticResource Delete}"
+                               IsVisible="{Binding HasAnyFactor, Converter={StaticResource InverseBoolean}}"
+                               TextColor="{StaticResource SecondaryLightText}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_btnDelete"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <local:LogListUC x:Name="logList"/>
+        </StackLayout>
+        <Button x:Name="btnAddLog" 
+                Style="{StaticResource AddButton}"
+                Clicked="BtnAddLog_Clicked"/>
+    </Grid>
+</ContentPage>

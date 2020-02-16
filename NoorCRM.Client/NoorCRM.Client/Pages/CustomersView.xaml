@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.CustomersView" PropertyChanged="ContentView_PropertyChanged">
+    <Grid>
+        <StackLayout>
+            <Grid>
+                <material:MaterialTextField x:Name="txtSearch" 
+                                            Style="{StaticResource MaterialTextBox}"
+                                            Margin="10, 0, 10, 0"
+                                            Placeholder="جستجو در مشتریان"/>
+            </Grid>
+            <local:CustomersListUC x:Name="listCustomer" Customers="{Binding Customers}"/>
+        </StackLayout>
+        <Button x:Name="btnAddCustomer" 
+                Style="{StaticResource AddButton}"
+                Clicked="BtnAddCustomer_Clicked"/>
+    </Grid>
+</ContentView>
