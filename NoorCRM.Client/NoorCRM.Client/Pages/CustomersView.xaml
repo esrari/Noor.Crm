@@ -8,15 +8,20 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.CustomersView" PropertyChanged="ContentView_PropertyChanged">
     <Grid>
-        <StackLayout>
-            <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
                 <material:MaterialTextField x:Name="txtSearch" 
                                             Style="{StaticResource MaterialTextBox}"
                                             Margin="10, 0, 10, 0"
-                                            Placeholder="جستجو در مشتریان"/>
+                                            Placeholder="جستجو در مشتریان"
+                                            TextChanged="txtSearch_TextChanged"/>
             </Grid>
-            <local:CustomersListUC x:Name="listCustomer" Customers="{Binding Customers}"/>
-        </StackLayout>
+            <local:CustomersListUC x:Name="listCustomer" Grid.Row="1" Customers="{Binding Customers}"/>
+        </Grid>
         <Button x:Name="btnAddCustomer" 
                 Style="{StaticResource AddButton}"
                 Clicked="BtnAddCustomer_Clicked"/>

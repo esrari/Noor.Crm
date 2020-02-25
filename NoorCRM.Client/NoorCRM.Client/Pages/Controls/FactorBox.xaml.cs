@@ -14,10 +14,12 @@ namespace NoorCRM.Client.Pages.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FactorBox : ContentView
     {
+        public FactorBoxViewModel ViewModel { get; set; }
         public FactorBox(Factor factor)
         {
             InitializeComponent();
-            BindingContext = new FactorBoxViewModel(factor);
+            ViewModel = new FactorBoxViewModel(factor);
+            BindingContext = ViewModel;
         }
     }
 

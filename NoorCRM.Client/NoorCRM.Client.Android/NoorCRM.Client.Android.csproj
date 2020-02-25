@@ -41,6 +41,9 @@
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <MandroidI18n />
     <AndroidSupportedAbis>x86;x86_64</AndroidSupportedAbis>
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\Users\Esrari\AppData\Local\Xamarin\Mono for Android\Keystore\noorcrm\noorcrm.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>noor123</AndroidSigningStorePass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>

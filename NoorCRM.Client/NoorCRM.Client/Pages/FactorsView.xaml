@@ -8,14 +8,19 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.FactorsView">
     <Grid>
-        <StackLayout Spacing="0">
-            <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
                 <material:MaterialTextField x:Name="txtSearch"
                                             Style="{StaticResource MaterialTextBox}"
-                                            Margin="10, 0, 10, -11"
-                                            Placeholder="جستجو در عنوان فاکتور"/>
+                                            Margin="10, 0, 10, 0"
+                                            Placeholder="جستجو در عنوان فاکتور"
+                                            TextChanged="TxtSearch_TextChanged"/>
             </Grid>
-            <local:FactorsListUC Factors="{Binding LastFactors}"/>
-        </StackLayout>
+            <local:FactorsListUC x:Name="factList" Grid.Row="1" Factors="{Binding LastFactors}"/>
+        </Grid>
     </Grid>
 </ContentView>

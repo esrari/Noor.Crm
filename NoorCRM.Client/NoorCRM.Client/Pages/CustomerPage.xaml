@@ -12,15 +12,23 @@
         <StackLayout>
             <Frame Padding="0">
                 <Grid Padding="8, 3, 8, 3" BackgroundColor="{StaticResource Secondary}">
-                    <material:MaterialChip
-                        IsVisible="{Binding HasReminder}"
-                        Text="{Binding Reminder, Converter={StaticResource DateTimeConvert2}}"
-                        HorizontalOptions="Start"
-                        Style="{StaticResource chip}">
-                        <material:MaterialChip.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Reminder_Tapped"/>
-                        </material:MaterialChip.GestureRecognizers>
-                    </material:MaterialChip>
+                    <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
+                        <material:MaterialChip
+                            Text="{Binding Tel}"
+                            Style="{StaticResource chipTel}">
+                            <material:MaterialChip.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_btnEdit"/>
+                            </material:MaterialChip.GestureRecognizers>
+                        </material:MaterialChip>
+                        <material:MaterialChip
+                            IsVisible="{Binding HasReminder}"
+                            Text="{Binding Reminder, Converter={StaticResource DateTimeConvert2}}"
+                            Style="{StaticResource chip}">
+                            <material:MaterialChip.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Reminder_Tapped"/>
+                            </material:MaterialChip.GestureRecognizers>
+                        </material:MaterialChip>
+                    </StackLayout>
                     <StackLayout Orientation="Horizontal" 
                                  HorizontalOptions="End"
                                  VerticalOptions="Center">

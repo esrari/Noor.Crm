@@ -93,7 +93,7 @@
         <Setter Property="FloatingPlaceholderColor" Value="{StaticResource PrimaryDark}"/>
         <Setter Property="TintColor" Value="{StaticResource PrimaryDark}"/>
         <Setter Property="TextFontFamily" Value="{StaticResource IRANSans}"/>
-        <Setter Property="TextFontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="TextFontSize" Value="14"/>
         <Setter Property="PlaceholderFontFamily" Value="{StaticResource IRANSans}"/>
     </Style>
 
@@ -109,7 +109,7 @@
         <Setter Property="BackgroundColor" Value="Transparent"/>
         <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
-        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="FontSize" Value="14"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="AddButton">
@@ -147,7 +147,7 @@
         <Setter Property="FlowDirection" Value="RightToLeft"/>
         <Setter Property="TitleColor" Value="{StaticResource Primary}"/>
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
-        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="FontSize" Value="14"/>
     </Style>
 
     <Style TargetType="{x:Type material:MaterialChip}" x:Key="chip">
@@ -158,5 +158,11 @@
     <Style TargetType="{x:Type material:MaterialChip}" x:Key="chipLarg">
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
         <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style TargetType="{x:Type material:MaterialChip}" x:Key="chipTel">
+        <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryLight}"/>
     </Style>
 </ResourceDictionary>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace NoorCRM.Client
 {
@@ -33,6 +34,11 @@ namespace NoorCRM.Client
                             .ConfigureAwait(true);
 
             BindingContext = MainViewModel;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
         }
 
         private void Splash_Disappearing(object sender, EventArgs e)

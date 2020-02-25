@@ -53,5 +53,22 @@ namespace NoorCRM.Client.Pages.Controls
         {
             InitializeComponent();
         }
+
+        public void Filter(string filter)
+        {
+            if (string.IsNullOrWhiteSpace(filter))
+                foreach (FactorBox item in stkFactors.Children)
+                    item.IsVisible = true;
+            else
+            {
+                var trimFilter = filter.Trim();
+                foreach (FactorBox item in stkFactors.Children)
+                {
+                    if (item.ViewModel.Title.Contains(trimFilter))
+                        item.IsVisible = true;
+                    else item.IsVisible = false;
+                }
+            }
+        }
     }
 }

@@ -37,6 +37,7 @@ namespace NoorCRM.Client.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 
 }

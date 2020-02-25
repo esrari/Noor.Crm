@@ -52,8 +52,6 @@ namespace NoorCRM.Client.Pages.Controls
 
         private static void Customers_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //var cardInfos = new List<CustomerCardInfo>(BindableLayout.GetItemsSource(cluc.stkContainer).Cast<CustomerCardInfo>());
-
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (Customer item in e.NewItems)

@@ -77,25 +77,103 @@ namespace NoorCRM.Client.Pages
 
         private void TapGestureRecognizer_btnEdit(object sender, EventArgs e)
         {
+            var editCustomerPage = new CreateCustomerPage(_customer);
+            editCustomerPage.CustomerEditDone += EditCustomerPage_CustomerEditDone; ;
+            App.NavigationPage.Navigation.PushModalAsync(editCustomerPage);
+        }
 
+        private async void EditCustomerPage_CustomerEditDone(CreateCustomerViewModel newCustomer)
+        {
+            var city = App.MainViewModel.OnlineUser.VisitCities
+                .Where(vc => vc.Name == newCustomer.CityName)
+                .FirstOrDefault();
+            if (city == null)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "شهر مورد نظر موجود نمی باشد و یا به آن دسترسی ندارید.",
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                return;
+            }
+
+            _customer.ManagerName = newCustomer.CustomerName;
+            _customer.StoreName = newCustomer.StoreName;
+            _customer.Address = newCustomer.Address;
+            _customer.CityId = city.Id;
+            _customer.City = city;
+            _customer.CreationDate = DateTime.Now;
+            _customer.IsActive = true;
+            if (_customer.PhoneNos == null || _customer.PhoneNos.Count == 0)
+            {
+                _customer.PhoneNos = new[] { new PhoneNo() { Title = newCustomer.PhoneTitle1, Number = newCustomer.PhoneNo1 },
+                                   new PhoneNo() { Title = newCustomer.PhoneTitle2, Number = newCustomer.PhoneNo2 },
+                                   new PhoneNo() { Title = newCustomer.PhoneTitle3, Number = newCustomer.PhoneNo3 }};
+            }
+            else
+            {
+                var phList = new List<PhoneNo>(_customer.PhoneNos);
+                if (phList.Count == 1)
+                {
+                    phList[0].Title = newCustomer.PhoneTitle1;
+                    phList[0].Number = newCustomer.PhoneNo1;
+                    phList.Add(new PhoneNo() { Title = newCustomer.PhoneTitle2, Number = newCustomer.PhoneNo2 });
+                    phList.Add(new PhoneNo() { Title = newCustomer.PhoneTitle3, Number = newCustomer.PhoneNo3 });
+                }
+                else if (phList.Count == 2)
+                {
+                    phList[0].Title = newCustomer.PhoneTitle1;
+                    phList[0].Number = newCustomer.PhoneNo1;
+                    phList[1].Title = newCustomer.PhoneTitle2;
+                    phList[1].Number = newCustomer.PhoneNo2;
+                    phList.Add(new PhoneNo() { Title = newCustomer.PhoneTitle3, Number = newCustomer.PhoneNo3 });
+                }
+                else if (phList.Count == 3)
+                {
+                    phList[0].Title = newCustomer.PhoneTitle1;
+                    phList[0].Number = newCustomer.PhoneNo1;
+                    phList[1].Title = newCustomer.PhoneTitle2;
+                    phList[1].Number = newCustomer.PhoneNo2;
+                    phList[2].Title = newCustomer.PhoneTitle3;
+                    phList[2].Number = newCustomer.PhoneNo3;
+                }
+
+                _customer.PhoneNos = phList;
+            }
+            var updatedCustomer = await App.ApiService.UpdateCustomerAsync(_customer).ConfigureAwait(true);
+
+            // Send result for snack bar and add inserted customer too customers list
+            if (updatedCustomer == null)
+                await MaterialDialog.Instance.SnackbarAsync(message: "ویرایش مشتری با مشکل روبرو شد.",
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+            else
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "ویرایش مشتری با موفقیت انجام شد.",
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+            }
         }
 
         private async void TapGestureRecognizer_btnDelete(object sender, EventArgs e)
         {
+
             if (_customer.Factors != null && _customer.Factors.Any())
                 await MaterialDialog.Instance.SnackbarAsync(message: "مشتری مورد نظر دارای فاکتور می باشد و قابل حذف نیست.",
                     msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(false);
             else
             {
-                var result = await App.ApiService.DeleteCustomerAsync(_customer.Id).ConfigureAwait(true);
-                if (result)
+                var confirm = await MaterialDialog.Instance.ConfirmAsync(message: "آیا از حذف این مشتری مطمئن هستید؟",
+                                    confirmingText: "بله",
+                                    dismissiveText: "خیر");
+
+                if (confirm.HasValue && confirm.Value)
                 {
-                    var cust = App.MainViewModel.Customers.Where(c => c.Id == _customer.Id).FirstOrDefault();
-                    if (cust != null)
-                        App.MainViewModel.Customers.Remove(cust);
-                    await MaterialDialog.Instance.SnackbarAsync(message: "مشتری مورد نظر حذف شد.",
-                        msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
-                    await App.NavigationPage.Navigation.PopAsync().ConfigureAwait(false);
+                    var result = await App.ApiService.DeleteCustomerAsync(_customer.Id).ConfigureAwait(true);
+                    if (result)
+                    {
+                        var cust = App.MainViewModel.Customers.Where(c => c.Id == _customer.Id).FirstOrDefault();
+                        if (cust != null)
+                            App.MainViewModel.Customers.Remove(cust);
+                        await MaterialDialog.Instance.SnackbarAsync(message: "مشتری مورد نظر حذف شد.",
+                            msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                        await App.NavigationPage.Navigation.PopAsync().ConfigureAwait(false);
+                    }
                 }
             }
         }
@@ -174,13 +252,27 @@ namespace NoorCRM.Client.Pages
         private bool _hasReminder;
         private DateTime _reminder;
         private bool _hasAnyFactor;
+        private string _tel;
 
         public Customer Customer { get; set; }
         public string Title { get; set; }
         public bool IsActive { get; set; }
+
+        public string Tel
+        {
+            get => _tel;
+            set
+            {
+                if (_tel == value)
+                    return;
+                _tel = value;
+                OnPropertyChanged();
+            }
+        }
         public bool HasAnyFactor
         {
-            get => _hasAnyFactor; set
+            get => _hasAnyFactor;
+            set
             {
                 if (_hasAnyFactor == value)
                     return;
@@ -215,6 +307,13 @@ namespace NoorCRM.Client.Pages
             Title = Helper.CreateCustomerTitle(customer);
             HasAnyFactor = customer.Factors?.Count > 0;
             IsActive = customer.IsActive;
+            if (customer.PhoneNos != null)
+                foreach (var item in customer.PhoneNos)
+                    if (!string.IsNullOrWhiteSpace(item.Number))
+                    {
+                        Tel = item.Number;
+                        break;
+                    }
             if (customer.Reminder.HasValue)
             {
                 HasReminder = true;

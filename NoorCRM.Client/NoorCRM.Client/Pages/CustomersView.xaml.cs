@@ -51,15 +51,21 @@ namespace NoorCRM.Client.Pages
         private void BtnAddCustomer_Clicked(object sender, EventArgs e)
         {
             var addCustomerPage = new CreateCustomerPage();
-            addCustomerPage.CustomerCreated += AddCustomerPage_CustomerCreated;
+            addCustomerPage.CustomerEditDone += AddCustomerPage_CustomerEditDone;
             App.NavigationPage.Navigation.PushModalAsync(addCustomerPage);
         }
 
-        private async void AddCustomerPage_CustomerCreated(CreateCustomerViewModel newCustomer)
+        private async void AddCustomerPage_CustomerEditDone(CreateCustomerViewModel newCustomer)
         {
             var city = App.MainViewModel.OnlineUser.VisitCities
                     .Where(vc => vc.Name == newCustomer.CityName)
                     .FirstOrDefault();
+            if (city == null)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "شهر مورد نظر موجود نمی باشد و یا به آن دسترسی ندارید.",
+                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                return;
+            }
             var customer = new Customer()
             {
                 ManagerName = newCustomer.CustomerName,
@@ -68,7 +74,9 @@ namespace NoorCRM.Client.Pages
                 CityId = city.Id,
                 CreationDate = DateTime.Now,
                 IsActive = true,
-                PhoneNos = new[] { new PhoneNo() { Title = "تلفن", Number = newCustomer.PhoneNo } },
+                PhoneNos = new[] { new PhoneNo() { Title = newCustomer.PhoneTitle1, Number = newCustomer.PhoneNo1 },
+                                   new PhoneNo() { Title = newCustomer.PhoneTitle2, Number = newCustomer.PhoneNo2 },
+                                   new PhoneNo() { Title = newCustomer.PhoneTitle3, Number = newCustomer.PhoneNo3 }}
             };
 
             var insertedCustomer = await App.ApiService.InsertNewCustomerAsync(customer).ConfigureAwait(true);
@@ -82,14 +90,13 @@ namespace NoorCRM.Client.Pages
                 await MaterialDialog.Instance.SnackbarAsync(message: "افزودن مشتری جدید با موفقیت انجام شد.",
                     msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
 
-                // after inserting open customer page for action
-                await App.NavigationPage.Navigation.PushAsync(new CustomerPage(insertedCustomer)).ConfigureAwait(true);
                 // after insertion city don't load again
-                var newList = new ObservableCollection<Customer>(App.MainViewModel.Customers);
                 insertedCustomer.City = city;
                 insertedCustomer.CityId = city.Id;
-                newList.Add(insertedCustomer);
-                App.MainViewModel.Customers = newList;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.MainViewModel.Customers.Add(insertedCustomer);
+                });
             }
         }
 
@@ -99,6 +106,11 @@ namespace NoorCRM.Client.Pages
             {
                 listCustomer.RefreshItems();
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            listCustomer.Filter(e.NewTextValue);
         }
     }
 }

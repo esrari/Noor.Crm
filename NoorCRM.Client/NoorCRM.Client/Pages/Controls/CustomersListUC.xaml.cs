@@ -56,7 +56,9 @@ namespace NoorCRM.Client.Pages.Controls
             {
                 foreach (Customer item in e.NewItems)
                 {
-                    cardInfos.Add(new CustomerCardInfo(item, App.NavigationPage.Navigation));
+                    var cci = new CustomerCardInfo(item, App.NavigationPage.Navigation);
+                    cardInfos.Add(cci);
+                    cci.TapCommand.Execute(cci.Customer);
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
@@ -68,13 +70,28 @@ namespace NoorCRM.Client.Pages.Controls
                         cardInfos.Remove(cust);
                 }
             }
-
-            //BindableLayout.SetItemsSource(cluc.stkContainer, cardInfos);
         }
 
         public CustomersListUC()
         {
             InitializeComponent();
+        }
+
+        public void Filter(string filter)
+        {
+            if (string.IsNullOrWhiteSpace(filter))
+                foreach (var item in stkContainer.Children)
+                    item.IsVisible = true;
+            else
+            {
+                var trimFilter = filter.Trim();
+                foreach (var item in stkContainer.Children)
+                {
+                    if (((CustomerCardInfo)item.BindingContext).Title.Contains(trimFilter))
+                        item.IsVisible = true;
+                    else item.IsVisible = false;
+                }
+            }
         }
 
         public void RefreshItems()

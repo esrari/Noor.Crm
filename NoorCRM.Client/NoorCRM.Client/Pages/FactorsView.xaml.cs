@@ -43,5 +43,10 @@ namespace NoorCRM.Client.Pages
         {
             InitializeComponent();
         }
+
+        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            factList.Filter(e.NewTextValue);
+        }
     }
 }
