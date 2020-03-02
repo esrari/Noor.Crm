@@ -19,11 +19,11 @@ namespace NoorCRM.Client.Pages
         private readonly Customer _customer;
         private FactorViewModel _viewModel;
         public event PageClosedEventHandler PageClosed;
+        bool _inProccess = false;
 
         public SubmitFactorPage(Customer customer)
         {
             InitializeComponent();
-            App.NavigationPage.BarBackgroundColor = Color.White;
             _customer = customer;
             _viewModel = new FactorViewModel(customer);
             BindingContext = _viewModel;
@@ -81,12 +81,16 @@ namespace NoorCRM.Client.Pages
 
         private async void Submit_Clicked(object sender, EventArgs e)
         {
+            if (_inProccess)
+                return;
+
             if (!_viewModel.FactorItems.Any())
                 return;
 
             if (_viewModel.Status != FactorStatus.New)
                 return;
 
+            _inProccess = true;
             var factor = _viewModel.GetSubmitedFactor();
 
             if (factor.Id != 0)

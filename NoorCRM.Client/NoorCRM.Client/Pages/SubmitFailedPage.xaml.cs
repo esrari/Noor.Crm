@@ -16,6 +16,7 @@ namespace NoorCRM.Client.Pages
     {
         private readonly Customer _customer;
         public event PageClosedEventHandler PageClosed;
+        bool _inProccess = false;
 
         public SubmitFailedPage(Customer customer)
         {
@@ -35,8 +36,13 @@ namespace NoorCRM.Client.Pages
 
         private async void Submit_Clicked(object sender, EventArgs e)
         {
+            if (_inProccess)
+                return;
+
             if (string.IsNullOrWhiteSpace(txtDescription.Text))
                 return;
+
+            _inProccess = true;
 
             FailureReason reason = FailureReason.Unknown;
             if (picReason.SelectedIndex == 1)

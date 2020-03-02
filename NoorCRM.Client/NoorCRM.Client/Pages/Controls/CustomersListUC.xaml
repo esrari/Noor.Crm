@@ -12,7 +12,7 @@
                     Margin="0, 5, 0, 0">
             <StackLayout Orientation="Vertical"
                          x:Name="stkContainer"
-                         Padding="5" Spacing="2">
+                         Padding="5, 0, 5, 0" Spacing="2">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <Grid>

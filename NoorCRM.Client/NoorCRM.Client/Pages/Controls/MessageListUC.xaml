@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.Controls.MessageListUC">
+    <ContentView.Content>
+        <ScrollView x:Name="scvScroller">
+            <StackLayout x:Name="lstMessages"
+                         Padding="5, 0, 5, 0"
+                         Spacing="2"
+                         SizeChanged="lstMessages_SizeChanged">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout VerticalOptions="Center" 
+                                     Spacing="0" 
+                                     IsVisible="{Binding IsVisible}"
+                                     Margin="10, 0, 10, 0">
+                            <Label Grid.Column="0" 
+                                   x:Name="lblCreatorName"
+                                   HorizontalOptions="End"
+                                   Style="{StaticResource SmallLabel}" 
+                                   Text="{Binding CtreatorName}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsSelfMessage}" Value="True">
+                                        <Setter Property="HorizontalOptions" Value="Start"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Frame CornerRadius="5" 
+                                   BorderColor="{Binding BorderColor}"
+                                   BackgroundColor="{Binding BackgroundColor}"
+                                   HasShadow="False" 
+                                   Padding="0">
+                                <Label x:Name="lblMessageText"
+                                       HorizontalOptions="StartAndExpand"
+                                       Margin="10, 3, 10, 3"
+                                       Style="{StaticResource SmallLabel}"
+                                       Text="{Binding MessageText}">
+                                </Label>
+                            </Frame>
+                            <StackLayout Orientation="Horizontal"
+                                         Grid.Column="2" 
+                                         HorizontalOptions="Start">
+                                <StackLayout.Triggers>
+                                    <DataTrigger TargetType="StackLayout" Binding="{Binding IsSelfMessage}" Value="True">
+                                        <Setter Property="HorizontalOptions" Value="End"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+                                <Label FlowDirection="LeftToRight"
+                                       x:Name="lblDate"
+                                       Style="{StaticResource MicroLabel}"
+                                       Text="{Binding CreationDate, Converter={StaticResource DateTimeConvert}}">
+                                </Label>
+                                <Label FlowDirection="LeftToRight"
+                                       IsVisible="{Binding IsSended}"
+                                       Style="{StaticResource MaterialIcons}"
+                                       Text="{StaticResource Check}"
+                                       TextColor="{StaticResource Primary}">
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

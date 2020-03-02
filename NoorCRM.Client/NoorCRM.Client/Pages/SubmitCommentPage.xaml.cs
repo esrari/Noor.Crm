@@ -16,6 +16,7 @@ namespace NoorCRM.Client.Pages
     {
         private readonly Customer _customer;
         public event PageClosedEventHandler PageClosed;
+        bool _inProccess = false;
 
         public SubmitCommentPage(Customer customer)
         {
@@ -35,9 +36,13 @@ namespace NoorCRM.Client.Pages
 
         private async void Submit_Clicked(object sender, EventArgs e)
         {
+            if (_inProccess)
+                return;
+
             if (string.IsNullOrWhiteSpace(txtComment.Text))
                 return;
 
+            _inProccess = true;
             ImportanceLevel level = ImportanceLevel.Normal;
             if (picImportance.SelectedIndex == 1)
                 level = ImportanceLevel.Important;

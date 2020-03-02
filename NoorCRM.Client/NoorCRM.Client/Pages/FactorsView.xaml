@@ -16,7 +16,7 @@
             <Grid Grid.Row="0">
                 <material:MaterialTextField x:Name="txtSearch"
                                             Style="{StaticResource MaterialTextBox}"
-                                            Margin="10, 0, 10, 0"
+                                            Margin="10, 0, 10, -20"
                                             Placeholder="جستجو در عنوان فاکتور"
                                             TextChanged="TxtSearch_TextChanged"/>
             </Grid>

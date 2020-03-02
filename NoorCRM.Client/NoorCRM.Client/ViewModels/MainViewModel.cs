@@ -33,6 +33,7 @@ namespace NoorCRM.Client.ViewModels
         private bool _todayTabSelected;
         private bool _customersTabSelected;
         private bool _factorsTabSelected;
+        private bool _chatTabSelected;
 
         public bool HomeTabSelected
         {
@@ -48,6 +49,7 @@ namespace NoorCRM.Client.ViewModels
                     TodayTabSelected = false;
                     CustomersTabSelected = false;
                     FactorsTabSelected = false;
+                    ChatTabSelected = false;
                     OnHomeTabShowed();
                 }
                 OnPropertyChanged();
@@ -67,6 +69,7 @@ namespace NoorCRM.Client.ViewModels
                 {
                     HomeTabSelected = false;
                     FactorsTabSelected = false;
+                    ChatTabSelected = false;
                     CustomersTabSelected = false;
                 }
                 OnPropertyChanged();
@@ -87,6 +90,7 @@ namespace NoorCRM.Client.ViewModels
                     HomeTabSelected = false;
                     TodayTabSelected = false;
                     FactorsTabSelected = false;
+                    ChatTabSelected = false;
                 }
                 OnPropertyChanged();
             }
@@ -106,6 +110,27 @@ namespace NoorCRM.Client.ViewModels
                     HomeTabSelected = false;
                     TodayTabSelected = false;
                     CustomersTabSelected = false;
+                    ChatTabSelected = false;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        public bool ChatTabSelected
+        {
+            get { return _chatTabSelected; }
+            set
+            {
+                if (_chatTabSelected == value)
+                    return;
+                _chatTabSelected = value;
+                // Manage other tabs
+                if (value)
+                {
+                    HomeTabSelected = false;
+                    TodayTabSelected = false;
+                    CustomersTabSelected = false;
+                    FactorsTabSelected = false;
                 }
                 OnPropertyChanged();
             }
@@ -127,6 +152,21 @@ namespace NoorCRM.Client.ViewModels
             }
         }
         #endregion
+        #endregion
+
+        #region Messages
+        private ObservableCollection<Message> _messages = new ObservableCollection<Message>();
+        public ObservableCollection<Message> Messages
+        {
+            get => _messages;
+            set
+            {
+                if (ReferenceEquals(_messages, value))
+                    return;
+                _messages = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Products

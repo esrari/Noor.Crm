@@ -45,6 +45,7 @@
                                              IsVisible="False"
                                              HorizontalOptions="Center" 
                                              Text="تایید" 
+                                             FontFamily="{StaticResource IRANSans}"
                                              BackgroundColor="White"
                                              TextColor="Black"
                                              Clicked="MaterialButton_Clicked"/>
@@ -56,10 +57,11 @@
                                  HorizontalOptions="Center">
                         <Label x:Name="lblnet" 
                                Text="شما به اینترنت متصل نیستید"
-                               IsVisible="True"
+                               IsVisible="False"
                                FontFamily="{StaticResource IRANSans}"
                                FontSize="Body"/>
                         <Frame x:Name ="lblRefresh"  
+                               IsVisible="False"
                                CornerRadius="5" 
                                BackgroundColor="{StaticResource Primary}" 
                                Padding="1" 

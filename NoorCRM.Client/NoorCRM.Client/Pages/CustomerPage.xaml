@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d" Title="{Binding Title}"
-             x:Class="NoorCRM.Client.Pages.CustomerPage"
+             x:Class="NoorCRM.Client.Pages.CustomerPage" Appearing="ContentPage_Appearing"
+             Disappearing="ContentPage_Disappearing"
              BackgroundColor="{StaticResource BodyBackgroundColor}">
     <Grid>
         <StackLayout>

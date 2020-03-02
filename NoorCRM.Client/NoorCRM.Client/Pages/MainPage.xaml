@@ -22,17 +22,15 @@
         <!--Contents-->
         <Grid Grid.Row="0">
             <!--Home Tab-->
-            <local:HomeView x:Name="homeTab" 
-                            IsVisible="{Binding HomeTabSelected}"/>
+            <local:HomeView IsVisible="{Binding HomeTabSelected}"/>
             <!--Today Tab-->
-            <local:TodayView x:Name="todayTab" 
-                            IsVisible="{Binding TodayTabSelected}"/>
+            <local:TodayView IsVisible="{Binding TodayTabSelected}"/>
             <!--Customers Tab-->
-            <local:CustomersView x:Name="customersTab" 
-                            IsVisible="{Binding CustomersTabSelected}"/>
+            <local:CustomersView IsVisible="{Binding CustomersTabSelected}"/>
             <!--Factors Tab-->
-            <local:FactorsView x:Name="factorsTab" 
-                            IsVisible="{Binding FactorsTabSelected}"/>
+            <local:FactorsView IsVisible="{Binding FactorsTabSelected}"/>
+            <!--Chat Tab-->
+            <local:ChatView IsVisible="{Binding ChatTabSelected}"/>
         </Grid>
         <!--Bottom Tabs-->
         <material:MaterialCard Elevation="5" 
@@ -46,6 +44,7 @@
               HorizontalOptions="Fill"
               BindableLayout.ItemsSource="{Binding BottomMenuItems}">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

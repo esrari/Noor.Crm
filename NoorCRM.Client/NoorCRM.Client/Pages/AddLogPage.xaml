@@ -8,12 +8,15 @@
              x:Class="NoorCRM.Client.Pages.AddLogPage">
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
         <material:MaterialButton x:Name="btnComment" 
+                                 FontFamily="{StaticResource IRANSans}"
                                  Text="توضیح" 
                                  Clicked="btnComment_Clicked"/>
         <material:MaterialButton x:Name="btnSuccessful" 
+                                 FontFamily="{StaticResource IRANSans}"
                                  Text="فاکتور" 
                                  Clicked="BtnSuccessful_Clicked"/>
         <material:MaterialButton x:Name="btnFailed" 
+                                 FontFamily="{StaticResource IRANSans}"
                                  Text="عدم خرید" 
                                  Clicked="btnFailed_Clicked"/>
     </StackLayout>

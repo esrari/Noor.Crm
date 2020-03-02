@@ -11,4 +11,6 @@
     <x:String x:Key="Reminder">&#xf88b;</x:String>
     <x:String x:Key="Up">&#xf063;</x:String>
     <x:String x:Key="Down">&#xf04b;</x:String>
+    <x:String x:Key="Send">&#xf48a;</x:String>
+    <x:String x:Key="Check">&#xf12c;</x:String>
 </ResourceDictionary>

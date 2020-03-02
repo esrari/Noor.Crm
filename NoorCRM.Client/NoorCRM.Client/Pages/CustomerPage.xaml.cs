@@ -28,8 +28,7 @@ namespace NoorCRM.Client.Pages
         {
             InitializeComponent();
             _customer = customer;
-            if (Application.Current.Resources.TryGetValue("Secondary", out var secColor))
-                App.NavigationPage.BarBackgroundColor = (Color)secColor;
+
             App.ApiService.CustomerLogsFetched += ApiService_CustomerLogsFetched;
             _ = App.ApiService.GetCustomerLogsAync(customer.Id, 20, 0);
 
@@ -160,7 +159,7 @@ namespace NoorCRM.Client.Pages
             {
                 var confirm = await MaterialDialog.Instance.ConfirmAsync(message: "آیا از حذف این مشتری مطمئن هستید؟",
                                     confirmingText: "بله",
-                                    dismissiveText: "خیر");
+                                    dismissiveText: "خیر").ConfigureAwait(true);
 
                 if (confirm.HasValue && confirm.Value)
                 {
@@ -170,6 +169,10 @@ namespace NoorCRM.Client.Pages
                         var cust = App.MainViewModel.Customers.Where(c => c.Id == _customer.Id).FirstOrDefault();
                         if (cust != null)
                             App.MainViewModel.Customers.Remove(cust);
+                        // remove from reminder list
+                        var tcu = App.MainViewModel.TodayCustomers.Where(c => c.Id == _customer.Id).FirstOrDefault();
+                        if (tcu != null)
+                            App.MainViewModel.TodayCustomers.Remove(tcu);
                         await MaterialDialog.Instance.SnackbarAsync(message: "مشتری مورد نظر حذف شد.",
                             msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
                         await App.NavigationPage.Navigation.PopAsync().ConfigureAwait(false);
@@ -244,6 +247,17 @@ namespace NoorCRM.Client.Pages
 
                 }
             }
+        }
+
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
+            if (Application.Current.Resources.TryGetValue("Secondary", out var secColor))
+                App.NavigationPage.BarBackgroundColor = (Color)secColor;
+        }
+
+        private void ContentPage_Disappearing(object sender, EventArgs e)
+        {
+            App.NavigationPage.BarBackgroundColor = Color.White;
         }
     }
 

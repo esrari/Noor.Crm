@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.SubmitCommentPage" FlowDirection="RightToLeft">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="btnSubmit" IconImageSource="{Binding IconSource}" Clicked="Submit_Clicked"/>
+        <ToolbarItem x:Name="btnSubmit" IconImageSource="{Binding IconSource}" Text="تایید" Clicked="Submit_Clicked"/>
     </ContentPage.ToolbarItems>
     <Grid>
         <StackLayout>
@@ -23,7 +23,7 @@
                 <Picker x:Name="picImportance" 
                         Style="{StaticResource picker}" 
                         HorizontalOptions="Center"
-                        Title="درجه اهمیت"/>
+                        Title="انتخاب کنید" />
             </StackLayout>
             <Editor Style="{StaticResource NormalEditor}"
                     x:Name="txtComment"

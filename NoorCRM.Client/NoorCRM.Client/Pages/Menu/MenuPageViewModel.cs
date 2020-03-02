@@ -14,7 +14,6 @@ namespace NoorCRM.Client.Pages.Menu
         #region Properties
         private string _userTitle;
         private string _userPhoneNo;
-        private double _userAccountBalance = 0;
 
         public string UserTitle
         {
@@ -36,17 +35,6 @@ namespace NoorCRM.Client.Pages.Menu
                 if (_userPhoneNo == value)
                     return;
                 _userPhoneNo = value;
-                OnPropertyChanged();
-            }
-        }
-        public double UserAccountBalance
-        {
-            get => _userAccountBalance;
-            set
-            {
-                if (_userAccountBalance == value)
-                    return;
-                _userAccountBalance = value;
                 OnPropertyChanged();
             }
         }

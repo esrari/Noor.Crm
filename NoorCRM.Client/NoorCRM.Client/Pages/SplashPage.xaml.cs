@@ -23,7 +23,7 @@ namespace NoorCRM.Client.Pages
             InitializeComponent();
 
             App.ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
-            _ = getUserPhoneNoAsync();
+            _ = getUserPassAsync();
         }
 
         public SplashPage(User user)
@@ -34,7 +34,7 @@ namespace NoorCRM.Client.Pages
             else
             {
                 App.ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
-                _ = getUserPhoneNoAsync();
+                _ = getUserPassAsync();
             }
         }
 
@@ -56,7 +56,7 @@ namespace NoorCRM.Client.Pages
             App.MainViewModel.TodayCustomers = new ObservableCollection<Customer>(await App.ApiService.GetUserTodayCustomersAsync().ConfigureAwait(true));
             App.MainViewModel.Products = new ObservableCollection<Product>(await App.ApiService.GetAllProductsAsync().ConfigureAwait(false));
             App.MainViewModel.LastFactors = new ObservableCollection<Factor>(await App.ApiService.GetLastVisitorFactorsAsync(user.Id, 20).ConfigureAwait(false));
-            App.AddItemPage = new AddFactorItemPage();
+            App.MainViewModel.Messages = new ObservableCollection<Message>(await App.ApiService.GetNewMessagesAsync(20).ConfigureAwait(false));
 
             // Set first city if exist as default city
             if (user.VisitCities != null && user.VisitCities.Count > 0)
@@ -67,7 +67,7 @@ namespace NoorCRM.Client.Pages
             await App.NavigationPage.Navigation.PopModalAsync().ConfigureAwait(false);
         }
 
-        private async Task getUserPhoneNoAsync()
+        private async Task getUserPassAsync()
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
@@ -143,7 +143,7 @@ namespace NoorCRM.Client.Pages
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            await getUserPhoneNoAsync().ConfigureAwait(false);
+            await getUserPassAsync().ConfigureAwait(false);
         }
 
         private void ContentPage_Appearing(object sender, EventArgs e)

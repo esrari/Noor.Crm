@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.ChatView" PropertyChanged="ContentView_PropertyChanged">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <local:MessageListUC x:Name="lstMessages" Grid.Row="0" Messages="{Binding Messages}"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Column="0" x:Name ="lblSend"  
+                       CornerRadius="5" 
+                       Padding="0"                      
+                       HasShadow="False">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="lblSend_Tapped"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="{StaticResource Send}"
+                           Margin="0, 0, 5, 0"
+                           Style="{StaticResource LargeMaterialIcons}"
+                           TextColor="{StaticResource Primary}"/>
+                </Frame>
+                <Editor Grid.Column="1" x:Name="txtMessage" 
+                        Style="{StaticResource SmallEditor}"
+                        PlaceholderColor="Gray"
+                        AutoSize="TextChanges"
+                        Placeholder="چیزی بنویسید"/>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

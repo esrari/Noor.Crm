@@ -13,12 +13,22 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <material:MaterialTextField x:Name="txtSearch" 
+            <Grid Grid.Row="0"
+                  Margin="5, 0, 5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <material:MaterialTextField x:Name="txtSearch"
+                                            Grid.Column="0"
                                             Style="{StaticResource MaterialTextBox}"
-                                            Margin="10, 0, 10, 0"
+                                            Margin="5, 0, 5, -25"
                                             Placeholder="جستجو در مشتریان"
                                             TextChanged="txtSearch_TextChanged"/>
+                <material:MaterialChip Text="{Binding Customers.Count, StringFormat='تعداد: {0}'}"
+                                       Grid.Column="1"
+                                       VerticalOptions="End"
+                                       Style="{StaticResource chipTel}"/>
             </Grid>
             <local:CustomersListUC x:Name="listCustomer" Grid.Row="1" Customers="{Binding Customers}"/>
         </Grid>

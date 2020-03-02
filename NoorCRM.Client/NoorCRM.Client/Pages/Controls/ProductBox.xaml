@@ -36,19 +36,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Text="نقد" Style="{StaticResource SmallLabel}"/>
-            <Frame Grid.Row="0" Grid.Column="1" x:Name="btnPrice1">
+            <Frame Grid.Row="0" Grid.Column="1" x:Name="btnPrice1" HasShadow="False">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice1_Clicked"/>
                 </Frame.GestureRecognizers>
                     <Label Text="{Binding Price1, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
-            <Frame Grid.Row="0" Grid.Column="2" x:Name="btnPrice2">
+                <Frame Grid.Row="0" Grid.Column="2" x:Name="btnPrice2" HasShadow="False">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice2_Clicked"/>
                 </Frame.GestureRecognizers>
                     <Label Text="{Binding Price2, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
-            <Frame Grid.Row="0" Grid.Column="3" x:Name="btnPrice3">
+                <Frame Grid.Row="0" Grid.Column="3" x:Name="btnPrice3" HasShadow="False">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice3_Clicked"/>
                 </Frame.GestureRecognizers>
@@ -57,19 +57,19 @@
             <!--<material:MaterialButton Grid.Row="0" Grid.Column="2" x:Name="btnPrice2" Text="{Binding Price2}" Clicked="BtnPrice2_Clicked"/>
             <material:MaterialButton Grid.Row="0" Grid.Column="3" x:Name="btnPrice3" Text="{Binding Price3}" Clicked="BtnPrice3_Clicked"/>-->
             <Label Grid.Row="1" Grid.Column="0" Text="شرایطی" Style="{StaticResource SmallLabel}"/>
-            <Frame Grid.Row="1" Grid.Column="1" x:Name="btnPrice1ch">
+                <Frame Grid.Row="1" Grid.Column="1" x:Name="btnPrice1ch" HasShadow="False">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice1ch_Clicked"/>
                 </Frame.GestureRecognizers>
                     <Label Text="{Binding Price1ch, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
-            <Frame Grid.Row="1" Grid.Column="2" x:Name="btnPrice2ch">
+                <Frame Grid.Row="1" Grid.Column="2" x:Name="btnPrice2ch" HasShadow="False">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnPrice2ch_Clicked"/>
                 </Frame.GestureRecognizers>
                     <Label Text="{Binding Price2ch, Converter={StaticResource PriceCommaConvert}}" HorizontalOptions="Center"/>
             </Frame>
-                <Frame Grid.Row="1" Grid.Column="3" x:Name="btnPrice3ch">
+                <Frame Grid.Row="1" Grid.Column="3" x:Name="btnPrice3ch" HasShadow="False">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="BtnPrice3ch_Clicked"/>
                     </Frame.GestureRecognizers>

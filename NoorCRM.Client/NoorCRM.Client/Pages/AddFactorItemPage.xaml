@@ -12,6 +12,7 @@
             <material:MaterialTextField x:Name="txtSearch" 
                                         Style="{StaticResource MaterialTextBox}"
                                         Placeholder="جستجو"
+                                        Margin="10, 0, 10, 0"
                                         TextChanged="TxtSearch_TextChanged"/>
             <local:ProductsUC x:Name="productList"/>
         </StackLayout>

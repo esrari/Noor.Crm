@@ -31,19 +31,18 @@ namespace NoorCRM.Client.Pages.Controls
                 BindingMode.TwoWay,
                 propertyChanged: HandleCustomersChanged);
 
-        private static RemiderListUC cluc;
         private static ObservableCollection<CustomerCardInfo> cardInfos;
         private static async void HandleCustomersChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var customers = newValue as ObservableCollection<Customer>;
-            customers.CollectionChanged += Customers_CollectionChanged;
             if (customers != null)
             {
+                customers.CollectionChanged += Customers_CollectionChanged;
                 cardInfos = new ObservableCollection<CustomerCardInfo>();
                 foreach (var c in customers)
                     cardInfos.Add(new CustomerCardInfo(c, App.NavigationPage.Navigation));
 
-                cluc = (RemiderListUC)bindable;
+                var cluc = (RemiderListUC)bindable;
                 BindableLayout.SetItemsSource(cluc.stkContainer, cardInfos);
                 await Task.Delay(3).ConfigureAwait(true);
                 await cluc.scvScroller.ScrollToAsync(cluc.stkContainer, ScrollToPosition.Start, false).ConfigureAwait(false);

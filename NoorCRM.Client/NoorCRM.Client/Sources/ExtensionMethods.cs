@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -9,6 +10,18 @@ namespace NoorCRM.Client.Sources
 {
     public static class ExtensionMethods
     {
+        public static bool Replace<T>(this ObservableCollection<T> collection, T oldItem, T newItem)
+        {
+            if (collection != null && oldItem != null && newItem != null)
+                if (collection.Contains(oldItem))
+                {
+                    collection[collection.IndexOf(oldItem)] = newItem;
+                    return true;
+                }
+
+            return false;
+        }
+
         public static ImageSource ToImageSource(this byte[] bytes)
         {
             if (bytes == null)

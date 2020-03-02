@@ -4,11 +4,20 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.TodayView">
   <ContentView.Content>
         <Grid>
-            <local:RemiderListUC Customers="{Binding TodayCustomers}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <material:MaterialChip Text="{Binding TodayCustomers.Count, StringFormat='تعداد: {0}'}"
+                           HorizontalOptions="End"
+                           Style="{StaticResource chipTel}"
+                           Margin="10, 0, 10, 0"/>
+            <local:RemiderListUC Grid.Row="1" Customers="{Binding TodayCustomers}"/>
         </Grid>
     </ContentView.Content>
 </ContentView>

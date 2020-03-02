@@ -38,7 +38,7 @@
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
-    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <MandroidI18n />
     <AndroidSupportedAbis>x86;x86_64</AndroidSupportedAbis>
     <AndroidKeyStore>false</AndroidKeyStore>

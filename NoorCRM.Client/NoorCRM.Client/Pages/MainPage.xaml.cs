@@ -45,6 +45,11 @@ namespace NoorCRM.Client
         {
             if (!App.MainViewModel.SplashScreenSuccessfulClosed)
                 Environment.Exit(0);
+            else
+                Task.Run(new Action(() =>
+                {
+                    App.AddItemPage = new AddFactorItemPage();
+                }));
         }
 
         private void MainViewModel_HomeTabShowed(object sender, PropertyChangedEventArgs e)
@@ -98,6 +103,14 @@ namespace NoorCRM.Client
                     TapCommand = new Command(OnFactorsTapped),
                     GridColumnIndex = 3
                 },
+                new BottomMenuItem()
+                {
+                    Title = "گفتگو",
+                    Icon = MaterialIcons.ChatOutline,
+                    TextColor = bottomMenuNormalColor,
+                    TapCommand = new Command(OnChatTapped),
+                    GridColumnIndex = 4
+                },
             };
         }
 
@@ -123,6 +136,12 @@ namespace NoorCRM.Client
         {
             setBottomMenuSelectedItem(3);
             MainViewModel.FactorsTabSelected = true;
+        }
+
+        private void OnChatTapped()
+        {
+            setBottomMenuSelectedItem(4);
+            MainViewModel.ChatTabSelected = true;
         }
 
         private void setBottomMenuSelectedItem(int selectedIndex)
