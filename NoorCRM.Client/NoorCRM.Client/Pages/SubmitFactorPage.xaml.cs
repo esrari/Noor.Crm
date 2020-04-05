@@ -19,6 +19,7 @@ namespace NoorCRM.Client.Pages
         private readonly Customer _customer;
         private FactorViewModel _viewModel;
         public event PageClosedEventHandler PageClosed;
+        public event FactorDeletedEventHandler FactorDeleted;
         bool _inProccess = false;
 
         public SubmitFactorPage(Customer customer)
@@ -29,10 +30,15 @@ namespace NoorCRM.Client.Pages
             BindingContext = _viewModel;
 
             if (!_viewModel.EditPossible)
+            {
                 _viewModel.IconSource = "empty.png";
+                _viewModel.DeleteIconSource = "empty.png";
+            }
             else
+            {
                 _viewModel.IconSource = "submit.png";
-
+                _viewModel.DeleteIconSource = "empty.png";
+            }
             App.AddItemPage.ProductSelected += AddItemPage_ProductSelected;
         }
 
@@ -42,6 +48,18 @@ namespace NoorCRM.Client.Pages
             _customer = factor?.Customer;
             _viewModel = new FactorViewModel(factor);
             BindingContext = _viewModel;
+
+            if (!_viewModel.EditPossible)
+            {
+                _viewModel.IconSource = "empty.png";
+                _viewModel.DeleteIconSource = "empty.png";
+            }
+            else
+            {
+                _viewModel.IconSource = "submit.png";
+                _viewModel.DeleteIconSource = "delete.png";
+            }
+            App.AddItemPage.ProductSelected += AddItemPage_ProductSelected;
         }
 
         private void BtnAddItem_Clicked(object sender, EventArgs e)
@@ -129,9 +147,54 @@ namespace NoorCRM.Client.Pages
             await App.NavigationPage.Navigation.PopAsync().ConfigureAwait(false);
         }
 
+        private async void Delete_Clicked(object sender, EventArgs e)
+        {
+            if (_inProccess)
+                return;
+
+            if (_viewModel.Status != FactorStatus.New)
+                return;
+
+            var confirm = await MaterialDialog.Instance.ConfirmAsync(message: "آیا از حذف این فاکتور مطمئن هستید؟",
+                    confirmingText: "بله",
+                    dismissiveText: "خیر").ConfigureAwait(true);
+
+            if (confirm.HasValue && confirm.Value)
+            {
+                _inProccess = true;
+                var factorId = _viewModel.GetFactorId();
+
+                if (factorId != 0)
+                {
+                    bool result = await App.ApiService.DeleteFactorAndLogAsync(factorId).ConfigureAwait(true);
+                    if (result)
+                    {
+                        var fact = App.MainViewModel.LastFactors.FirstOrDefault(f => f.Id == factorId);
+                        if (fact != null)
+                            App.MainViewModel.LastFactors.Remove(fact);
+                        OnFactorDeleted(fact);
+                        await MaterialDialog.Instance.SnackbarAsync(message: "حذف فاکتور با موفقیت انجام شد.",
+                            msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                    }
+                    else
+                    {
+                        await MaterialDialog.Instance.SnackbarAsync(message: "حذف فاکتور با مشکل مواجه شد.",
+                            msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                    }
+                }
+
+                await App.NavigationPage.Navigation.PopAsync().ConfigureAwait(false);
+            }
+        }
+
         private void OnPageClosed(bool successful, SuccessfulLog log)
         {
             PageClosed?.Invoke(successful, log);
+        }
+
+        private void OnFactorDeleted(Factor factor)
+        {
+            FactorDeleted?.Invoke(factor);
         }
 
         private void txtQuantity_Focused(object sender, FocusEventArgs e)

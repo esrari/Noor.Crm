@@ -9,7 +9,8 @@
              FlowDirection="RightToLeft"
              BackgroundColor="{StaticResource BodyBackgroundColor}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="btnSubmit" IconImageSource="{Binding IconSource}" Text="تایید" Clicked="Submit_Clicked"/>
+        <ToolbarItem x:Name="btnDelete" IconImageSource="{Binding DeleteIconSource}" Clicked="Delete_Clicked"/>
+        <ToolbarItem x:Name="btnSubmit" IconImageSource="{Binding IconSource}" Clicked="Submit_Clicked"/>
     </ContentPage.ToolbarItems>
     <Grid>
         <StackLayout Spacing="2">

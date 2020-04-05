@@ -19,6 +19,7 @@ namespace NoorCRM.Client.ViewModels
         private string _description;
         private bool _editMode = false;
         private string _iconSource;
+        private string _deleteIconSource;
         private readonly Factor _factorForEdit;
 
         public int Id { get; set; }
@@ -30,6 +31,17 @@ namespace NoorCRM.Client.ViewModels
                 if (_iconSource == value)
                     return;
                 _iconSource = value;
+                OnPropertyChanged();
+            }
+        }        
+        public string DeleteIconSource
+        {
+            get => _deleteIconSource;
+            set
+            {
+                if (_deleteIconSource == value)
+                    return;
+                _deleteIconSource = value;
                 OnPropertyChanged();
             }
         }
@@ -103,7 +115,7 @@ namespace NoorCRM.Client.ViewModels
         public void AddItem(FactorItemViewModel item)
         {
             item.DeleteCommandRaise += Item_DeleteCommandRaise;
-            item.PriceChanged += Item_PriceChanged;
+            item.PriceChanged += Item_PriceChanged;  
             FactorItems.Add(item);
             OnPropertyChanged(nameof(TotalPrice));
         }
@@ -122,19 +134,31 @@ namespace NoorCRM.Client.ViewModels
             }));
         }
 
+        public int GetFactorId()
+        {
+            if (_editMode)
+                return _factorForEdit.Id;
+            return 0;
+        }
+
         public Factor GetSubmitedFactor()
         {
             var itemList = new List<FactorItem>();
             foreach (var item in FactorItems)
             {
                 if (item.Quantity > 0)
-                    itemList.Add(new FactorItem()
+                {
+                    var fi = new FactorItem()
                     {
                         ProductId = item.Product.Id,
                         Product = item.Product,
                         Quantity = item.Quantity,
-                        SelectedPrice = item.SelectedPrice
-                    });
+                        SelectedPrice = item.SelectedPrice,
+                    };
+                    itemList.Add(fi);
+                    if (_editMode)
+                        fi.FactorId = _factorForEdit.Id;
+                }
             }
 
             Factor fac;

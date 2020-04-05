@@ -57,4 +57,5 @@ namespace NoorCRM.Client.Pages
     }
 
     public delegate void PageClosedEventHandler(bool successful, CustomerLog log);
+    public delegate void FactorDeletedEventHandler(Factor factor);
 }
