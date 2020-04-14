@@ -1,12 +1,15 @@
 ﻿using NoorCRM.API.Helpers;
 using NoorCRM.API.Models;
+using NoorCRM.Client.Sources;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using XF.Material.Forms.UI.Dialogs;
 
@@ -15,7 +18,7 @@ namespace NoorCRM.Client.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateCustomerPage : ContentPage
     {
-        private CreateCustomerViewModel _createCustomerViewModel;
+        private EditCustomerViewModel _createCustomerViewModel;
         private readonly Customer _customer;
         private bool _isEdit = false;
 
@@ -28,7 +31,7 @@ namespace NoorCRM.Client.Pages
             var cities = from city in App.MainViewModel.OnlineUser.VisitCities
                          select city.Name;
             picCities.ItemsSource = new List<string>(cities);
-            _createCustomerViewModel = new CreateCustomerViewModel()
+            _createCustomerViewModel = new EditCustomerViewModel()
             { CityName = App.MainViewModel.DefaultCity?.Name };
             BindingContext = _createCustomerViewModel;
         }
@@ -38,12 +41,42 @@ namespace NoorCRM.Client.Pages
             InitializeComponent();
             _customer = customer;
             _isEdit = true;
+            if (customer != null)
+            {
+                var cities = from city in App.MainViewModel.OnlineUser.VisitCities
+                             select city.Name;
+                picCities.ItemsSource = new List<string>(cities);
+                _createCustomerViewModel = new EditCustomerViewModel(customer);
+                BindingContext = _createCustomerViewModel;
 
-            var cities = from city in App.MainViewModel.OnlineUser.VisitCities
-                         select city.Name;
-            picCities.ItemsSource = new List<string>(cities);
-            _createCustomerViewModel = new CreateCustomerViewModel(customer);
-            BindingContext = _createCustomerViewModel;
+                if (customer.HasLocation)
+                {
+                    setLocation(new Position(customer.Latitude, customer.Longitude));
+                    btnLocation.Text = "تغییر موقعیت";
+                }
+            }
+        }
+
+        private void setLocation(Position? position)
+        {
+            var pins = new ObservableCollection<Pin>();
+            if (position.HasValue)
+            {
+                pins.Add(new Pin()
+                {
+                    Position = position.Value,
+                    Address = _customer.Address,
+                    Label = _customer.CreateCustomerTitle()
+                });
+                map.IsVisible = true;
+                btnLocation.Text = "تغییر موقعیت";
+            }
+            else
+            {
+                map.IsVisible = false;
+                btnLocation.Text = "ثبت موقعیت";
+            }
+            map.Pins = pins;
         }
 
         private async void BtnSave_Clicked(object sender, EventArgs e)
@@ -71,14 +104,38 @@ namespace NoorCRM.Client.Pages
             App.NavigationPage.Navigation.PopModalAsync();
         }
 
-        private void OnCustomerEditDone(CreateCustomerViewModel newCustomer)
+        private void OnCustomerEditDone(EditCustomerViewModel newCustomer)
         {
             CustomerEditDone?.Invoke(newCustomer);
         }
 
+        AddPinPage _pinPage;
+        private void btnLocation_Clicked(object sender, EventArgs e)
+        {
+            if (_customer.HasLocation)
+                _pinPage = new AddPinPage(new Position(_customer.Latitude, _customer.Longitude));
+            else
+                _pinPage = new AddPinPage();
+
+            _pinPage.Disappearing += PinPage_Disappearing;
+            App.NavigationPage.Navigation.PushModalAsync(_pinPage);
+        }
+
+        private void PinPage_Disappearing(object sender, EventArgs e)
+        {
+            if (_pinPage.PageSubmitted)
+            {
+                setLocation(_pinPage.Position);
+                if (_pinPage.Position.HasValue)
+                {
+                    _customer.HasLocation = true;
+                    _customer.Latitude = _pinPage.Position.Value.Latitude;
+                    _customer.Longitude = _pinPage.Position.Value.Longitude;
+            } }
+        }
     }
 
-    public class CreateCustomerViewModel
+    public class EditCustomerViewModel
     {
         public bool IsAccepted { get; set; }
         public string CustomerName { get; set; }
@@ -92,12 +149,16 @@ namespace NoorCRM.Client.Pages
         public string PhoneNo3 { get; set; }
         public string PhoneTitle3 { get; set; }
 
-        public CreateCustomerViewModel()
+        public bool HasLocation { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
+        public EditCustomerViewModel()
         {
             IsAccepted = false;
         }
 
-        public CreateCustomerViewModel(Customer customer)
+        public EditCustomerViewModel(Customer customer)
         {
             IsAccepted = false;
 
@@ -117,7 +178,7 @@ namespace NoorCRM.Client.Pages
                             PhoneTitle1 = numbers[i].Title;
                             PhoneNo1 = numbers[i].Number;
                         }
-                        else if(i==1)
+                        else if (i == 1)
                         {
                             PhoneTitle2 = numbers[i].Title;
                             PhoneNo2 = numbers[i].Number;
@@ -129,9 +190,13 @@ namespace NoorCRM.Client.Pages
                         }
                     }
                 }
+
+                HasLocation = customer.HasLocation;
+                Latitude = customer.Latitude;
+                Longitude = customer.Longitude;
             }
         }
     }
 
-    public delegate void CustomerCreatedEventHandler(CreateCustomerViewModel newCustomer);
+    public delegate void CustomerCreatedEventHandler(EditCustomerViewModel newCustomer);
 }

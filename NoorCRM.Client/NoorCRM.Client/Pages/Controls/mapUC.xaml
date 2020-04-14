@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.Controls.mapUC">
+    <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+        <map:Map x:Name="map"/>
+        <Slider Margin="40,0,5,0"
+                Maximum="18"
+                Minimum="1"
+                Value="12"
+                VerticalOptions="End"
+                ValueChanged="OnSliderValueChanged" />
+    </Grid>
+</ContentView>

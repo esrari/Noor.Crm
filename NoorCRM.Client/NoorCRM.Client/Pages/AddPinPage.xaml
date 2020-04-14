@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.AddPinPage" FlowDirection="RightToLeft">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <map:Map x:Name="map" 
+                     Grid.Row="0" 
+                     IsShowingUser="True"
+                     MapClicked="map_MapClicked" />
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="End" 
+                         Grid.Row="1"
+                         Margin="10">
+                <material:MaterialButton x:Name="btnCancel" 
+                                         Style="{StaticResource CancelButton}"
+                                         Text="انصراف"
+                                         Clicked="BtnCancel_Clicked"/>
+                <material:MaterialButton x:Name="btnRemove" 
+                                         Style="{StaticResource CancelButton}"
+                                         Text="حذف"
+                                         Clicked="btnRemove_Clicked"/>
+                <material:MaterialButton x:Name="btnSave" 
+                                         IsEnabled="False"
+                                         Style="{StaticResource SaveButton}"
+                                         Text="تایید"
+                                         Clicked="BtnSave_Clicked"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

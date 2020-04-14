@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:controls="clr-namespace:NoorCRM.Client.Pages.Controls"
+             mc:Ignorable="d"
+             FlowDirection="RightToLeft"
+             x:Class="NoorCRM.Client.Pages.CustomerInfoPage">
+    <Grid>
+        <ScrollView InputTransparent="True">
+            <StackLayout Padding="10">
+                <Label Text="مشخصات" 
+                       Style="{StaticResource NormalLabel}" 
+                       Margin="0, 5, 0, 0" 
+                       TextColor="{StaticResource Secondary}"/>
+                <Frame Padding="10, 0, 10, 0" 
+                       HasShadow="False" 
+                       BorderColor="{StaticResource SecondaryLight}"
+                       BackgroundColor="{StaticResource BackgroundGrayColor}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="نام مشتری:" Style="{StaticResource SmallLabel}"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding CustomerName}" Style="{StaticResource NormalLabel}"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="نام فروشگاه:" Style="{StaticResource SmallLabel}"/>
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding StoreName}" Style="{StaticResource NormalLabel}"/>
+                    </Grid>
+                </Frame>
+                <Label Text="موقعیت" 
+                       Style="{StaticResource NormalLabel}" 
+                       Margin="0, 5, 0, 0" 
+                       TextColor="{StaticResource Secondary}"/>
+                <Frame Padding="10, 0, 10, 10" 
+                       HasShadow="False" 
+                       BorderColor="{StaticResource SecondaryLight}"
+                       BackgroundColor="{StaticResource BackgroundGrayColor}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="شهر:" Style="{StaticResource SmallLabel}"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding CityName}" Style="{StaticResource NormalLabel}"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="آدرس:" Style="{StaticResource SmallLabel}"/>
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Address}" Style="{StaticResource NormalLabel}"/>
+                        <controls:mapUC x:Name="map" 
+                                        IsVisible="{Binding HasLocation}"
+                                        Grid.Column="0" 
+                                        Grid.Row="2" 
+                                        Grid.ColumnSpan="2" 
+                                        HeightRequest="300"/>
+                    </Grid>
+                </Frame>
+                <Label Text="تلفن" 
+                       Style="{StaticResource NormalLabel}" 
+                       Margin="0, 5, 0, 0" 
+                       TextColor="{StaticResource Secondary}"/>
+                <Frame Padding="10, 0, 10, 0" 
+                       HasShadow="False" 
+                       BorderColor="{StaticResource SecondaryLight}"
+                       BackgroundColor="{StaticResource BackgroundGrayColor}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="{Binding PhoneTitle1, StringFormat='{0}:'}" Style="{StaticResource SmallLabel}"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding PhoneNo1}" Style="{StaticResource NormalLabel}"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="{Binding PhoneTitle2, StringFormat='{0}:'}" Style="{StaticResource SmallLabel}"/>
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding PhoneNo2}" Style="{StaticResource NormalLabel}"/>
+                        <Label Grid.Column="0" Grid.Row="2" Text="{Binding PhoneTitle3, StringFormat='{0}:'}" Style="{StaticResource SmallLabel}"/>
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding PhoneNo3}" Style="{StaticResource NormalLabel}"/>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

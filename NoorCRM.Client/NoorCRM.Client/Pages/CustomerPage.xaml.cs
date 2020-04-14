@@ -29,10 +29,13 @@ namespace NoorCRM.Client.Pages
             InitializeComponent();
             _customer = customer;
 
-            App.ApiService.CustomerLogsFetched += ApiService_CustomerLogsFetched;
-            _ = App.ApiService.GetCustomerLogsAync(customer.Id, 20, 0);
+            if (customer != null)
+            {
+                App.ApiService.CustomerLogsFetched += ApiService_CustomerLogsFetched;
+                _ = App.ApiService.GetCustomerLogsAync(customer.Id, 20, 0);
 
-            _viewModel = new CustomerViewModel(customer);
+                _viewModel = new CustomerViewModel(customer);
+            }
             BindingContext = _viewModel;
         }
 
@@ -81,7 +84,7 @@ namespace NoorCRM.Client.Pages
             App.NavigationPage.Navigation.PushModalAsync(editCustomerPage);
         }
 
-        private async void EditCustomerPage_CustomerEditDone(CreateCustomerViewModel newCustomer)
+        private async void EditCustomerPage_CustomerEditDone(EditCustomerViewModel newCustomer)
         {
             var city = App.MainViewModel.OnlineUser.VisitCities
                 .Where(vc => vc.Name == newCustomer.CityName)
@@ -258,6 +261,12 @@ namespace NoorCRM.Client.Pages
         private void ContentPage_Disappearing(object sender, EventArgs e)
         {
             App.NavigationPage.BarBackgroundColor = Color.White;
+        }
+
+        private void CustomerInfo_Tapped(object sender, EventArgs e)
+        {
+            var customerInfoPage = new CustomerInfoPage(_customer);
+            App.NavigationPage.Navigation.PushModalAsync(customerInfoPage);
         }
     }
 

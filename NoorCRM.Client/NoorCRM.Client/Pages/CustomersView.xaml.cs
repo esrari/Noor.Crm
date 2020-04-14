@@ -55,7 +55,7 @@ namespace NoorCRM.Client.Pages
             App.NavigationPage.Navigation.PushModalAsync(addCustomerPage);
         }
 
-        private async void AddCustomerPage_CustomerEditDone(CreateCustomerViewModel newCustomer)
+        private async void AddCustomerPage_CustomerEditDone(EditCustomerViewModel newCustomer)
         {
             var city = App.MainViewModel.OnlineUser.VisitCities
                     .Where(vc => vc.Name == newCustomer.CityName)

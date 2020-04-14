@@ -18,7 +18,7 @@
                             Text="{Binding Tel}"
                             Style="{StaticResource chipTel}">
                             <material:MaterialChip.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_btnEdit"/>
+                                <TapGestureRecognizer Tapped="CustomerInfo_Tapped"/>
                             </material:MaterialChip.GestureRecognizers>
                         </material:MaterialChip>
                         <material:MaterialChip
