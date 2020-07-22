@@ -103,6 +103,7 @@ namespace NoorCRM.Client.ViewModels
             _editMode = true;
             CreateDate = factor.CreateDate;
             Status = factor.Status;
+            Description = factor.Description;
             FactorItems = new ObservableCollection<FactorItemViewModel>();
             Customer = factor.Customer;
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Timers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XF.Material.Forms.UI.Dialogs;
@@ -13,16 +13,27 @@ using XF.Material.Forms.UI.Dialogs;
 namespace NoorCRM.Client.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChatView : ContentView
+    public partial class ChatView : ContentView, IDisposable
     {
         private bool _checkerRun = false;
+        private Timer _timer;
         public ChatView()
         {
             InitializeComponent();
+            _timer = new Timer(5 * 60 * 1000);
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Start();
+        }
+
+        private async void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if(!_checkerRun)
+                await CheckForNewMessagesAsync().ConfigureAwait(true);
         }
 
         private async Task CheckForNewMessagesAsync()
         {
+            _checkerRun = true;
             var m = App.MainViewModel.Messages.Last(l => l.Id != 0);
             if (m.Id != 0)
             {
@@ -31,8 +42,7 @@ namespace NoorCRM.Client.Pages
                     foreach (var item in messages)
                         App.MainViewModel.Messages.Add(item);
             }
-            await Task.Delay(60000).ConfigureAwait(true);
-            await CheckForNewMessagesAsync().ConfigureAwait(true);
+            _checkerRun = false;
         }
 
         private async Task sendMessageAsync(Message message = null)
@@ -83,10 +93,17 @@ namespace NoorCRM.Client.Pages
         {
             if (e.PropertyName == nameof(IsVisible))
                 if (IsVisible && !_checkerRun)
-                {
-                    _checkerRun = true;
                     await CheckForNewMessagesAsync().ConfigureAwait(true);
-                }
+        }
+
+        protected virtual void Dispose(bool type)
+        {
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            _timer.Dispose();
         }
     }
 }

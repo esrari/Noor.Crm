@@ -66,6 +66,11 @@
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidSupportedAbis />
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>D:\CO\Repos\NoorCRM.Client\noorcrm\noorcrm.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>noor123</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>noorcrm</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>noor123</AndroidSigningKeyPass>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

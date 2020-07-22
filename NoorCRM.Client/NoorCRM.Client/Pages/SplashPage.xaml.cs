@@ -53,10 +53,17 @@ namespace NoorCRM.Client.Pages
         {
             // Set AppViewModel with catched data
             App.MainViewModel.Customers = new ObservableCollection<Customer>(await App.ApiService.GetUserCustomersAsync().ConfigureAwait(true));
-            App.MainViewModel.TodayCustomers = new ObservableCollection<Customer>(await App.ApiService.GetUserTodayCustomersAsync().ConfigureAwait(true));
+            //App.MainViewModel.TodayCustomers = new ObservableCollection<Customer>(await App.ApiService.GetUserTodayCustomersAsync().ConfigureAwait(true));
             App.MainViewModel.Products = new ObservableCollection<Product>(await App.ApiService.GetAllProductsAsync().ConfigureAwait(false));
             App.MainViewModel.LastFactors = new ObservableCollection<Factor>(await App.ApiService.GetLastVisitorFactorsAsync(user.Id, 20).ConfigureAwait(false));
             App.MainViewModel.Messages = new ObservableCollection<Message>(await App.ApiService.GetNewMessagesAsync(20).ConfigureAwait(false));
+
+            // get today customers from all customers
+            SortedDictionary<DateTime, Customer> todayCustomersDict = new SortedDictionary<DateTime, Customer>();
+            foreach (Customer item in App.MainViewModel.Customers)
+                if (item.Reminder.HasValue)
+                    todayCustomersDict.Add(item.Reminder.Value, item);
+            App.MainViewModel.TodayCustomers = new ObservableCollection<Customer>(todayCustomersDict.Values);
 
             // Set first city if exist as default city
             if (user.VisitCities != null && user.VisitCities.Count > 0)

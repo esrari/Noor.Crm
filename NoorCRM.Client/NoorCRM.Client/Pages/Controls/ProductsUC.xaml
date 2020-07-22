@@ -16,10 +16,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--<BoxView Grid.Row="0" Grid.ColumnSpan="4" HeightRequest="20" BackgroundColor="LightPink"/>-->
-        <Label Grid.Row="0" Grid.Column="1" Text="عمده فروش" Style="{StaticResource SmallLabel}" TextColor="{StaticResource Secondary}"/>
+        <!--<Label Grid.Row="0" Grid.Column="1" Text="عمده فروش" Style="{StaticResource SmallLabel}" TextColor="{StaticResource Secondary}"/>
         <Label Grid.Row="0" Grid.Column="2" Text="خشکبار" Style="{StaticResource SmallLabel}" TextColor="{StaticResource Secondary}"/>
-        <Label Grid.Row="0" Grid.Column="3" Text="سوپر مارکت" Style="{StaticResource SmallLabel}" TextColor="{StaticResource Secondary}"/>
+        <Label Grid.Row="0" Grid.Column="3" Text="سوپر مارکت" Style="{StaticResource SmallLabel}" TextColor="{StaticResource Secondary}"/>-->
         <ScrollView Grid.Row="1" Grid.ColumnSpan="4" x:Name="scvScroller">
             <StackLayout x:Name="stkProducts"
                          Padding="5, 0, 5, 0"
