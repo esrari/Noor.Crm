@@ -1,4 +1,5 @@
 ﻿using NoorCRM.API.Models;
+using NoorCRM.Client.Sources;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -30,22 +31,17 @@ namespace NoorCRM.Client.Pages.Controls
                 propertyChanged: HandleCustomersChanged);
 
         private static CustomersListUC cluc;
-        private static ObservableCollection<CustomerCardInfo> cardInfos;
+        private static SortedList<string, CustomerCardInfo> cardInfos;
+        private static ObservableCollection<Customer> customers;
+        private static int selectedCity = -1;
+        private static string searchfilter = "";
         private static async void HandleCustomersChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var customers = newValue as ObservableCollection<Customer>;
+            cluc = (CustomersListUC)bindable;
+            customers = newValue as ObservableCollection<Customer>;
             customers.CollectionChanged += Customers_CollectionChanged;
             if (customers != null)
-            {
-                cardInfos = new ObservableCollection<CustomerCardInfo>();
-                foreach (var c in customers)
-                    cardInfos.Add(new CustomerCardInfo(c, App.NavigationPage.Navigation));
-
-                cluc = (CustomersListUC)bindable;
-                BindableLayout.SetItemsSource(cluc.stkContainer, cardInfos);
-                await Task.Delay(3).ConfigureAwait(true);
-                await cluc.scvScroller.ScrollToAsync(cluc.stkContainer, ScrollToPosition.Start, false).ConfigureAwait(false);
-            }
+                setToList(customers);
         }
 
         private static void Customers_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -57,7 +53,7 @@ namespace NoorCRM.Client.Pages.Controls
                 foreach (Customer item in e.NewItems)
                 {
                     var cci = new CustomerCardInfo(item, App.NavigationPage.Navigation);
-                    cardInfos.Add(cci);
+                    cardInfos.Add(getCustomerKey(item), cci);
                     cci.TapCommand.Execute(cci.Customer);
                 }
             }
@@ -65,42 +61,111 @@ namespace NoorCRM.Client.Pages.Controls
             {
                 foreach (Customer item in e.OldItems)
                 {
-                    var cust = cardInfos.Where(c => ReferenceEquals(c.Customer, item)).FirstOrDefault();
-                    if (cust != null)
-                        cardInfos.Remove(cust);
+                    var cust = cardInfos.Where(c => ReferenceEquals(c.Value.Customer, item)).FirstOrDefault();
+                    if (cust.Value != null)
+                        cardInfos.Remove(getCustomerKey(item));
                 }
             }
         }
+
+
 
         public CustomersListUC()
         {
             InitializeComponent();
         }
 
-        public void Filter(string filter)
+        public int Filter(string filter)
         {
-            if (string.IsNullOrWhiteSpace(filter))
-                foreach (var item in stkContainer.Children)
-                    item.IsVisible = true;
-            else
+            searchfilter = filter.Trim();
+            return dualFilter();
+        }
+
+        public int CityFilter(int cityId)
+        {
+            selectedCity = cityId;
+            return dualFilter();
+        }
+
+        private int dualFilter()
+        {
+            List<Customer> fcust = new List<Customer>();
+            if (string.IsNullOrWhiteSpace(searchfilter) && selectedCity == -1)
             {
-                var trimFilter = filter.Trim();
-                foreach (var item in stkContainer.Children)
+                setToList(customers);
+                return customers.Count;
+            }
+            else if (string.IsNullOrWhiteSpace(searchfilter))
+            {
+                foreach (var item in customers)
+                    if (item.CityId == selectedCity)
+                        fcust.Add(item);
+            }
+            else if (selectedCity == -1)
+            {
+                foreach (var item in customers)
                 {
-                    if (((CustomerCardInfo)item.BindingContext).Title.Contains(trimFilter))
-                        item.IsVisible = true;
-                    else item.IsVisible = false;
+                    if (item.ManagerName.Contains(searchfilter) || item.StoreName.Contains(searchfilter))
+                    {
+                        fcust.Add(item);
+                        continue;
+                    }
+                    if(item.PhoneNos != null)
+                    {
+                        foreach (var ph in item.PhoneNos)
+                            if(ph.Number!=null)
+                            {
+                                string numberEn = ph.Number.WithEnglishDigits();
+                                string filterEn = searchfilter.WithEnglishDigits();
+                                if (numberEn.Contains(filterEn))
+                                {
+                                    fcust.Add(item);
+                                    break;
+                                }
+                            }
+                    }
                 }
             }
+            else
+            {
+                foreach (var item in customers)
+                    if (item.ManagerName.Contains(searchfilter) || item.StoreName.Contains(searchfilter))
+                        if (item.CityId == selectedCity)
+                            fcust.Add(item);
+            }
+
+            setToList(fcust);
+            return fcust.Count;
         }
 
         public void RefreshItems()
         {
             if (cardInfos != null)
                 foreach (var item in cardInfos)
-                {
-                    item.CustomerChanged();
-                }
+                    item.Value.CustomerChanged();
+        }
+
+        private static void setToList(IEnumerable<Customer> customers)
+        {
+            cardInfos = new SortedList<string, CustomerCardInfo>();
+            foreach (var c in customers)
+                cardInfos.Add(getCustomerKey(c), new CustomerCardInfo(c, App.NavigationPage.Navigation));
+
+            cluc.stkContainer.ItemsSource = cardInfos.Values;
+        }
+
+        private static string getCustomerKey(Customer c)
+        {
+            return c.ManagerName + "(" + c.StoreName + ")-" + c.Id;
+        }
+
+        private void stkContainer_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+             var card = e.Item as CustomerCardInfo;
+            if(card != null)
+            {
+                card.TapCommand.Execute(card.Customer);
+            }
         }
     }
 }

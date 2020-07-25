@@ -15,7 +15,7 @@ namespace NoorCRM.Client.Pages.Controls
         public string CityName => Customer.City?.Name;
         public string Address => Customer.Address;
         public DateTime Remider => Customer.Reminder.HasValue ? Customer.Reminder.Value : DateTime.Now.AddDays(1);
-        public bool HasAnyFactor => Customer.Factors?.Count > 0;
+        public bool HasAnyFactor => Customer.HasFactor;
         public bool HasReminder => Customer.Reminder.HasValue;
 
         public ICommand TapCommand { get; set; }

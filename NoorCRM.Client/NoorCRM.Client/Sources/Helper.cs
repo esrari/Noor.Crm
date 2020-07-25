@@ -60,5 +60,35 @@ namespace NoorCRM.Client.Sources
 
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(finalLat, finalLong), Distance.FromKilometers(distance/2)));
         }
+
+        private static Dictionary<char, char> persianToEnglishDigitDict = new Dictionary<char, char>()
+        {
+            ['۰'] = '0',
+            ['۱'] = '1',
+            ['۲'] = '2',
+            ['۳'] = '3',
+            ['۴'] = '4',
+            ['۵'] = '5',
+            ['۶'] = '6',
+            ['۷'] = '7',
+            ['۸'] = '8',
+            ['۹'] = '9'
+        };
+        public static string WithEnglishDigits(this string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                return str;
+
+            string result = "";
+            foreach (char ch in str)
+            {
+                if (persianToEnglishDigitDict.ContainsKey(ch))
+                    result += persianToEnglishDigitDict[ch];
+                else
+                    result += ch;
+            }
+
+            return result;
+        }
     }
 }

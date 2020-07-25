@@ -27,6 +27,7 @@
     <Color x:Key="TextGrayColor">#aaaaaa</Color>
     <Color x:Key="Green">Green</Color>
     <Color x:Key="LightGreen">LightGreen</Color>
+    <Color x:Key="Transparent">Transparent</Color>
 
     <!--<Color x:Key="Primary">#43a047</Color>
     <Color x:Key="PrimaryDark">#00701a</Color>

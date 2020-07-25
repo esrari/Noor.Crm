@@ -105,12 +105,45 @@ namespace NoorCRM.Client.Pages
             if (e.PropertyName == "IsVisible")
             {
                 listCustomer.RefreshItems();
+                // load cities
+                if (picCities.ItemsSource == null && App.MainViewModel.OnlineUser != null)
+                {
+                    var cities = from city in App.MainViewModel.OnlineUser.VisitCities
+                                 select city;
+                    picCities.ItemsSource = cities.ToList();
+                }
             }
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            listCustomer.Filter(e.NewTextValue);
+            int count = listCustomer.Filter(e.NewTextValue);
+            setCount(count);
+        }
+
+        private void setCount(int count)
+        {
+            chipCount.Text = $"تعداد: {count}";
+        }
+
+        private void picCities_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = -1;
+            if (picCities.SelectedItem != null)
+                id = ((City)picCities.SelectedItem).Id;
+            int count = listCustomer.CityFilter(id);
+            setCount(count);
+        }
+
+
+        private void btnClearCity_Tapped(object sender, EventArgs e)
+        {
+            picCities.SelectedItem = null;
+        }
+
+        private void btnClearSearch_Tapped(object sender, EventArgs e)
+        {
+            txtSearch.Text = "";
         }
     }
 }

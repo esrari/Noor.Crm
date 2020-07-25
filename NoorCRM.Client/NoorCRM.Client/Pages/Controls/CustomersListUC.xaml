@@ -7,52 +7,36 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.Controls.CustomersListUC">
     <ContentView.Content>
-        <ScrollView x:Name="scvScroller" 
-                    Orientation="Vertical"
-                    Margin="0, 5, 0, 0">
-            <StackLayout Orientation="Vertical"
-                         x:Name="stkContainer"
-                         Padding="5, 0, 5, 0" Spacing="2">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
+        <ListView x:Name="stkContainer"
+                  ItemTapped="stkContainer_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
                         <Grid>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding TapCommand}"
-                                    CommandParameter="{Binding Customer}"/>
-                            </Grid.GestureRecognizers>
-                            <BoxView CornerRadius="5"
-                                     IsVisible="{Binding HasAnyFactor}"
+                            <BoxView IsVisible="{Binding HasAnyFactor}"
                                      HorizontalOptions="FillAndExpand"
                                      BackgroundColor="{StaticResource PrimaryLight}"/>
-                            <BoxView CornerRadius="5"
-                                     IsVisible="{Binding HasAnyFactor, Converter={StaticResource InverseBoolean}}"
+                            <BoxView IsVisible="{Binding HasAnyFactor, Converter={StaticResource InverseBoolean}}"
                                      HorizontalOptions="FillAndExpand"
-                                     BackgroundColor="{StaticResource Primary}"/>
-                            <StackLayout Orientation="Vertical"
+                                     BackgroundColor="{StaticResource BackgroundGrayColor}"/>
+                            <StackLayout Orientation="Horizontal"
                                          Margin="3">
-                                <StackLayout Orientation="Horizontal">
-                                    <Label IsVisible="{Binding HasReminder}" Text="{StaticResource Reminder}" Style="{StaticResource MaterialIcons}"/>
-                                    <Label Style="{StaticResource NormalLabel}" 
-                                           Text="{Binding Title}"  
-                                           TextColor="{StaticResource BodyTextColor}"
-                                           Margin="5"
-                                           HorizontalOptions="StartAndExpand"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <material:MaterialChip Style="{StaticResource chip}" 
-                                                           BackgroundColor="{StaticResource BackgroundGrayColor}" 
-                                                           Text="{Binding CityName}"
-                                                           TextColor="{StaticResource SecondaryDark}"/>
-                                    <Label Style="{StaticResource SmallLabel}" 
-                                           Text="{Binding Address}"  
-                                           TextColor="{StaticResource BackgroundGrayColor}"/>
-                                </StackLayout>
+                                <material:MaterialChip Style="{StaticResource chip}" 
+                                                       VerticalOptions="Center"
+                                                       BackgroundColor="{StaticResource BackgroundGrayColor}" 
+                                                       Text="{Binding CityName}"
+                                                       TextColor="{StaticResource SecondaryDark}"/>
+                                <Label IsVisible="{Binding HasReminder}" Text="{StaticResource Reminder}" Style="{StaticResource MaterialIcons}"/>
+                                <Label Style="{StaticResource NormalLabel}" 
+                                       Text="{Binding Title}"  
+                                       TextColor="{StaticResource BodyTextColor}"
+                                       Margin="5"
+                                       HorizontalOptions="StartAndExpand"/>
                             </StackLayout>
                         </Grid>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
-        </ScrollView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentView.Content>
 </ContentView>

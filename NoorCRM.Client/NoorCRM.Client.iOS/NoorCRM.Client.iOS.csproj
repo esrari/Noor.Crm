@@ -64,6 +64,7 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
+    <Compile Include="PickRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <BundleResource Include="Resources\IRANSansMobile.ttf" />
     <BundleResource Include="Resources\IRANSansMobile_Bold.ttf" />

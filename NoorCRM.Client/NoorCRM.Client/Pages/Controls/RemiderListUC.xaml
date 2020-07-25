@@ -7,23 +7,14 @@
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.Controls.RemiderListUC">
     <ContentView.Content>
-        <ScrollView x:Name="scvScroller" 
-                    Orientation="Vertical"
-                    Margin="0, 5, 0, 0">
-            <StackLayout Orientation="Vertical"
-                         x:Name="stkContainer"
-                         Padding="5, 0, 5, 0" Spacing="2">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
+        <ListView x:Name="stkContainer"
+                  ItemTapped="stkContainer_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
                         <Grid>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding TapCommand}"
-                                    CommandParameter="{Binding Customer}"/>
-                            </Grid.GestureRecognizers>
-                            <BoxView CornerRadius="5"
-                                     HorizontalOptions="FillAndExpand"
-                                     BackgroundColor="{StaticResource PrimaryLight}"/>
+                            <BoxView HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="{StaticResource PrimaryLight}"/>
                             <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -32,28 +23,28 @@
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Style="{StaticResource NormalLabel}" 
-                                           Text="{Binding Remider, Converter={StaticResource TodayTimeConverter}}"/>
+                                       Text="{Binding Remider, Converter={StaticResource TodayTimeConverter}}"/>
                                     <Label IsVisible="{Binding HasAnyFactor, Converter={StaticResource InverseBoolean}}"
-                                           Text="{StaticResource Edit}" 
-                                           Margin="5, 0, 5, 0"
-                                           Style="{StaticResource MaterialIcons}"/>
+                                       Text="{StaticResource Check}" 
+                                       Margin="5, 0, 5, 0"
+                                       Style="{StaticResource MaterialIcons}"/>
                                 </StackLayout>
                                 <Label Grid.Column="1" 
-                                       Style="{StaticResource SmallLabel}" 
-                                       Text="{Binding Title}"  
-                                       TextColor="{StaticResource BodyTextColor}"
-                                       Margin="5, 0, 5, 0"
-                                       HorizontalOptions="StartAndExpand"/>
+                                   Style="{StaticResource SmallLabel}" 
+                                   Text="{Binding Title}"  
+                                   TextColor="{StaticResource BodyTextColor}"
+                                   Margin="5, 0, 5, 0"
+                                   HorizontalOptions="StartAndExpand"/>
                                 <material:MaterialChip Grid.Column="2" 
-                                                       Style="{StaticResource chip}" 
-                                                       BackgroundColor="{StaticResource BackgroundGrayColor}" 
-                                                       Text="{Binding CityName}"
-                                                       TextColor="{StaticResource SecondaryDark}"/>
+                                                   Style="{StaticResource chip}" 
+                                                   BackgroundColor="{StaticResource BackgroundGrayColor}" 
+                                                   Text="{Binding CityName}"
+                                                   TextColor="{StaticResource SecondaryDark}"/>
                             </Grid>
                         </Grid>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
-        </ScrollView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentView.Content>
 </ContentView>

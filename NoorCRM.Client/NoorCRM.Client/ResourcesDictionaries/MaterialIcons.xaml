@@ -13,4 +13,5 @@
     <x:String x:Key="Down">&#xf04b;</x:String>
     <x:String x:Key="Send">&#xf48a;</x:String>
     <x:String x:Key="Check">&#xf12c;</x:String>
+    <x:String x:Key="CloseCircle">&#xf159;</x:String>
 </ResourceDictionary>

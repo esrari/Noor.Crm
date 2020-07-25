@@ -57,12 +57,12 @@
                                 <TapGestureRecognizer Command="{Binding TapCommand}"/>
                             </StackLayout.GestureRecognizers>
 
-                            <Label Style="{StaticResource LargeMaterialIcons}" 
+                            <Label Style="{StaticResource HugeMaterialIcons}" 
                                    Text="{Binding Icon}" 
                                    TextColor="{Binding TextColor}"
                                    FontSize="Medium"/>
 
-                            <Label Style="{StaticResource NormalLabel}" 
+                            <Label Style="{StaticResource LargeLabel}" 
                                    Text="{Binding Title}"  
                                    TextColor="{Binding TextColor}"
                                    FontSize="Small"/>

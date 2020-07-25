@@ -32,7 +32,7 @@ namespace NoorCRM.Client.Pages.Controls
                 propertyChanged: HandleCustomersChanged);
 
         private static ObservableCollection<CustomerCardInfo> cardInfos;
-        private static async void HandleCustomersChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void HandleCustomersChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var customers = newValue as ObservableCollection<Customer>;
             if (customers != null)
@@ -43,9 +43,7 @@ namespace NoorCRM.Client.Pages.Controls
                     cardInfos.Add(new CustomerCardInfo(c, App.NavigationPage.Navigation));
 
                 var cluc = (RemiderListUC)bindable;
-                BindableLayout.SetItemsSource(cluc.stkContainer, cardInfos);
-                await Task.Delay(3).ConfigureAwait(true);
-                await cluc.scvScroller.ScrollToAsync(cluc.stkContainer, ScrollToPosition.Start, false).ConfigureAwait(false);
+                cluc.stkContainer.ItemsSource = cardInfos;
             }
         }
 
@@ -72,6 +70,15 @@ namespace NoorCRM.Client.Pages.Controls
         public RemiderListUC()
         {
             InitializeComponent();
+        }
+
+        private void stkContainer_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var card = e.Item as CustomerCardInfo;
+            if (card != null)
+            {
+                card.TapCommand.Execute(card.Customer);
+            }
         }
     }
 }
