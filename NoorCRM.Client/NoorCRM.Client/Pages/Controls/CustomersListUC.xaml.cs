@@ -105,15 +105,16 @@ namespace NoorCRM.Client.Pages.Controls
             {
                 foreach (var item in customers)
                 {
-                    if (item.ManagerName.Contains(searchfilter) || item.StoreName.Contains(searchfilter))
+                    if(((item.ManagerName != null) && (item.ManagerName.Contains(searchfilter))) || 
+                        ((item.StoreName != null) && (item.StoreName.Contains(searchfilter))))
                     {
                         fcust.Add(item);
                         continue;
                     }
-                    if(item.PhoneNos != null)
+                    if (item.PhoneNos != null)
                     {
                         foreach (var ph in item.PhoneNos)
-                            if(ph.Number!=null)
+                            if (ph.Number != null)
                             {
                                 string numberEn = ph.Number.WithEnglishDigits();
                                 string filterEn = searchfilter.WithEnglishDigits();
@@ -161,8 +162,8 @@ namespace NoorCRM.Client.Pages.Controls
 
         private void stkContainer_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-             var card = e.Item as CustomerCardInfo;
-            if(card != null)
+            var card = e.Item as CustomerCardInfo;
+            if (card != null)
             {
                 card.TapCommand.Execute(card.Customer);
             }
