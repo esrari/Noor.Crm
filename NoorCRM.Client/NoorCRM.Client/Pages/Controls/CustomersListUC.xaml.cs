@@ -151,7 +151,6 @@ namespace NoorCRM.Client.Pages.Controls
             cardInfos = new SortedList<string, CustomerCardInfo>();
             foreach (var c in customers)
                 cardInfos.Add(getCustomerKey(c), new CustomerCardInfo(c, App.NavigationPage.Navigation));
-
             cluc.stkContainer.ItemsSource = cardInfos.Values;
         }
 

@@ -58,11 +58,16 @@ namespace NoorCRM.Client.Pages
             App.MainViewModel.LastFactors = new ObservableCollection<Factor>(await App.ApiService.GetLastVisitorFactorsAsync(user.Id, 20).ConfigureAwait(false));
             App.MainViewModel.Messages = new ObservableCollection<Message>(await App.ApiService.GetNewMessagesAsync(20).ConfigureAwait(false));
 
+            Random random = new Random();
             // get today customers from all customers
             SortedDictionary<DateTime, Customer> todayCustomersDict = new SortedDictionary<DateTime, Customer>();
             foreach (Customer item in App.MainViewModel.Customers)
                 if (item.Reminder.HasValue)
+                {
+                    if (todayCustomersDict.ContainsKey(item.Reminder.Value))
+                        item.Reminder = item.Reminder.Value.AddMilliseconds(random.Next(1, 10));
                     todayCustomersDict.Add(item.Reminder.Value, item);
+                }
             App.MainViewModel.TodayCustomers = new ObservableCollection<Customer>(todayCustomersDict.Values);
 
             // Set first city if exist as default city
