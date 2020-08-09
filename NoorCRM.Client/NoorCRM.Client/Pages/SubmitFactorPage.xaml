@@ -8,61 +8,79 @@
              x:Class="NoorCRM.Client.Pages.SubmitFactorPage"
              FlowDirection="RightToLeft"
              BackgroundColor="{StaticResource BodyBackgroundColor}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="btnDelete" IconImageSource="{Binding DeleteIconSource}" Clicked="Delete_Clicked"/>
-        <ToolbarItem x:Name="btnSubmit" IconImageSource="{Binding IconSource}" Clicked="Submit_Clicked"/>
-    </ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
+         <ToolbarItem x:Name="btnDelete" IconImageSource="{Binding DeleteIconSource}" Clicked="Delete_Clicked"/>
+         <ToolbarItem x:Name="btnSubmit" IconImageSource="{Binding IconSource}" Clicked="Submit_Clicked"/>
+         </ContentPage.ToolbarItems>-->
     <Grid>
-        <StackLayout Spacing="2">
-            <Frame BackgroundColor="{StaticResource PrimaryLight}"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Frame BackgroundColor="{StaticResource BackgroundGrayColor}"
+                   Grid.Row="0"
                    CornerRadius="5"
                    Margin="5, 3, 5, 0"
                    HasShadow="False"
                    Padding="5">
-                <StackLayout Padding="3">
-                    <Label Text="{Binding CustomerTitle}" 
-                           Style="{StaticResource NormalLabel}"
-                           TextColor="{StaticResource PrimaryLightText}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="وضعیت فاکتور: " 
-                               Style="{StaticResource SmallLabel}"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Padding="3" Grid.Column="0" >
+                        <Label Text="{Binding CustomerTitle}" 
+                               Style="{StaticResource NormalLabel}"
                                TextColor="{StaticResource PrimaryLightText}"
-                               HorizontalOptions="End"/>
-                        <material:MaterialChip BackgroundColor="{StaticResource Primary}" 
-                                               Text="{Binding StatusPersianName}"
-                                               TextColor="{StaticResource PrimaryLightText}"
-                                               HorizontalOptions="Center" 
-                                               FontFamily="{StaticResource IRANSans}"/>
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="وضعیت فاکتور: " 
+                                   Style="{StaticResource SmallLabel}"
+                                   TextColor="{StaticResource PrimaryLightText}"
+                                   HorizontalOptions="End"/>
+                            <material:MaterialChip BackgroundColor="{StaticResource Primary}" 
+                                                   Text="{Binding StatusPersianName}"
+                                                   TextColor="{StaticResource PrimaryLightText}"
+                                                   HorizontalOptions="Center" 
+                                                   FontFamily="{StaticResource IRANSans}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="تاریخ ثبت: " 
+                                   Style="{StaticResource SmallLabel}"
+                                   TextColor="{StaticResource PrimaryLightText}"
+                                   HorizontalOptions="End"/>
+                            <Label Text="{Binding CreateDate,Converter={StaticResource DateTimeConvert}}" 
+                                   Style="{StaticResource SmallLabel}"
+                                   FlowDirection="LeftToRight"
+                                   TextColor="{StaticResource PrimaryLightText}"
+                                   HorizontalOptions="End"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="پرداخت شرایطی: " 
+                                   Style="{StaticResource SmallLabel}"
+                                   TextColor="{StaticResource PrimaryLightText}"
+                                   HorizontalOptions="End"/>
+                            <Switch x:Name="swtChequePayment"
+                                    IsToggled="{Binding IsChequePayment}"
+                                    Toggled="swtChequePayment_Toggled"/>
+                        </StackLayout>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="تاریخ ثبت: " 
-                               Style="{StaticResource SmallLabel}"
-                               TextColor="{StaticResource PrimaryLightText}"
-                               HorizontalOptions="End"/>
-                        <Label Text="{Binding CreateDate,Converter={StaticResource DateTimeConvert}}" 
-                               Style="{StaticResource SmallLabel}"
-                               FlowDirection="LeftToRight"
-                               TextColor="{StaticResource PrimaryLightText}"
-                               HorizontalOptions="End"/>
-                    </StackLayout>
-                </StackLayout>
-            </Frame>
-            <Frame BackgroundColor="{StaticResource PrimaryLight}"
-                   CornerRadius="5"
-                   Margin="5, 0, 5, 1"
-                   HasShadow="False"
-                   Padding="5">
-                <Editor Style="{StaticResource SmallEditor}"
+                    <material:MaterialTextField 
+                        Grid.Column="1"
                         x:Name="txtComment"
+                        Margin="0,50,0,0"
+                        AlwaysShowUnderline="False"
+                        Style="{StaticResource MaterialTextBox}"
                         Text="{Binding Description, Mode=TwoWay}"
-                        Placeholder="شرایط پرداخت"
-                        PlaceholderColor="Gray"
-                        AutoSize="TextChanges"
-                        Margin="0, 10, 0, 0"/>
+                        Placeholder="توضیحات"
+                        PlaceholderColor="Gray"/>
+                </Grid>
             </Frame>
             <Frame BorderColor="{StaticResource PrimaryLight}"
+                   Grid.Row="1"
                    CornerRadius="5"
                    Margin="5, 0, 5, 0"
                    HasShadow="False"
@@ -138,12 +156,25 @@
                     </ListView>
                 </StackLayout>
             </Frame>
-            <material:MaterialChip BackgroundColor="{StaticResource Secondary}" 
+            <material:MaterialChip Grid.Row="2" 
+                                   Margin="5, 0, 0, 0"
+                                   BackgroundColor="{StaticResource Secondary}" 
                                    Text="{Binding TotalPrice, StringFormat='جمع کل: {0}', Converter={StaticResource PriceCommaConvert}}" 
                                    TextColor="{StaticResource PrimaryLightText}"
-                                   HorizontalOptions="Center" 
+                                   HorizontalOptions="End" 
+                                   VerticalOptions ="Center"
                                    FontFamily="{StaticResource IRANSans}"/>
-        </StackLayout>
+            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" >
+                <material:MaterialButton x:Name="btnDelete" 
+                                         Style="{StaticResource CancelButton}"
+                                         Text="حذف"
+                                         Clicked="Delete_Clicked"/>
+                <material:MaterialButton x:Name="btnSubmit" 
+                                         Style="{StaticResource SaveButton}"
+                                         Text="تایید"
+                                         Clicked="Submit_Clicked"/>
+            </StackLayout>
+        </Grid>
         <Button x:Name="btnAddItem" 
                 IsVisible="{Binding EditPossible}"
                 Style="{StaticResource AddButton}"

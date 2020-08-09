@@ -6,15 +6,30 @@
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:local="clr-namespace:NoorCRM.Client.Pages.Controls"
              mc:Ignorable="d"
+             FlowDirection="RightToLeft"
              x:Class="NoorCRM.Client.Pages.AddFactorItemPage">
     <Grid>
         <StackLayout>
             <material:MaterialTextField x:Name="txtSearch" 
+                                        AlwaysShowUnderline="False"
                                         Style="{StaticResource MaterialTextBox}"
                                         Placeholder="جستجو"
                                         Margin="10, 0, 10, 0"
                                         TextChanged="TxtSearch_TextChanged"/>
-            <local:ProductsUC x:Name="productList"/>
+            <local:SelectFactorProductsUC x:Name="productList"/>
+            <StackLayout HorizontalOptions="CenterAndExpand" 
+                         Orientation="Horizontal">
+                <material:MaterialButton x:Name="btnCancel" 
+                                             Grid.Column="0"
+                                             Style="{StaticResource CancelButton}"
+                                             Text="انصراف"
+                                             Clicked="BtnCancel_Clicked"/>
+                <material:MaterialButton x:Name="btnSave" 
+                                             Grid.Column="1"
+                                             Style="{StaticResource SaveButton}"
+                                             Text="تایید"
+                                             Clicked="BtnSave_Clicked"/>
+            </StackLayout>
         </StackLayout>
     </Grid>
 </ContentPage>

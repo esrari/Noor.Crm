@@ -54,9 +54,13 @@ namespace NoorCRM.Client.Pages.Controls
             var products = newValue as ObservableCollection<Product>;
             if (products != null)
             {
+                var sortedcards = new SortedList<string, Product>();
+                foreach (var item in products)
+                    sortedcards.Add(item.Title + item.Id, item);
+
                 var pruc = (ProductsUC)bindable;
                 pruc.stkProducts.Children.Clear();
-                foreach (var item in products)
+                foreach (var item in sortedcards.Values)
                 {
                     var proBox = new ProductBox(item);
                     pruc.stkProducts.Children.Add(proBox);

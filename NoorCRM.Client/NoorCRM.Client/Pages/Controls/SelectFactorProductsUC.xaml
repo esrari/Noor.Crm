@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="NoorCRM.Client.Pages.Controls.SelectFactorProductsUC">
+    <ContentView.Content>
+        <ListView x:Name="stkContainer">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <BoxView HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource BackgroundGrayColor}"/>
+                            <BoxView IsVisible="{Binding ExistedQuantity, Converter={StaticResource DoubleToBooleanConvert}}"
+                                     HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource PrimaryLight }"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource NormalLabel}" 
+                                       Text="{Binding Title}"  
+                                       TextColor="{StaticResource BodyTextColor}"
+                                       Margin="5"
+                                       HorizontalOptions="StartAndExpand"/>
+                                <Switch IsToggled="{Binding Selected}" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentView.Content>
+</ContentView>

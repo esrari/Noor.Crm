@@ -17,6 +17,7 @@ namespace NoorCRM.Client.ViewModels
     public class FactorViewModel : INotifyPropertyChanged
     {
         private string _description;
+        private bool _isChequePayment;
         private bool _editMode = false;
         private string _iconSource;
         private string _deleteIconSource;
@@ -54,6 +55,17 @@ namespace NoorCRM.Client.ViewModels
                 if (_description == value)
                     return;
                 _description = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsChequePayment
+        {
+            get => _isChequePayment;
+            set
+            {
+                if (_isChequePayment == value)
+                    return;
+                _isChequePayment = value;
                 OnPropertyChanged();
             }
         }
@@ -104,6 +116,7 @@ namespace NoorCRM.Client.ViewModels
             CreateDate = factor.CreateDate;
             Status = factor.Status;
             Description = factor.Description;
+            IsChequePayment = factor.PaymentType == PaymentType.Cheque;
             FactorItems = new ObservableCollection<FactorItemViewModel>();
             Customer = factor.Customer;
 

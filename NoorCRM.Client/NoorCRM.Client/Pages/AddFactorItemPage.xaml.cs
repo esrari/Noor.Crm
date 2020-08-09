@@ -16,30 +16,31 @@ namespace NoorCRM.Client.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddFactorItemPage : ContentPage
     {
+        private List<Product> _selectedProducts = null;
+        public List<Product> SelectedProducts => _selectedProducts;
+
         public AddFactorItemPage()
         {
             InitializeComponent();
-            productList.ProductSelected += ProductList_ProductSelected;
             productList.Products = App.MainViewModel.Products;
         }
 
 
-
-        private void ProductList_ProductSelected(SelectedProduct selectedProduct)
-        {
-            OnProductSelected(selectedProduct);
-            txtSearch.Text = "";
-        }
-
         private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            productList.Filter(e.NewTextValue);
+            productList.Search(e.NewTextValue, false);
         }
 
-        public event ProductSelectedEventHandler ProductSelected;
-        public void OnProductSelected(SelectedProduct selectedProduct)
+        private void BtnCancel_Clicked(object sender, EventArgs e)
         {
-            ProductSelected?.Invoke(selectedProduct);
+            _selectedProducts = null;
+            App.NavigationPage.Navigation.PopModalAsync();
+        }
+
+        private void BtnSave_Clicked(object sender, EventArgs e)
+        {
+            _selectedProducts = productList.GetSelectedProducts();
+            App.NavigationPage.Navigation.PopModalAsync();
         }
     }
 }

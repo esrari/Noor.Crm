@@ -129,7 +129,8 @@
         <Setter Property="ButtonType" Value="Flat"/>
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
         <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
-        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
     </Style>
 
@@ -137,7 +138,8 @@
         <Setter Property="ButtonType" Value="Outlined"/>
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
         <Setter Property="TextColor" Value="{StaticResource Primary}"/>
-        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
         <Setter Property="FontFamily" Value="{StaticResource IRANSans}"/>
     </Style>
 

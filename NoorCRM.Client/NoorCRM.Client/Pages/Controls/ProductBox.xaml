@@ -8,21 +8,21 @@
              x:Class="NoorCRM.Client.Pages.Controls.ProductBox">
     <ContentView.Resources>
         <Style TargetType="Frame">
-            <Setter Property="CornerRadius" Value="5" />
-            <Setter Property="Padding" Value="5, 10, 5, 10" />
+            <Setter Property="Padding" Value="5, 5, 5, 5" />
         </Style>
     </ContentView.Resources>
     <Grid>
-        <BoxView CornerRadius="5"
+        <BoxView HorizontalOptions="FillAndExpand"
+                 BackgroundColor="{StaticResource BackgroundGrayColor}"/>
+        <BoxView IsVisible="{Binding ExistedQuantity, Converter={StaticResource DoubleToBooleanConvert}}"
                  HorizontalOptions="FillAndExpand"
-                 BackgroundColor="{StaticResource PrimaryLight}"/>
-
+                 BackgroundColor="{StaticResource PrimaryLight }"/>
         <StackLayout Padding="3">
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding Title}" Style="{StaticResource NormalLabel}"/>
-                <Label Text="{Binding ExistedQuantity, StringFormat='[{0}]'}"
+                <!--<Label Text="{Binding ExistedQuantity, StringFormat='[{0}]'}"
                        Style="{StaticResource SmallLabel}"
-                       TextColor="{StaticResource Secondary}"/>
+                       TextColor="{StaticResource Secondary}"/>-->
             </StackLayout>
             <Grid ColumnSpacing="1" RowSpacing="1">
                 <Grid.RowDefinitions>

@@ -105,38 +105,56 @@ namespace NoorCRM.Client.Pages.Controls
             {
                 foreach (var item in customers)
                 {
-                    if(((item.ManagerName != null) && (item.ManagerName.Contains(searchfilter))) || 
-                        ((item.StoreName != null) && (item.StoreName.Contains(searchfilter))))
+                    if (isInCustomerTitle(item) || isInPhoneNo(item) || isInCustomerAddress(item))
                     {
                         fcust.Add(item);
                         continue;
-                    }
-                    if (item.PhoneNos != null)
-                    {
-                        foreach (var ph in item.PhoneNos)
-                            if (ph.Number != null)
-                            {
-                                string numberEn = ph.Number.WithEnglishDigits();
-                                string filterEn = searchfilter.WithEnglishDigits();
-                                if (numberEn.Contains(filterEn))
-                                {
-                                    fcust.Add(item);
-                                    break;
-                                }
-                            }
                     }
                 }
             }
             else
             {
                 foreach (var item in customers)
-                    if (item.ManagerName.Contains(searchfilter) || item.StoreName.Contains(searchfilter))
+                    if (isInCustomerTitle(item) || isInPhoneNo(item) || isInCustomerAddress(item))
                         if (item.CityId == selectedCity)
                             fcust.Add(item);
             }
 
             setToList(fcust);
             return fcust.Count;
+        }
+
+        private bool isInCustomerTitle(Customer item)
+        {
+            if (((item.ManagerName != null) && (item.ManagerName.Contains(searchfilter))) ||
+                ((item.StoreName != null) && (item.StoreName.Contains(searchfilter))))
+                return true;
+            return false;
+        }
+
+        private bool isInCustomerAddress(Customer item)
+        {
+            if ((item.Address != null) && (item.Address.Contains(searchfilter)))
+                return true;
+            return false;
+        }
+
+        private bool isInPhoneNo(Customer item)
+        {
+            if (item.PhoneNos != null)
+            {
+                foreach (var ph in item.PhoneNos)
+                    if (ph != null && ph.Number != null)
+                    {
+                        string numberEn = ph.Number.WithEnglishDigits();
+                        string filterEn = searchfilter.WithEnglishDigits();
+                        if (numberEn.Contains(filterEn))
+                        {
+                            return true;
+                        }
+                    }
+            }
+            return false;
         }
 
         public void RefreshItems()

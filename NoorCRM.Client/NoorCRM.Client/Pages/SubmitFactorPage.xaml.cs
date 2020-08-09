@@ -30,16 +30,8 @@ namespace NoorCRM.Client.Pages
             BindingContext = _viewModel;
 
             if (!_viewModel.EditPossible)
-            {
-                _viewModel.IconSource = "empty.png";
-                _viewModel.DeleteIconSource = "empty.png";
-            }
-            else
-            {
-                _viewModel.IconSource = "submit.png";
-                _viewModel.DeleteIconSource = "empty.png";
-            }
-            App.AddItemPage.ProductSelected += AddItemPage_ProductSelected;
+                btnSubmit.IsVisible = false;
+            btnDelete.IsVisible = false;
         }
 
         public SubmitFactorPage(Factor factor)
@@ -51,31 +43,39 @@ namespace NoorCRM.Client.Pages
 
             if (!_viewModel.EditPossible)
             {
-                _viewModel.IconSource = "empty.png";
-                _viewModel.DeleteIconSource = "empty.png";
+                btnSubmit.IsVisible = false;
+                btnDelete.IsVisible = false;
             }
-            else
-            {
-                _viewModel.IconSource = "submit.png";
-                _viewModel.DeleteIconSource = "delete.png";
-            }
-            App.AddItemPage.ProductSelected += AddItemPage_ProductSelected;
         }
 
         private void BtnAddItem_Clicked(object sender, EventArgs e)
         {
-            //var addItemPage = new AddFactorItemPage();
-            //addItemPage.ProductSelected += AddItemPage_ProductSelected;
-            //App.NavigationPage.Navigation.PushAsync(addItemPage);
-
-            App.NavigationPage.Navigation.PushAsync(App.AddItemPage);
+            var addItemPage = new AddFactorItemPage();
+            addItemPage.Disappearing += addItemPage_Disappearing;
+            App.NavigationPage.Navigation.PushModalAsync(addItemPage);
         }
 
-        private async void AddItemPage_ProductSelected(SelectedProduct selectedProduct)
+        private async void addItemPage_Disappearing(object sender, EventArgs e)
+        {
+            var page = sender as AddFactorItemPage;
+            if (page != null && page.SelectedProducts != null)
+            {
+                var insertedList = new List<FactorItemViewModel>();
+                foreach (var item in page.SelectedProducts)
+                {
+                    var inserted = await addItem(item).ConfigureAwait(true);
+                    if (inserted != null)
+                        insertedList.Add(inserted);
+                }
+                setPrice(insertedList);
+            }
+        }
+
+        private async Task<FactorItemViewModel> addItem(Product selectedProduct)
         {
             bool itsNew = true;
             foreach (var fi in _viewModel.FactorItems)
-                if (fi.Product.Id == selectedProduct.Product.Id)
+                if (fi.Product.Id == selectedProduct.Id)
                 {
                     itsNew = false;
                     break;
@@ -85,15 +85,32 @@ namespace NoorCRM.Client.Pages
             {
                 var item = new FactorItemViewModel()
                 {
-                    Product = selectedProduct.Product,
-                    SelectedPrice = selectedProduct.SelectedPrice
+                    Product = selectedProduct
                 };
                 _viewModel.AddItem(item);
+                return item;
             }
             else
             {
-                await MaterialDialog.Instance.SnackbarAsync(message: "کالای انتخاب شده در لیست موجود می باشد.",
-                    msDuration: MaterialSnackbar.DurationLong).ConfigureAwait(true);
+                await MaterialDialog.Instance.SnackbarAsync(message: $"کالای '{selectedProduct.Title}' در لیست موجود می باشد.",
+                    msDuration: MaterialSnackbar.DurationShort).ConfigureAwait(true);
+                return null;
+            }
+        }
+
+        private void setPrice(IEnumerable<FactorItemViewModel> factorItems = null)
+        {
+            if (factorItems == null)
+                factorItems = _viewModel.FactorItems;
+
+            foreach (var item in factorItems)
+            {
+                // Cheque payment
+                if (swtChequePayment.IsToggled)
+                    item.SelectedPrice = item.Product.Price1ch;
+                // Cash
+                else
+                    item.SelectedPrice = item.Product.Price1;
             }
         }
 
@@ -201,6 +218,11 @@ namespace NoorCRM.Client.Pages
         {
             var ent = sender as Entry;
             ent.SelectionLength = ent.Text.Length;
+        }
+
+        private void swtChequePayment_Toggled(object sender, ToggledEventArgs e)
+        {
+            setPrice(_viewModel.FactorItems);
         }
     }
 }

@@ -19,9 +19,11 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <material:MaterialTextField x:Name="txtSearch" 
+                                        AlwaysShowUnderline="False"
                                         Style="{StaticResource MaterialTextBox}"
                                         Placeholder="جستجو در کالا"
                                         Margin="10, 0, 10, 0"
+                                        VerticalOptions="Center"
                                         TextChanged="TxtSearch_TextChanged"/>
             <material:MaterialChip Text="{Binding Products.Count, StringFormat='تعداد: {0}'}"
                                    Grid.Column="1"

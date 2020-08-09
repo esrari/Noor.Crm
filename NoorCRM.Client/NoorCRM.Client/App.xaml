@@ -26,6 +26,7 @@
             <locSource:TodayTimeConverter x:Key="TodayTimeConverter"/>
             <locSource:PriceCommaConverter x:Key="PriceCommaConvert"/>
             <locSource:ItemSelectedBooleanConverter x:Key="ItemSelectedBooleanConvert"/>
+            <locSource:DoubleToBooleanConverter x:Key="DoubleToBooleanConvert"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

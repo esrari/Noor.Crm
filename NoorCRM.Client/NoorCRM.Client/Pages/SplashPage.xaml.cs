@@ -52,8 +52,12 @@ namespace NoorCRM.Client.Pages
         private async Task loadAllOtherData(User user)
         {
             // Set AppViewModel with catched data
-            App.MainViewModel.Customers = new ObservableCollection<Customer>(await App.ApiService.GetUserCustomersAsync().ConfigureAwait(true));
-            //App.MainViewModel.TodayCustomers = new ObservableCollection<Customer>(await App.ApiService.GetUserTodayCustomersAsync().ConfigureAwait(true));
+            List<Customer> customers = new List<Customer>(await App.ApiService.GetUserCustomersAsync().ConfigureAwait(true));
+            SortedDictionary<string, Customer> sortedCustomersDict = new SortedDictionary<string, Customer>();
+            foreach (Customer item in customers)
+                sortedCustomersDict.Add($"{item.ManagerName}({item.StoreName})-{item.Id}", item);
+            App.MainViewModel.Customers = new ObservableCollection<Customer>(sortedCustomersDict.Values);
+
             App.MainViewModel.Products = new ObservableCollection<Product>(await App.ApiService.GetAllProductsAsync().ConfigureAwait(false));
             App.MainViewModel.LastFactors = new ObservableCollection<Factor>(await App.ApiService.GetLastVisitorFactorsAsync(user.Id, 20).ConfigureAwait(false));
             App.MainViewModel.Messages = new ObservableCollection<Message>(await App.ApiService.GetNewMessagesAsync(20).ConfigureAwait(false));

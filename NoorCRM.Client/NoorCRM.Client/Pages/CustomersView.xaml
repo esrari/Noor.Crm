@@ -52,6 +52,7 @@
                                             AlwaysShowUnderline="False"
                                             Style="{StaticResource MaterialTextBox}"
                                             Margin="5, 0, 5, -25"
+                                            VerticalOptions="Center"
                                             Placeholder="جستجو در مشتریان"
                                             TextChanged="txtSearch_TextChanged"/>
                 <material:MaterialChip x:Name="chipCount" 
