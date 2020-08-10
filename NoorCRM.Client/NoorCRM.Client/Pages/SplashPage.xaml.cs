@@ -16,26 +16,18 @@ namespace NoorCRM.Client.Pages
     public partial class SplashPage : ContentPage
     {
         private string fileName = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/phoneNo.txt";
+        private readonly User _user = null;
 
         public event OnlineUserFetchedEventHandler OnlineUserFetched;
         public SplashPage()
         {
             InitializeComponent();
-
-            App.ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
-            _ = getUserPassAsync();
         }
 
         public SplashPage(User user)
         {
             InitializeComponent();
-            if (user != null)
-                loadAllOtherData(user).ConfigureAwait(false);
-            else
-            {
-                App.ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
-                _ = getUserPassAsync();
-            }
+            _user = user;
         }
 
         private async void apiService_OnlineUserFetched(User user)
@@ -55,7 +47,7 @@ namespace NoorCRM.Client.Pages
             List<Customer> customers = new List<Customer>(await App.ApiService.GetUserCustomersAsync().ConfigureAwait(true));
             SortedDictionary<string, Customer> sortedCustomersDict = new SortedDictionary<string, Customer>();
             foreach (Customer item in customers)
-                sortedCustomersDict.Add($"{item.ManagerName}({item.StoreName})-{item.Id}", item);
+                sortedCustomersDict.Add($"{item.StoreName}({item.ManagerName})-{item.Id}", item);
             App.MainViewModel.Customers = new ObservableCollection<Customer>(sortedCustomersDict.Values);
 
             App.MainViewModel.Products = new ObservableCollection<Product>(await App.ApiService.GetAllProductsAsync().ConfigureAwait(false));
@@ -164,6 +156,13 @@ namespace NoorCRM.Client.Pages
 
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
+            if (_user != null)
+                loadAllOtherData(_user).ConfigureAwait(false);
+            else
+            {
+                App.ApiService.OnlineUserFetched += apiService_OnlineUserFetched;
+                _ = getUserPassAsync();
+            }
             App.MainViewModel.SplashScreenSuccessfulClosed = false;
         }
     }

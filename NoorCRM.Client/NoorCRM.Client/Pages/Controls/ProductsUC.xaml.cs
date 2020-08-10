@@ -15,24 +15,6 @@ namespace NoorCRM.Client.Pages.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductsUC : ContentView
     {
-        public IEnumerable<Product> Products
-        {
-            set
-            {
-                if (value != null)
-                {
-                    stkProducts.Children.Clear();
-                    foreach (var item in value)
-                    {
-                        var proBox = new ProductBox(item);
-                        proBox.ProductSelected += ProBox_ProductSelected;
-                        stkProducts.Children.Add(proBox);
-                    }
-                    scvScroller.ScrollToAsync(stkProducts, ScrollToPosition.Start, false).ConfigureAwait(false);
-                }
-            }
-        }
-
         public ObservableCollection<Product> ProductList
         {
             get { return (ObservableCollection<Product>)GetValue(ProductListProperty); }
@@ -49,31 +31,24 @@ namespace NoorCRM.Client.Pages.Controls
                 BindingMode.TwoWay,
                 propertyChanged: HandleProductListChanged);
 
+        private static ProductsUC puc;
+        private static List<ProductViewModel> allProInfos;
         private static async void HandleProductListChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var products = newValue as ObservableCollection<Product>;
             if (products != null)
             {
+                puc = bindable as ProductsUC;
                 var sortedcards = new SortedList<string, Product>();
                 foreach (var item in products)
                     sortedcards.Add(item.Title + item.Id, item);
 
-                var pruc = (ProductsUC)bindable;
-                pruc.stkProducts.Children.Clear();
+                allProInfos = new List<ProductViewModel>();
                 foreach (var item in sortedcards.Values)
-                {
-                    var proBox = new ProductBox(item);
-                    pruc.stkProducts.Children.Add(proBox);
-                }
+                    allProInfos.Add(new ProductViewModel(item));
 
-                await Task.Delay(3).ConfigureAwait(true);
-                await pruc.scvScroller.ScrollToAsync(pruc.stkProducts, ScrollToPosition.Start, false).ConfigureAwait(false);
+                setToList(allProInfos);
             }
-        }
-
-        private void ProBox_ProductSelected(SelectedProduct selectedProduct)
-        {
-            OnProductSelected(selectedProduct);
         }
 
         public ProductsUC()
@@ -84,24 +59,22 @@ namespace NoorCRM.Client.Pages.Controls
         public void Filter(string filter)
         {
             if (string.IsNullOrWhiteSpace(filter))
-                foreach (ProductBox item in stkProducts.Children)
-                    item.IsVisible = true;
+                setToList(allProInfos);
             else
             {
                 var trimFilter = filter.Trim();
-                foreach (ProductBox item in stkProducts.Children)
-                {
-                    if (item.ViewModel.Title.Contains(trimFilter))
-                        item.IsVisible = true;
-                    else item.IsVisible = false;
-                }
+                var products = new List<ProductViewModel>();
+                foreach (var item in allProInfos)
+                    if (item.Title.Contains(trimFilter))
+                        products.Add(item);
+
+                setToList(products);
             }
         }
 
-        public event ProductSelectedEventHandler ProductSelected;
-        public void OnProductSelected(SelectedProduct selectedProduct)
+        private static void setToList(IEnumerable<ProductViewModel> products)
         {
-            ProductSelected?.Invoke(selectedProduct);
+            puc.stkProducts.ItemsSource = products;
         }
     }
 }

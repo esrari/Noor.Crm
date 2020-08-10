@@ -2,13 +2,45 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d"
              x:Class="NoorCRM.Client.Pages.Controls.FactorsListUC">
-    <ScrollView x:Name="scroller">
-        <StackLayout x:Name="stkFactors"
-                     Orientation="Vertical"
-                     Padding="5, 0, 5, 0"
-                     Spacing="2"/>
-    </ScrollView>
+    <ListView x:Name="stkFactors"
+              ItemSelected="stkFactors_ItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid >
+                        <BoxView x:Name="bxvBackground" 
+                                 HorizontalOptions="FillAndExpand"
+                                 Margin="1" CornerRadius="2"
+                                 BackgroundColor="{Binding BackColor}"/>
+                        <StackLayout Orientation="Vertical" Spacing="0">
+                            <Grid>
+                                <StackLayout Orientation="Horizontal"  
+                                             Padding="4"
+                                             x:Name="stkHeader">
+                                    <material:MaterialChip Style="{StaticResource chip}"
+                                                           FlowDirection="LeftToRight"
+                                                           BackgroundColor="{StaticResource DimBackgroundGrayColor}" 
+                                                           Text="{Binding RegisterDate, Converter={StaticResource DateTimeConvert}}"
+                                                           TextColor="{StaticResource SecondaryDark}"/>
+                                    <material:MaterialChip Style="{StaticResource chip}"
+                                                           BackgroundColor="{StaticResource DimBackgroundGrayColor}" 
+                                                           Text="{Binding CityName}" 
+                                                           TextColor="{StaticResource SecondaryDark}"/>
+                                    <Label Style="{StaticResource NormalLabel}"
+                                           Text="{Binding Title}"  
+                                           TextColor="{StaticResource BodyTextColor}"
+                                           Margin="2, 0, 2, 0"
+                                           HorizontalOptions="StartAndExpand"/>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentView>

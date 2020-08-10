@@ -30,22 +30,20 @@ namespace NoorCRM.Client.Pages.Controls
                 BindingMode.TwoWay,
                 propertyChanged: HandleFactorsChanged);
 
+        private static FactorsListUC facList;
+        private static List<FactorBoxViewModel> allBoxInfos;
         private static async void HandleFactorsChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var facts = newValue as IEnumerable<Factor>;
             if (facts != null)
             {
-                var facList = bindable as FactorsListUC;
-                facList.stkFactors.Children.Clear();
+                facList = bindable as FactorsListUC;
+                allBoxInfos = new List<FactorBoxViewModel>();
                 var revFacts = facts.Reverse();
                 foreach (var item in revFacts)
-                {
-                    var f = new FactorBox(item);
-                    facList.stkFactors.Children.Add(f);
-                }
+                    allBoxInfos.Add(new FactorBoxViewModel(item));
 
-                await Task.Delay(3).ConfigureAwait(true);
-                await facList.scroller.ScrollToAsync(facList.scroller, ScrollToPosition.End, false).ConfigureAwait(false);
+                setToList(allBoxInfos);
             }
         }
 
@@ -56,19 +54,31 @@ namespace NoorCRM.Client.Pages.Controls
 
         public void Filter(string filter)
         {
+
             if (string.IsNullOrWhiteSpace(filter))
-                foreach (FactorBox item in stkFactors.Children)
-                    item.IsVisible = true;
+                setToList(allBoxInfos);
             else
             {
                 var trimFilter = filter.Trim();
-                foreach (FactorBox item in stkFactors.Children)
-                {
-                    if (item.ViewModel.Title.Contains(trimFilter))
-                        item.IsVisible = true;
-                    else item.IsVisible = false;
-                }
+                List<FactorBoxViewModel> factors = new List<FactorBoxViewModel>();
+                foreach (FactorBoxViewModel item in allBoxInfos)
+                    if (item.Title.Contains(trimFilter))
+                        factors.Add(item);
+
+                setToList(factors);
             }
+        }
+
+        private static void setToList(IEnumerable<FactorBoxViewModel> products)
+        {
+            facList.stkFactors.ItemsSource = products;
+        }
+
+        private void stkFactors_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var box = e.SelectedItem as FactorBoxViewModel;
+            if (box != null)
+                box.TapCommand.Execute(box.Factor);
         }
     }
 }
