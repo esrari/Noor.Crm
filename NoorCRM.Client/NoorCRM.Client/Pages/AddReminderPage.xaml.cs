@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Connectivity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace NoorCRM.Client.Pages
 {
@@ -266,18 +268,32 @@ namespace NoorCRM.Client.Pages
             _viewModel.SelectedDateTime = _viewModel.SelectedDateTime.AddYears(-1);
         }
 
-        private void btnSubmit_Clicked(object sender, EventArgs e)
+        private async void btnSubmit_Clicked(object sender, EventArgs e)
         {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "اتصال به اینترنت دچار مشکل شده است.",
+                    msDuration: MaterialSnackbar.DurationShort).ConfigureAwait(true);
+                return;
+            }
+
             _viewModel.IsSubmitted = true;
             _viewModel.IsRemoved = false;
-            App.NavigationPage.Navigation.PopModalAsync();
+            await App.NavigationPage.Navigation.PopModalAsync().ConfigureAwait(false);
         }
 
-        private void btnRemove_Clicked(object sender, EventArgs e)
+        private async void btnRemove_Clicked(object sender, EventArgs e)
         {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "اتصال به اینترنت دچار مشکل شده است.",
+                    msDuration: MaterialSnackbar.DurationShort).ConfigureAwait(true);
+                return;
+            }
+
             _viewModel.IsSubmitted = false;
             _viewModel.IsRemoved = true;
-            App.NavigationPage.Navigation.PopModalAsync();
+            await App.NavigationPage.Navigation.PopModalAsync().ConfigureAwait(false);
         }
     }
 

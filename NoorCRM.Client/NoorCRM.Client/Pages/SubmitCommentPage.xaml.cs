@@ -1,4 +1,5 @@
 ﻿using NoorCRM.API.Models;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,13 @@ namespace NoorCRM.Client.Pages
 
         private async void Submit_Clicked(object sender, EventArgs e)
         {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "اتصال به اینترنت دچار مشکل شده است.",
+                    msDuration: MaterialSnackbar.DurationShort).ConfigureAwait(true);
+                return;
+            }
+
             if (_inProccess)
                 return;
 

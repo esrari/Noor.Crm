@@ -1,6 +1,7 @@
 ﻿using NoorCRM.API.Models;
 using NoorCRM.Client.Pages.Controls;
 using NoorCRM.Client.ViewModels;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,11 +49,17 @@ namespace NoorCRM.Client.Pages
             }
         }
 
-        private void BtnAddItem_Clicked(object sender, EventArgs e)
+        private async void BtnAddItem_Clicked(object sender, EventArgs e)
         {
+            if(!CrossConnectivity.Current.IsConnected)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "اتصال به اینترنت دچار مشکل شده است.",
+                    msDuration: MaterialSnackbar.DurationShort).ConfigureAwait(true);
+                return;
+            }    
             var addItemPage = new AddFactorItemPage();
             addItemPage.Disappearing += addItemPage_Disappearing;
-            App.NavigationPage.Navigation.PushModalAsync(addItemPage);
+            await App.NavigationPage.Navigation.PushModalAsync(addItemPage).ConfigureAwait(false);
         }
 
         private async void addItemPage_Disappearing(object sender, EventArgs e)
@@ -116,6 +123,13 @@ namespace NoorCRM.Client.Pages
 
         private async void Submit_Clicked(object sender, EventArgs e)
         {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "اتصال به اینترنت دچار مشکل شده است.",
+                    msDuration: MaterialSnackbar.DurationShort).ConfigureAwait(true);
+                return;
+            }
+
             if (_inProccess)
                 return;
 
